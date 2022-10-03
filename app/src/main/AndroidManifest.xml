@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Pebbles">
         <activity
+            android:name=".view.splash.activity.SplashActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.home.activity.MainActivity"
             android:exported="true">
             <intent-filter>
