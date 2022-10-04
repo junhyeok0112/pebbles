@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_unselect"
+        android:title="홈" />
+
+    <item
+        android:id="@+id/manageFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_manage_unselect"
+        android:title="바윗돌 관리" />
+
+    <item
+        android:id="@+id/achiveFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_achive_unselect"
+        android:title="내 돌탑" />
+
+</menu>
