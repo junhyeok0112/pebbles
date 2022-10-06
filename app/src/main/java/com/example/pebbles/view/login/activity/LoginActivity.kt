@@ -1,5 +1,6 @@
 package com.example.pebbles.view.login.activity
 
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.bit.kodari.Config.BaseActivity
@@ -10,7 +11,7 @@ import com.example.pebbles.viewmodel.login.LoginViewModel
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
-    lateinit var loginViewModel: LoginViewModel
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun initAfterBinding() {
         //네비게이션 컨트롤러 선언
@@ -18,7 +19,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         val navController = navHostFragment.navController
 
         //액티비티와 프래그먼트가 공유할 ViewModel 선언
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         binding.loginViewModel = loginViewModel
         binding.lifecycleOwner = this
     }

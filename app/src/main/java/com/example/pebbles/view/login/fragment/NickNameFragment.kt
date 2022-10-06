@@ -5,16 +5,40 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import com.bit.kodari.Config.BaseFragment
 import com.example.pebbles.R
 import com.example.pebbles.databinding.FragmentNickNameBinding
+import com.example.pebbles.viewmodel.login.LoginViewModel
+import kotlin.math.log
 
 //닉네임 설정 프래그먼트
 class NickNameFragment : BaseFragment<FragmentNickNameBinding>(R.layout.fragment_nick_name) {
 
+    private val loginViewModel : LoginViewModel by activityViewModels()
+
     override fun initAfterBinding() {
 
+        binding.loginViewModel = loginViewModel
+        binding.lifecycleOwner = this
+//입력받은 닉네임의 길이로 중복확인 버튼 활성화
+        loginViewModel.nickname.observe(this, Observer {
+            var len = loginViewModel.nickname.value?.length
+            if (len != null) {
+                if(len >= 1){
+                    binding.nickNameCheckTv.isClickable = true
+                    binding.nickNameCheckTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.main_30))
+                } else{
+                    binding.nickNameCheckTv.isClickable = false
+                    binding.nickNameCheckTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_30))
+                }
+            }
+        })
+
+        setListener()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,6 +52,8 @@ class NickNameFragment : BaseFragment<FragmentNickNameBinding>(R.layout.fragment
     }
 
     private fun setListener(){
-
+        binding.nickNameCheckTv.setOnClickListener {
+            showToast("클릭")
+        }
     }
 }
