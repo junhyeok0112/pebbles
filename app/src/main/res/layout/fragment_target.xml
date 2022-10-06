@@ -3,6 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="loginViewModel"
+            type="com.example.pebbles.viewmodel.login.LoginViewModel" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,13 +44,14 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="20dp"
-            android:background="@drawable/signup_basic"
+            android:background="@{loginViewModel.content.length() > 0 ? @drawable/signup_success : @drawable/signup_basic}"
             android:gravity="top"
             android:hint="예시 ) 베스트셀러 작가, 매년10억 버는사람, 사람다운 사람 등 자유롭게 적어보세요"
             android:paddingStart="15dp"
             android:paddingTop="12dp"
             android:paddingEnd="15dp"
             android:paddingBottom="12dp"
+            android:text="@={loginViewModel._content}"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -58,11 +64,11 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="38dp"
-            android:background="@color/gray_30"
+            android:background="@{loginViewModel.content.length() > 0 ? @color/main_30 : @color/gray_30}"
             android:text="완료"
             android:textColor="@color/white"
             android:textSize="17sp"
-            android:clickable="false"
+            android:clickable="@{loginViewModel.content.length() > 0 ? true : false}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

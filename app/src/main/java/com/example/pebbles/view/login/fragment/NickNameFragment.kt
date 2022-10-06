@@ -24,20 +24,6 @@ class NickNameFragment : BaseFragment<FragmentNickNameBinding>(R.layout.fragment
 
         binding.loginViewModel = loginViewModel
         binding.lifecycleOwner = this
-//입력받은 닉네임의 길이로 중복확인 버튼 활성화
-        loginViewModel.nickname.observe(this, Observer {
-            var len = loginViewModel.nickname.value?.length
-            if (len != null) {
-                if(len >= 1){
-                    binding.nickNameCheckTv.isClickable = true
-                    binding.nickNameCheckTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.main_30))
-                } else{
-                    binding.nickNameCheckTv.isClickable = false
-                    binding.nickNameCheckTv.setTextColor(ContextCompat.getColor(requireContext(), R.color.gray_30))
-                }
-            }
-        })
-
         setListener()
     }
 

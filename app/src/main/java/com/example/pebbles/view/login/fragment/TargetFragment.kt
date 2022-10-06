@@ -6,14 +6,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.bit.kodari.Config.BaseFragment
 import com.example.pebbles.R
 import com.example.pebbles.databinding.FragmentTargetBinding
 import com.example.pebbles.view.MainActivity
+import com.example.pebbles.viewmodel.login.LoginViewModel
 
 //목표 설정 프래그먼트
 class TargetFragment : BaseFragment<FragmentTargetBinding>(R.layout.fragment_target) {
+
+    private val loginViewModel : LoginViewModel by activityViewModels()
+
     override fun initAfterBinding() {
+        binding.loginViewModel = loginViewModel
+        binding.lifecycleOwner = this
+
         setListener()
     }
 

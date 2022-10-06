@@ -38,7 +38,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(R.layout.fragment_sig
         setViewPager()
         setListener()
     }
-
+//뷰페이저 2 설정 함수
     private fun setViewPager(){
         binding.signUpViewpager.adapter = SingUpVPAdapter(this)
         binding.signUpViewpager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
