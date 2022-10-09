@@ -39,7 +39,7 @@ class NickNameFragment : BaseFragment<FragmentNickNameBinding>(R.layout.fragment
 
     private fun setListener(){
         binding.nickNameCheckTv.setOnClickListener {
-            showToast("클릭")
+
         }
     }
 }
