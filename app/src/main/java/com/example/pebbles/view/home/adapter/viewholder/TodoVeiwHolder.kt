@@ -10,4 +10,6 @@ class TodoVeiwHolder(private var binding : ItemTodoHomeBinding) : RecyclerView.V
     fun bind(item : Todo) = with(binding){
         this.todo = item            //binding의 variable과 연결
     }
+
+    fun getBinding() = binding
 }

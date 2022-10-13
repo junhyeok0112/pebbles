@@ -48,7 +48,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
-                android:id="@+id/item_habbit_setting_iv"
+                android:id="@+id/item_habbit_detail_iv"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_three_dots"
