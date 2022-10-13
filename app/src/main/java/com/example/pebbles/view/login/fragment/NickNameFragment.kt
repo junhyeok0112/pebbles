@@ -1,19 +1,13 @@
 package com.example.pebbles.view.login.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import com.bit.kodari.Config.BaseFragment
 import com.example.pebbles.R
 import com.example.pebbles.databinding.FragmentNickNameBinding
-import com.example.pebbles.viewmodel.login.LoginViewModel
-import kotlin.math.log
+import com.example.pebbles.view.login.LoginViewModel
 
 //닉네임 설정 프래그먼트
 class NickNameFragment : BaseFragment<FragmentNickNameBinding>(R.layout.fragment_nick_name) {

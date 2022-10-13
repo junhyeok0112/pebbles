@@ -1,17 +1,12 @@
 package com.example.pebbles.view.login.fragment
 
 import android.content.Intent
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.bit.kodari.Config.BaseFragment
 import com.example.pebbles.R
 import com.example.pebbles.databinding.FragmentTargetBinding
 import com.example.pebbles.view.MainActivity
-import com.example.pebbles.viewmodel.login.LoginViewModel
+import com.example.pebbles.view.login.LoginViewModel
 
 //목표 설정 프래그먼트
 class TargetFragment : BaseFragment<FragmentTargetBinding>(R.layout.fragment_target) {

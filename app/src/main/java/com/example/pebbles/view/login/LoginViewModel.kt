@@ -1,7 +1,5 @@
-package com.example.pebbles.viewmodel.login
+package com.example.pebbles.view.login
 
-import androidx.databinding.Bindable
-import androidx.databinding.InverseMethod
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

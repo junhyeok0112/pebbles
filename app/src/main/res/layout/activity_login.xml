@@ -6,7 +6,7 @@
     <data>
         <variable
             name="loginViewModel"
-            type="com.example.pebbles.viewmodel.login.LoginViewModel" />
+            type="com.example.pebbles.view.login.LoginViewModel" />
     </data>
 
     <androidx.fragment.app.FragmentContainerView

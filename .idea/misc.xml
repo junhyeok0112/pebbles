@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/drawable/corner_white.xml" value="0.2615" />
+        <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/drawable/corner_white_shadow.xml" value="0.2615" />
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/drawable/ic_btn_naver.xml" value="0.2615" />
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/drawable/ic_home_select.xml" value="0.1325" />
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/drawable/ic_home_unselect.xml" value="0.1325" />
@@ -28,6 +29,7 @@
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/layout/fragment_sign_up.xml" value="0.5" />
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/layout/fragment_target.xml" value="0.54296875" />
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/layout/item_habbit_home.xml" value="0.67" />
+        <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/layout/item_habit_home.xml" value="0.54296875" />
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/layout/item_todo_home.xml" value="0.54296875" />
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/menu/bottom_menu.xml" value="0.54296875" />
       </map>

@@ -1,39 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/item_todo_title_tv"
+    <data>
+        <variable
+            name="todo"
+            type="com.example.pebbles.data.remote.dto.Todo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:text="투두 내용은 아마 내용이 길겠지요 ?"
-        android:textSize="14dp"
-        android:textColor="@color/gray_60"/>
+        android:layout_height="50dp"
+        android:background="@color/white">
 
-    <ImageView
-        android:id="@+id/item_todo_chk_iv"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/item_todo_title_tv"
-        app:layout_constraintBottom_toBottomOf="@id/item_todo_title_tv"
-        android:src="@drawable/ic_todo_sand_not_achived"/>
+        <TextView
+            android:id="@+id/item_todo_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@{todo.name}"
+            android:textSize="14sp"
+            android:textColor="@color/gray_60"/>
 
-    <View
-        android:id="@+id/item_todo_line_view"
-        android:layout_width="match_parent"
-        android:layout_height="0.8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/item_todo_title_tv"
-        android:layout_marginTop="13dp"
-        android:background="@color/gray_20"/>
+        <ImageView
+            android:id="@+id/item_todo_chk_iv"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/item_todo_title_tv"
+            app:layout_constraintBottom_toBottomOf="@id/item_todo_title_tv"
+            android:src="@{todo.status.equals(`0`) ? @drawable/ic_todo_sand_not_achived : @drawable/ic_todo_sand_achive}"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/item_todo_line_view"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_todo_title_tv"
+            android:layout_marginTop="13dp"
+            android:background="@color/gray_20"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
