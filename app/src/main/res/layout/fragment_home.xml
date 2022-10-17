@@ -63,6 +63,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
+                android:paddingBottom="10dp"
                 tools:itemCount="2"
                 tools:listitem="@layout/item_habit_home" />
 

@@ -37,6 +37,7 @@ class HabitRVAdapter(private var habbits : LiveData<List<Habit>>): RecyclerView.
         this.listener = listener
     }
 
+
     interface TodoButtonListener {
         fun onSandClick(item : Todo , habit_id : Int)
         fun onDetailClick(item: Habit)

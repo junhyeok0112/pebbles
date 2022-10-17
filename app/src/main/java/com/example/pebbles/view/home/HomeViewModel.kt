@@ -48,12 +48,20 @@ class HomeViewModel : ViewModel() {
         val temp = ArrayList<Habit>()
         _habbitList.value!!.forEachIndexed { index, habit ->
             if(habit.id == habit_id){
+                var cnt = 0
                 for(todo in habit.todos){
                     if(todo.id == item.id){
                         if(todo.status == "0") todo.status ="1"
                         else todo.status ="0"
                         Log.d("HomeViewModel" , todo.status)
                     }
+                    if(todo.status == "1") cnt++
+                }
+                //전부 1로 바뀌었으면
+                if(cnt == habit.todos.size){
+                    habit.today_status = "1"
+                } else{
+                    habit.today_status = "0"
                 }
             }
 

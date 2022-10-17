@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="habbit"
+            name="habit"
             type="com.example.pebbles.data.remote.model.Habit" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,73 +18,85 @@
             android:id="@+id/item_habbit_con_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="13일 연속 달성 중!"
-            android:textSize="13sp"
             android:layout_marginTop="20dp"
+            android:text="13일 연속 달성 중!"
+            android:textColor="@color/main_40"
+            android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/main_40"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/item_habbit_container_cl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/corner_white"
             android:layout_marginTop="3dp"
+            android:background="@drawable/corner_white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_habbit_con_tv">
 
-            <TextView
-                android:id="@+id/item_habbit_title_tv"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_habit_title_cl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="@{habbit.name}"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:gravity="center"
+                android:background="@{habit.today_status == `1` ? @drawable/corner_main_10 : @drawable/corner_white}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/item_habbit_detail_iv"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_three_dots"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/item_habbit_title_tv"
-                app:layout_constraintBottom_toBottomOf="@id/item_habbit_title_tv"
-                android:layout_marginEnd="10dp"/>
+                <TextView
+                    android:id="@+id/item_habbit_title_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:text="@{habit.name}"
+                    android:textColor="@{habit.today_status == `1` ? @color/white :@color/black}"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/item_habbit_line_view"
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/item_habbit_title_tv"
-                android:layout_marginTop="13dp"
-                android:background="@color/gray_20"/>
+                <ImageView
+                    android:id="@+id/item_habbit_detail_iv"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@{habit.today_status == `1` ? @drawable/ic_three_dots_white : @drawable/ic_three_dots}"
+                    app:layout_constraintBottom_toBottomOf="@id/item_habbit_title_tv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/item_habbit_title_tv" />
+
+                <View
+                    android:id="@+id/item_habbit_line_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="13dp"
+                    android:background="@color/gray_20"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/item_habbit_title_tv" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/item_home_recycler_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/item_habbit_line_view"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_habit_title_cl"
                 tools:itemCount="3"
-                tools:listitem="@layout/item_todo_home"/>
+                tools:listitem="@layout/item_todo_home" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

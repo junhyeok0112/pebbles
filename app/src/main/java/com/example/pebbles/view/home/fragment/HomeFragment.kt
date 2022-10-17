@@ -1,5 +1,6 @@
 package com.example.pebbles.view.home.fragment
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import com.bit.kodari.Config.BaseFragment
 import com.example.pebbles.R
@@ -8,10 +9,13 @@ import com.example.pebbles.data.remote.model.Habit
 import com.example.pebbles.databinding.FragmentHomeBinding
 import com.example.pebbles.view.home.HomeViewModel
 import com.example.pebbles.view.home.adapter.HabitRVAdapter
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.util.*
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val homeViewModel: HomeViewModel by viewModels()
+    private lateinit var adapter : HabitRVAdapter
 
     override fun initAfterBinding() {
         binding.homeViewModel = homeViewModel
@@ -19,8 +23,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         setRecycelrView()
 
+        homeViewModel._habbitList.observe(this,{
+            adapter.notifyDataSetChanged()
+        })
+
 
     }
+
 
     fun setRecycelrView(){
 
@@ -32,11 +41,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
             override fun onDetailClick(item: Habit) {
                 //해당 정보를 가지고 BottomSheetDialog 실행.
-                showToast("클릭")
+                val bottomSheetDialog = HabitInfoDialog(item)
+                bottomSheetDialog.show(requireActivity().supportFragmentManager , "BottomSheetDialog")
             }
         }
 
-        val adapter = HabitRVAdapter(homeViewModel.habitList)
+        adapter = HabitRVAdapter(homeViewModel.habitList)
         adapter.setListener(listener)
         binding.homeRecyclerRv.adapter = adapter
     }
