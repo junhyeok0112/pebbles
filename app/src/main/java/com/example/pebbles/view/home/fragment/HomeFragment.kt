@@ -5,12 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.fragment.app.viewModels
 import com.bit.kodari.Config.BaseFragment
 import com.example.pebbles.R
@@ -19,7 +13,6 @@ import com.example.pebbles.data.remote.model.Habit
 import com.example.pebbles.databinding.FragmentHomeBinding
 import com.example.pebbles.view.home.HomeViewModel
 import com.example.pebbles.view.home.adapter.HabitRVAdapter
-import com.google.accompanist.appcompattheme.AppCompatTheme
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.*
 
@@ -60,13 +53,4 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         adapter.setListener(listener)
         binding.homeRecyclerRv.adapter = adapter
     }
-}
-
-@Composable
-fun Greeting(){
-    Text(text = "안녕",
-    style = MaterialTheme.typography.h5,
-    modifier = Modifier.fillMaxWidth()
-
-    )
 }
