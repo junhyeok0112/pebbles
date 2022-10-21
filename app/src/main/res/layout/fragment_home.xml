@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="homeViewModel"
             type="com.example.pebbles.view.home.HomeViewModel" />
     </data>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -39,35 +41,30 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/home_logo_lv" />
 
-
-            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            <calendar.CustomCalendarView
                 android:id="@+id/home_calendar_cv"
                 android:layout_width="match_parent"
-                android:layout_height="115dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/corner_white"
-                app:mcv_leftArrow="@drawable/ic_calendar_prev"
-                app:mcv_rightArrow="@drawable/ic_calendar_next"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_logo_lv"
-                app:mcv_calendarMode="week" />
-
+                app:layout_constraintTop_toBottomOf="@id/home_logo_lv" />
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/home_recycler_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/home_calendar_cv"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:paddingStart="20dp"
                 android:paddingEnd="20dp"
                 android:paddingBottom="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/home_calendar_cv"
                 tools:itemCount="2"
                 tools:listitem="@layout/item_habit_home" />
 
