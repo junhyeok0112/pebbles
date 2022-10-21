@@ -1,54 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/corner_white">
 
     <TextView
         android:id="@+id/custom_view_calendar_title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="2022년 10월 2주차"
-        android:textSize="14sp"
-        android:textColor="@color/gray_60"
-        android:textStyle="bold"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="14dp"/>
+        android:layout_marginTop="14dp"
+        android:text="2022년 10월 2주차"
+        android:textColor="@color/gray_60"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/custom_view_calendar_change_iv"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        app:layout_constraintTop_toTopOf="@id/custom_view_calendar_title_tv"
+        android:layout_marginStart="11.13dp"
+        android:src="@drawable/ic_calender_month"
         app:layout_constraintBottom_toBottomOf="@id/custom_view_calendar_title_tv"
         app:layout_constraintStart_toEndOf="@id/custom_view_calendar_title_tv"
-        android:src="@drawable/ic_calender_month"
-        android:layout_marginStart="11.13dp"/>
+        app:layout_constraintTop_toTopOf="@id/custom_view_calendar_title_tv" />
 
     <ImageView
         android:id="@+id/custom_view_calendar_prev_iv"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        app:layout_constraintTop_toTopOf="@id/custom_view_calendar_next_iv"
+        android:layout_marginEnd="32.5dp"
+        android:src="@drawable/ic_calendar_prev"
         app:layout_constraintBottom_toBottomOf="@id/custom_view_calendar_next_iv"
         app:layout_constraintEnd_toStartOf="@id/custom_view_calendar_next_iv"
-        android:src="@drawable/ic_calendar_prev"/>
+        app:layout_constraintTop_toTopOf="@id/custom_view_calendar_next_iv" />
 
     <ImageView
         android:id="@+id/custom_view_calendar_next_iv"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="14dp"
         android:src="@drawable/ic_calendar_next"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginEnd="14dp"
-        android:layout_marginTop="14dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/custom_view_calendar_day_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/custom_view_calendar_next_iv"
+        android:layout_marginTop="18.44dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/custom_view_calendar_mon"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="월"
+            android:textColor="@color/gray_40"
+            android:textSize="13sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/custom_view_calendar_tue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="화"
+            android:textColor="@color/gray_40"
+            android:textSize="13sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/custom_view_calendar_wed"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="수"
+            android:textColor="@color/gray_40"
+            android:textSize="13sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/custom_view_calendar_thu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="목"
+            android:textColor="@color/gray_40"
+            android:textSize="13sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/custom_view_calendar_fri"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="금"
+            android:textColor="@color/gray_40"
+            android:textSize="13sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/custom_view_calendar_sat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="토"
+            android:textColor="@color/gray_40"
+            android:textSize="13sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/custom_view_calendar_sun"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="일"
+            android:textColor="@color/gray_40"
+            android:textSize="13sp"
+            android:gravity="center"/>
 
 
-
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
