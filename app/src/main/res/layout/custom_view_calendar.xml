@@ -22,11 +22,22 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/custom_view_calendar_change_iv"
+            android:id="@+id/custom_view_calendar_month_iv"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginStart="11.13dp"
             android:src="@drawable/ic_calender_month"
+            app:layout_constraintBottom_toBottomOf="@id/custom_view_calendar_title_tv"
+            app:layout_constraintStart_toEndOf="@id/custom_view_calendar_title_tv"
+            app:layout_constraintTop_toTopOf="@id/custom_view_calendar_title_tv" />
+
+        <ImageView
+            android:id="@+id/custom_view_calendar_day_iv"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="11.13dp"
+            android:src="@drawable/ic_calender_day"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/custom_view_calendar_title_tv"
             app:layout_constraintStart_toEndOf="@id/custom_view_calendar_title_tv"
             app:layout_constraintTop_toTopOf="@id/custom_view_calendar_title_tv" />

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.toDrawable
@@ -17,6 +18,7 @@ import com.example.pebbles.util.DateUtil
 import java.time.LocalDate
 import java.time.YearMonth
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
     private val binding: CustomViewCalendarBinding = DataBindingUtil.inflate(
@@ -38,7 +40,7 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
         initListener()
     }
 
-    //화면 설정
+    //월간 화면 설정
     private fun setMonthView() {
 
         //년월 텍스트 뷰 셋팅
@@ -60,36 +62,72 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
         binding.customViewCalendarRv.adapter = adapter
     }
 
+    //주간 화면 설정
+    private fun setWeekView(){
+
+        //년월 텍스트 뷰 셋팅
+        binding.customViewCalendarTitleTv.setText(DateUtil.monthYearFromDate(selectedDate))
+
+        //해당 주 날짜 가져오기
+        val dayList = daysInWeekArray(selectedDate)
+
+        //어댑테 데이터 적용
+        val adapter = CalendarAdapter(dayList)
+
+        //레이아웃 설정하기 (열 7개)
+        val manager = GridLayoutManager(context, 7)
+
+        //레이아웃 적용
+        binding.customViewCalendarRv.layoutManager = manager
+
+        //어댑터 적용
+        binding.customViewCalendarRv.adapter = adapter
+    }
+
+
     private fun initListener() {
         binding.customViewCalendarPrevIv.setOnClickListener {
+            //월 달력일때
+            if(binding.customViewCalendarMonthIv.visibility == VISIBLE){
+                //월 -1 하기기
+                selectedDate = selectedDate.minusMonths(1)
+                setMonthView()
+            } else{ //주 -1 하기
+                selectedDate = selectedDate.minusWeeks(1)
+                setWeekView()
+            }
 
-            //월 -1 하기기
-            selectedDate = selectedDate.minusMonths(1)
-            setMonthView()
         }
 
         binding.customViewCalendarNextIv.setOnClickListener {
-            //월 +1 하기
-            selectedDate = selectedDate.plusMonths(1)
-            setMonthView()
-        }
-        //주간 , 월간 바꾸기
-        binding.customViewCalendarChangeIv.setOnClickListener{
-
-            when(binding.customViewCalendarChangeIv.drawable){
-                R.drawable.ic_calender_day.toDrawable() -> {
-                    Toast.makeText(context, "현재 월",  Toast.LENGTH_SHORT).show()
-                    binding.customViewCalendarChangeIv.setImageDrawable(R.drawable.ic_calender_month.toDrawable())
-                } else->{
-                    Toast.makeText(context, " 현재 주" , Toast.LENGTH_SHORT).show()
-                    binding.customViewCalendarChangeIv.setImageDrawable(R.drawable.ic_calender_day.toDrawable())
-                }
-
+            //월 달력일때
+            if(binding.customViewCalendarMonthIv.visibility == VISIBLE){
+                //월 +1 하기기
+                selectedDate = selectedDate.plusMonths(1)
+                setMonthView()
+            } else{ //주 +1 하기
+                selectedDate = selectedDate.plusWeeks(1)
+                setWeekView()
             }
         }
+
+        //월간에서 버튼 눌렀을 때 주간으로 변경
+        binding.customViewCalendarMonthIv.setOnClickListener {
+            binding.customViewCalendarMonthIv.visibility = View.GONE
+            binding.customViewCalendarDayIv.visibility = View.VISIBLE
+            setWeekView()
+        }
+
+        //주간에서 버튼 눌렀을 때 월간으로 변경
+        binding.customViewCalendarDayIv.setOnClickListener {
+            binding.customViewCalendarMonthIv.visibility = View.VISIBLE
+            binding.customViewCalendarDayIv.visibility = View.GONE
+            setMonthView()      //달력도 월간으로 변경
+        }
+
     }
 
-    //날짜 생성하기
+    //월간 달력 날짜 생성하기
     private fun daysInMonthArray(date: LocalDate): ArrayList<Day> {
         val dayList = ArrayList<Day>()
 
@@ -114,6 +152,35 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
         }
         return dayList
 
+    }
+
+    //주간 달력 날짜 생성하기
+    private fun daysInWeekArray(date:LocalDate) : ArrayList<Day>{
+        val dayList = ArrayList<Day>()
+
+        val yearMonth = YearMonth.from(date)
+
+        //해당 월 마지막 날짜 가져오기 (ex> 28,30,31) -> 이거 넘어가면 안보이게
+        val lastDay = yearMonth.lengthOfMonth()
+
+        //몇일인지
+        val monthWeek = date.dayOfMonth
+
+        //무슨 요일인지       1 ~ 7 의 값으로
+        val dayOfWeek = date.dayOfWeek.value
+
+        //해당 주차 시작 날짜
+        val startDay = monthWeek - (dayOfWeek) + 1
+        //날짜 생성 -> 해당 요일부터 -> 현재 요일 - (dayOfWeek + 1) 부터 7개
+        for(i in startDay until startDay+7){
+            if(i > lastDay) {
+                dayList.add(Day("",0))
+            } else{
+                dayList.add(Day(i.toString(), 1))
+            }
+        }
+
+        return dayList
     }
 
 }
