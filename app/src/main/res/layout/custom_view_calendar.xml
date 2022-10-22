@@ -135,13 +135,22 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/custom_view_calendar_rv"
+        <LinearLayout
+            android:id="@+id/custom_view_recycler_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/custom_view_calendar_day_container" />
+            app:layout_constraintTop_toBottomOf="@id/custom_view_calendar_day_container">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/custom_view_calendar_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingTop="5dp"/>
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

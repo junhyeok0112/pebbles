@@ -2,12 +2,15 @@ package calendar
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import calendar.adapter.CalendarAdapter
+import calendar.data.Day
 import com.example.pebbles.R
 import com.example.pebbles.databinding.CustomViewCalendarBinding
 import com.example.pebbles.util.DateUtil
@@ -48,7 +51,7 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
         val adapter = CalendarAdapter(dayList)
 
         //레이아웃 설정하기 (열 7개)
-        val manager = GridLayoutManager(context , 7)
+        val manager = GridLayoutManager(context, 7)
 
         //레이아웃 적용
         binding.customViewCalendarRv.layoutManager = manager
@@ -70,11 +73,25 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
             selectedDate = selectedDate.plusMonths(1)
             setMonthView()
         }
+        //주간 , 월간 바꾸기
+        binding.customViewCalendarChangeIv.setOnClickListener{
+
+            when(binding.customViewCalendarChangeIv.drawable){
+                R.drawable.ic_calender_day.toDrawable() -> {
+                    Toast.makeText(context, "현재 월",  Toast.LENGTH_SHORT).show()
+                    binding.customViewCalendarChangeIv.setImageDrawable(R.drawable.ic_calender_month.toDrawable())
+                } else->{
+                    Toast.makeText(context, " 현재 주" , Toast.LENGTH_SHORT).show()
+                    binding.customViewCalendarChangeIv.setImageDrawable(R.drawable.ic_calender_day.toDrawable())
+                }
+
+            }
+        }
     }
 
     //날짜 생성하기
-    private fun daysInMonthArray(date : LocalDate) : ArrayList<String>{
-        val dayList = ArrayList<String>()
+    private fun daysInMonthArray(date: LocalDate): ArrayList<Day> {
+        val dayList = ArrayList<Day>()
 
         val yearMonth = YearMonth.from(date)
 
@@ -88,11 +105,11 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
         val dayOfWeek = firstDay.dayOfWeek.value
 
         //날짜 생성
-        for(i in 1 .. 41){
-            if( i <= dayOfWeek || i > lastDay + dayOfWeek ){
-                dayList.add("")
-            } else{
-                dayList.add((i - dayOfWeek).toString())
+        for (i in 1..42) {
+            if (i < dayOfWeek || i >= lastDay + dayOfWeek) {
+                dayList.add(Day("", 0))
+            } else {
+                dayList.add(Day((i - dayOfWeek + 1).toString(), 1))
             }
         }
         return dayList
