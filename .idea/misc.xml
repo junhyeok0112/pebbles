@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/And/pebbles/app/src/main/res/drawable/corner_bottom_sheet_dialog.xml" value="0.1" />
+        <entry key="..\:/And/pebbles/app/src/main/res/drawable/custom_day_cell.xml" value="0.156" />
         <entry key="..\:/And/pebbles/app/src/main/res/drawable/custom_day_cell_blank.xml" value="0.156" />
+        <entry key="..\:/And/pebbles/app/src/main/res/drawable/custom_day_cell_unselected.xml" value="0.156" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/custom_calendar_cell.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/custom_view_calendar.xml" value="0.4" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_home.xml" value="0.1" />

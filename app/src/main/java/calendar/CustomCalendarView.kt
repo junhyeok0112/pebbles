@@ -16,6 +16,7 @@ import com.example.pebbles.R
 import com.example.pebbles.databinding.CustomViewCalendarBinding
 import com.example.pebbles.util.DateUtil
 import java.time.LocalDate
+import java.time.Year
 import java.time.YearMonth
 import java.util.*
 import kotlin.collections.ArrayList
@@ -29,15 +30,17 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
     )
 
     private var selectedDate = LocalDate.now()
+    private lateinit var listener : CalendarAdapter.OnCustomItemListener
 
 
     init {
 
-        //화면 설정
-        setMonthView()
-
         //화살표 눌렀을 때 이벤트
         initListener()
+
+        //화면 설정
+        setWeekView()
+
     }
 
     //월간 화면 설정
@@ -51,6 +54,9 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
 
         //어댑테 데이터 적용
         val adapter = CalendarAdapter(dayList)
+
+        //클릭 리스너 설정
+        adapter.setListener(listener)
 
         //레이아웃 설정하기 (열 7개)
         val manager = GridLayoutManager(context, 7)
@@ -73,6 +79,9 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
 
         //어댑테 데이터 적용
         val adapter = CalendarAdapter(dayList)
+
+        //클릭 리스너 설정
+        adapter.setListener(listener)
 
         //레이아웃 설정하기 (열 7개)
         val manager = GridLayoutManager(context, 7)
@@ -125,6 +134,17 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
             setMonthView()      //달력도 월간으로 변경
         }
 
+        //해당 날짜 클릭시 발생할 이벤트 리스너 정의
+        listener = object : CalendarAdapter.OnCustomItemListener{
+            override fun onCustomItemClick(dayText: String) {
+                //dayText는 일자만 나와있음 -> 그래서 selectedDate 이용해서 연,월 가져오고 뒤에 일자 붙혀야함
+                //클릭했을 때 해당 날짜 클릭했다고 View 변경해야함
+                //이 값을 ViewModel에 넘겨서 View의 리스트 변경하기
+                val clickDay = DateUtil.yearMonthFromDate(selectedDate) + "-"+dayText
+                Toast.makeText(context, clickDay , Toast.LENGTH_SHORT).show()
+            }
+        }
+
     }
 
     //월간 달력 날짜 생성하기
@@ -163,18 +183,24 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
         //해당 월 마지막 날짜 가져오기 (ex> 28,30,31) -> 이거 넘어가면 안보이게
         val lastDay = yearMonth.lengthOfMonth()
 
+        //이전달에 몇일까지 있는지 -> startDay <= 0 일 때 사용
+        val lastMonthDay = YearMonth.from(date.minusMonths(1)).lengthOfMonth()
         //몇일인지
         val monthWeek = date.dayOfMonth
 
         //무슨 요일인지       1 ~ 7 의 값으로
         val dayOfWeek = date.dayOfWeek.value
 
-        //해당 주차 시작 날짜
+        //해당 주차 시작 날짜 -> 만약 0 이하면 다른 날짜 나오게 변환 처리해야함 -> 작은 경우는 무조건 저번달 일 경우임.
         val startDay = monthWeek - (dayOfWeek) + 1
+
         //날짜 생성 -> 해당 요일부터 -> 현재 요일 - (dayOfWeek + 1) 부터 7개
+        //주간은 항상 활성화 버튼
         for(i in startDay until startDay+7){
             if(i > lastDay) {
-                dayList.add(Day("",0))
+                dayList.add(Day((i-lastDay).toString(),1))   //lastDay넘어가면 1일부터 표시하기.
+            } else if(i <= 0){  //0이하면 이전달 값 넣기
+                dayList.add(Day((lastMonthDay + i).toString() , 1))
             } else{
                 dayList.add(Day(i.toString(), 1))
             }
@@ -182,5 +208,7 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
 
         return dayList
     }
+
+
 
 }
