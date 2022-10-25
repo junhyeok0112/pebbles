@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import com.bit.kodari.Config.BaseFragment
 import com.example.pebbles.R
 import com.example.pebbles.databinding.FragmentLoginBinding
+import java.time.LocalDate
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
@@ -22,6 +23,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     private fun setListener() {
         binding.loginKakaoBtn.setOnClickListener {
             it.findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+        }
+        binding.loginNaverBtn.setOnClickListener {
+            showToast(LocalDate.now().toString()) //yyyy-MM-dd 형식으로 나옴
+
         }
     }
 }

@@ -22,7 +22,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@{day.num}"
+            android:text="@{day.num != null ? Integer.toString(day.num.dayOfMonth) : ``}"
             android:textSize="14sp"
             android:textColor="@color/gray_30" />
 

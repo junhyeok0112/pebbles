@@ -136,12 +136,17 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
 
         //해당 날짜 클릭시 발생할 이벤트 리스너 정의
         listener = object : CalendarAdapter.OnCustomItemListener{
-            override fun onCustomItemClick(dayText: String) {
+            override fun onCustomItemClick(dayText: LocalDate?) {
                 //dayText는 일자만 나와있음 -> 그래서 selectedDate 이용해서 연,월 가져오고 뒤에 일자 붙혀야함
                 //클릭했을 때 해당 날짜 클릭했다고 View 변경해야함
                 //이 값을 ViewModel에 넘겨서 View의 리스트 변경하기
-                val clickDay = DateUtil.yearMonthFromDate(selectedDate) + "-"+dayText
-                Toast.makeText(context, clickDay , Toast.LENGTH_SHORT).show()
+                if(dayText == null) {
+                    Toast.makeText(context, "다른 날을 클릭해주세요" , Toast.LENGTH_SHORT).show()
+                } else{
+//                    val clickDay = DateUtil.yearMonthFromDate(selectedDate) + "-"+dayText
+                    Toast.makeText(context, dayText.toString() , Toast.LENGTH_SHORT).show()
+                }
+
             }
         }
 
@@ -165,9 +170,10 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
         //날짜 생성
         for (i in 1..42) {
             if (i < dayOfWeek || i >= lastDay + dayOfWeek) {
-                dayList.add(Day("", 0))
+                dayList.add(Day(null, 0))
             } else {
-                dayList.add(Day((i - dayOfWeek + 1).toString(), 1))
+                //LocalDate.of(년,월,일)
+                dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue,i - dayOfWeek + 1), 1))
             }
         }
         return dayList
@@ -198,11 +204,11 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
         //주간은 항상 활성화 버튼
         for(i in startDay until startDay+7){
             if(i > lastDay) {
-                dayList.add(Day((i-lastDay).toString(),1))   //lastDay넘어가면 1일부터 표시하기.
+                dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue+1,i-lastDay),1))   //lastDay넘어가면 1일부터 표시하기.
             } else if(i <= 0){  //0이하면 이전달 값 넣기
-                dayList.add(Day((lastMonthDay + i).toString() , 1))
+                dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue-1,lastMonthDay + i) , 1))
             } else{
-                dayList.add(Day(i.toString(), 1))
+                dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue,i), 1))
             }
         }
 
