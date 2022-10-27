@@ -17,7 +17,6 @@ import java.time.LocalDate
 class CalendarAdapter(var dayList :ArrayList<Day>) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>(){
 
     private lateinit var listener: OnCustomItemListener
-    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
         val binding = CustomCalendarCellBinding.inflate(LayoutInflater.from(parent.context) , parent ,false)
