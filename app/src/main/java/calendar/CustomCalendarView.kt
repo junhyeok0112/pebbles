@@ -2,15 +2,12 @@ package calendar
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import calendar.adapter.CalendarAdapter
 import calendar.data.Day
@@ -18,12 +15,10 @@ import com.example.pebbles.MyApplicationClass
 import com.example.pebbles.R
 import com.example.pebbles.databinding.CustomViewCalendarBinding
 import com.example.pebbles.util.DateUtil
-import com.example.pebbles.view.home.HomeViewModel
+import java.io.ByteArrayInputStream
+import java.io.ObjectInputStream
 import java.time.LocalDate
-import java.time.Year
 import java.time.YearMonth
-import java.util.*
-import kotlin.collections.ArrayList
 
 class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
     private val binding: CustomViewCalendarBinding = DataBindingUtil.inflate(
@@ -34,17 +29,23 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
     )
 
     private var selectedDate = LocalDate.now()
-    private lateinit var listener : CalendarAdapter.OnCustomItemListener
+    private lateinit var listener: CalendarAdapter.OnCustomItemListener
+
+    private val callBackFunc: (LocalDate) -> Unit
 
 
     init {
+        val a = context.obtainStyledAttributes(attrs, R.styleable.CustomCalendarView)
+        val callBackStr = a.getString(R.styleable.CustomCalendarView_onClickListener) ?: ""
+
+        callBackFunc = createCallBackFunc(callBackStr)
 
         //화살표 눌렀을 때 이벤트
         initListener()
 
         //화면 설정
         setWeekView()
-
+        a.recycle()
     }
 
     //월간 화면 설정
@@ -101,11 +102,11 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
     private fun initListener() {
         binding.customViewCalendarPrevIv.setOnClickListener {
             //월 달력일때
-            if(binding.customViewCalendarMonthIv.visibility == VISIBLE){
+            if (binding.customViewCalendarMonthIv.visibility == VISIBLE) {
                 //월 -1 하기기
                 selectedDate = selectedDate.minusMonths(1)
                 setMonthView()
-            } else{ //주 -1 하기
+            } else { //주 -1 하기
                 selectedDate = selectedDate.minusWeeks(1)
                 setWeekView()
             }
@@ -139,21 +140,30 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
         }
 
         //해당 날짜 클릭시 발생할 이벤트 리스너 정의
-        listener = object : CalendarAdapter.OnCustomItemListener{
+        listener = object : CalendarAdapter.OnCustomItemListener {
             override fun onCustomItemClick(dayText: LocalDate?) {
                 //dayText는 일자만 나와있음 -> 그래서 selectedDate 이용해서 연,월 가져오고 뒤에 일자 붙혀야함
                 //클릭했을 때 해당 날짜 클릭했다고 View 변경해야함
                 //이 값을 ViewModel에 넘겨서 View의 리스트 변경하기
-                if(dayText == null) {
-                    Toast.makeText(context, "다른 날을 클릭해주세요" , Toast.LENGTH_SHORT).show()
-                } else{
+                if (dayText == null) {
+                    Toast.makeText(context, "다른 날을 클릭해주세요", Toast.LENGTH_SHORT).show()
+                } else {
 //                    val clickDay = DateUtil.yearMonthFromDate(selectedDate) + "-"+dayText
-                    Toast.makeText(context, dayText.toString() , Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, dayText.toString(), Toast.LENGTH_SHORT).show()
+                    // 그 함수 호출!
+                    callBackFunc(dayText)
                 }
 
             }
         }
 
+    }
+
+    private fun createCallBackFunc(callBackStr: String): (LocalDate) -> Unit {
+        val decoded = Base64.decode(callBackStr, Base64.DEFAULT)
+
+        return ObjectInputStream(ByteArrayInputStream(decoded))
+            .readObject() as ((LocalDate) -> Unit)
     }
 
     //월간 달력 날짜 생성하기
@@ -174,14 +184,32 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
         //날짜 생성
         for (i in 1..42) {
             if (i < dayOfWeek || i >= lastDay + dayOfWeek) {
-                dayList.add(Day(null, 0,false))
+                dayList.add(Day(null, 0, false))
             } else {
                 //LocalDate.of(년,월,일)
                 //선택했던 날짜랑 동일하면 true로 넣어줌 -> 아니면 false
-                if(LocalDate.of(selectedDate.year,selectedDate.monthValue,i - dayOfWeek + 1).equals(MyApplicationClass.clickedDate)){
-                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue,i - dayOfWeek + 1), 1 , true))
-                } else{
-                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue,i - dayOfWeek + 1), 1,false))
+                if (LocalDate.of(selectedDate.year, selectedDate.monthValue, i - dayOfWeek + 1)
+                        .equals(MyApplicationClass.clickedDate)
+                ) {
+                    dayList.add(
+                        Day(
+                            LocalDate.of(
+                                selectedDate.year,
+                                selectedDate.monthValue,
+                                i - dayOfWeek + 1
+                            ), 1, true
+                        )
+                    )
+                } else {
+                    dayList.add(
+                        Day(
+                            LocalDate.of(
+                                selectedDate.year,
+                                selectedDate.monthValue,
+                                i - dayOfWeek + 1
+                            ), 1, false
+                        )
+                    )
                 }
 
             }
@@ -191,7 +219,7 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
     }
 
     //주간 달력 날짜 생성하기
-    private fun daysInWeekArray(date:LocalDate) : ArrayList<Day>{
+    private fun daysInWeekArray(date: LocalDate): ArrayList<Day> {
         val dayList = ArrayList<Day>()
 
         val yearMonth = YearMonth.from(date)
@@ -212,32 +240,81 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
 
         //날짜 생성 -> 해당 요일부터 -> 현재 요일 - (dayOfWeek + 1) 부터 7개
         //주간은 항상 활성화 버튼
-        for(i in startDay until startDay+7){
-            if(i > lastDay) {
-                if(LocalDate.of(selectedDate.year,selectedDate.monthValue+1,i-lastDay).equals(MyApplicationClass.clickedDate)){
-                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue+1,i-lastDay),1 , true))   //lastDay넘어가면 1일부터 표시하기.
-                } else{
-                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue+1,i-lastDay),1 ,false))   //lastDay넘어가면 1일부터 표시하기.
+        for (i in startDay until startDay + 7) {
+            if (i > lastDay) {
+                if (LocalDate.of(selectedDate.year, selectedDate.monthValue + 1, i - lastDay)
+                        .equals(MyApplicationClass.clickedDate)
+                ) {
+                    dayList.add(
+                        Day(
+                            LocalDate.of(
+                                selectedDate.year,
+                                selectedDate.monthValue + 1,
+                                i - lastDay
+                            ), 1, true
+                        )
+                    )   //lastDay넘어가면 1일부터 표시하기.
+                } else {
+                    dayList.add(
+                        Day(
+                            LocalDate.of(
+                                selectedDate.year,
+                                selectedDate.monthValue + 1,
+                                i - lastDay
+                            ), 1, false
+                        )
+                    )   //lastDay넘어가면 1일부터 표시하기.
                 }
 
-            } else if(i <= 0){  //0이하면 이전달 값 넣기
-                if(LocalDate.of(selectedDate.year,selectedDate.monthValue-1,lastMonthDay + i).equals(MyApplicationClass.clickedDate)){
-                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue-1,lastMonthDay + i) , 1 , true))
-                }else{
-                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue-1,lastMonthDay + i) , 1,false))
+            } else if (i <= 0) {  //0이하면 이전달 값 넣기
+                if (LocalDate.of(selectedDate.year, selectedDate.monthValue - 1, lastMonthDay + i)
+                        .equals(MyApplicationClass.clickedDate)
+                ) {
+                    dayList.add(
+                        Day(
+                            LocalDate.of(
+                                selectedDate.year,
+                                selectedDate.monthValue - 1,
+                                lastMonthDay + i
+                            ), 1, true
+                        )
+                    )
+                } else {
+                    dayList.add(
+                        Day(
+                            LocalDate.of(
+                                selectedDate.year,
+                                selectedDate.monthValue - 1,
+                                lastMonthDay + i
+                            ), 1, false
+                        )
+                    )
                 }
-            } else{ //현재 값 표시하기.
-                if(LocalDate.of(selectedDate.year,selectedDate.monthValue,i).equals(MyApplicationClass.clickedDate)){
-                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue,i), 1 , true))
-                } else{
-                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue,i), 1 ,false))
+            } else { //현재 값 표시하기.
+                if (LocalDate.of(selectedDate.year, selectedDate.monthValue, i)
+                        .equals(MyApplicationClass.clickedDate)
+                ) {
+                    dayList.add(
+                        Day(
+                            LocalDate.of(selectedDate.year, selectedDate.monthValue, i),
+                            1,
+                            true
+                        )
+                    )
+                } else {
+                    dayList.add(
+                        Day(
+                            LocalDate.of(selectedDate.year, selectedDate.monthValue, i),
+                            1,
+                            false
+                        )
+                    )
                 }
             }
         }
 
         return dayList
     }
-
 
 
 }
