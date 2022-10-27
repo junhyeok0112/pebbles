@@ -21,6 +21,7 @@ class CalendarAdapter(var dayList :ArrayList<Day>) : RecyclerView.Adapter<Calend
         return CalendarViewHolder(binding)
     }
 
+
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
         //받아온 날짜 셋팅
         val day = dayList[position]
@@ -33,8 +34,9 @@ class CalendarAdapter(var dayList :ArrayList<Day>) : RecyclerView.Adapter<Calend
             if(day.num != null){
                 for(i in 0..dayList.size-1 ){
                     if(dayList[i].num == MyApplicationClass.clickedDate){
-                        //해당 아이템 View 변경.. 흠..
-                        notifyItemChanged(i)        //해당 지점 다시 그려서 선택 안되게 그림
+                        //해당 아이템 View 변경.. 흠.. 새로 해당 아이템 추가
+                        dayList[i] = dayList[i]
+                        notifyItemChanged(i)
                     }
                 }
                 MyApplicationClass.clickedDate = day.num
@@ -53,6 +55,8 @@ class CalendarAdapter(var dayList :ArrayList<Day>) : RecyclerView.Adapter<Calend
         fun bind(day : Day){
             binding.day = day
         }
+
+
     }
 
     //리스너 셋팅
