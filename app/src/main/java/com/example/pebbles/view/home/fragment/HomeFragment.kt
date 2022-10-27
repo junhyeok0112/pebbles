@@ -27,7 +27,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         setRecycelrView()
 
-        homeViewModel._habbitList.observe(this,{
+        homeViewModel.habitList.observe(this,{
             adapter.notifyDataSetChanged()
         })
 

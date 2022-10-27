@@ -5,16 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import calendar.data.Day
 import com.example.pebbles.MyApplicationClass
 import com.example.pebbles.R
 import com.example.pebbles.databinding.CustomCalendarCellBinding
+import com.example.pebbles.view.home.HomeViewModel
 import java.time.LocalDate
 
 class CalendarAdapter(var dayList :ArrayList<Day>) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>(){
 
     private lateinit var listener: OnCustomItemListener
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
         val binding = CustomCalendarCellBinding.inflate(LayoutInflater.from(parent.context) , parent ,false)
@@ -26,6 +29,7 @@ class CalendarAdapter(var dayList :ArrayList<Day>) : RecyclerView.Adapter<Calend
         //받아온 날짜 셋팅
         val day = dayList[position]
         holder.bind(day)
+
         holder.binding.root.setOnClickListener {
             //인터페이스를 통해 해당 날짜 넘기기
             listener.onCustomItemClick(day.num)
@@ -35,12 +39,12 @@ class CalendarAdapter(var dayList :ArrayList<Day>) : RecyclerView.Adapter<Calend
                 for(i in 0..dayList.size-1 ){
                     if(dayList[i].num == MyApplicationClass.clickedDate){
                         //해당 아이템 View 변경.. 흠.. 새로 해당 아이템 추가
-                        dayList[i] = dayList[i]
+                        dayList[i].isSelected = false
                         notifyItemChanged(i)
                     }
                 }
                 MyApplicationClass.clickedDate = day.num
-                Log.d("Test" , "${MyApplicationClass.clickedDate}")
+                dayList[position].isSelected = true
                 holder.binding.root.setBackgroundResource(R.drawable.custom_day_cell_selected)
                 holder.binding.customCellDayTextTv.setTextColor(ContextCompat.getColor(holder.binding.root.context, R.color.gray_50))
             }
@@ -54,6 +58,21 @@ class CalendarAdapter(var dayList :ArrayList<Day>) : RecyclerView.Adapter<Calend
 
         fun bind(day : Day){
             binding.day = day
+
+            //ClickDate이면 체크 표시 , 아니면 체크 해제 표시
+            if(day.isSelected){
+                binding.root.setBackgroundResource(R.drawable.custom_day_cell_selected)
+                binding.customCellDayTextTv.setTextColor(ContextCompat.getColor(binding.root.context, R.color.gray_50))
+            } else{ //아니면
+                binding.root.setBackgroundResource(R.drawable.custom_day_cell_unselected)
+                binding.customCellDayTextTv.setTextColor(ContextCompat.getColor(binding.root.context, R.color.gray_30))
+            }
+
+            //state == 0 이면 Blank로 처리하기
+            if(day.state == 0){
+                binding.root.setBackgroundResource(R.drawable.custom_day_cell_blank)
+            }
+
         }
 
 

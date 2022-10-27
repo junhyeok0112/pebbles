@@ -9,10 +9,10 @@ import com.example.pebbles.data.remote.dto.Todo
 import com.example.pebbles.data.remote.model.Habit
 
 class HomeViewModel : ViewModel() {
-    //ViewModel에서의
-    var _habbitList = MutableLiveData<List<Habit>>()
+    //Viwjscp fewModel에서의
+    var habitList = MutableLiveData<List<Habit>>()
     var habit_data = ArrayList<Habit>()                    //이 데이터로 _habbitList에 추가하면서 갱신해주어야함
-    val habitList : LiveData<List<Habit>> get() = _habbitList
+
 
     init{
         //더미데이터 -> 추후에 비동기 통신으로 값을 가져와야하는 부분
@@ -33,11 +33,11 @@ class HomeViewModel : ViewModel() {
         recyclerViewHabits.add(Habit(0,"2022-11-11" ,2,"해빗 2에 대한 내용",0,"2022-10-11","0","10:22","2022-10-11","0",todos2,"0"))
         recyclerViewHabits.add(Habit(0,"2022-11-11" ,3,"해빗 3에 대한 내용",0,"2022-10-11","0","10:22","2022-10-11","0",todos3,"0"))
         habit_data = recyclerViewHabits
-        _habbitList.value = recyclerViewHabits
+        habitList.value = recyclerViewHabits
     }
 
     fun setHabitList(recyclerViewHabits:ArrayList<Habit>){
-        _habbitList.value = recyclerViewHabits
+        habitList.value = recyclerViewHabits
     }
 
     //여기서 비지니스 로직 처리
@@ -46,7 +46,7 @@ class HomeViewModel : ViewModel() {
         //해당 item을 리스트에서 찾아서 변경해주어야함 , 그리고 Habit내의 Todo가 전부 1로 활성화 되면 파란색으로 바꿔야함.
         Log.d("HomeViewModel" , "${habit_id}  ${item.id}")
         val temp = ArrayList<Habit>()
-        _habbitList.value!!.forEachIndexed { index, habit ->
+        habitList.value!!.forEachIndexed { index, habit ->
             if(habit.id == habit_id){
                 var cnt = 0
                 for(todo in habit.todos){

@@ -9,12 +9,16 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import calendar.adapter.CalendarAdapter
 import calendar.data.Day
+import com.example.pebbles.MyApplicationClass
 import com.example.pebbles.R
 import com.example.pebbles.databinding.CustomViewCalendarBinding
 import com.example.pebbles.util.DateUtil
+import com.example.pebbles.view.home.HomeViewModel
 import java.time.LocalDate
 import java.time.Year
 import java.time.YearMonth
@@ -170,10 +174,16 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
         //날짜 생성
         for (i in 1..42) {
             if (i < dayOfWeek || i >= lastDay + dayOfWeek) {
-                dayList.add(Day(null, 0))
+                dayList.add(Day(null, 0,false))
             } else {
                 //LocalDate.of(년,월,일)
-                dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue,i - dayOfWeek + 1), 1))
+                //선택했던 날짜랑 동일하면 true로 넣어줌 -> 아니면 false
+                if(LocalDate.of(selectedDate.year,selectedDate.monthValue,i - dayOfWeek + 1).equals(MyApplicationClass.clickedDate)){
+                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue,i - dayOfWeek + 1), 1 , true))
+                } else{
+                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue,i - dayOfWeek + 1), 1,false))
+                }
+
             }
         }
         return dayList
@@ -204,11 +214,24 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
         //주간은 항상 활성화 버튼
         for(i in startDay until startDay+7){
             if(i > lastDay) {
-                dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue+1,i-lastDay),1))   //lastDay넘어가면 1일부터 표시하기.
+                if(LocalDate.of(selectedDate.year,selectedDate.monthValue+1,i-lastDay).equals(MyApplicationClass.clickedDate)){
+                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue+1,i-lastDay),1 , true))   //lastDay넘어가면 1일부터 표시하기.
+                } else{
+                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue+1,i-lastDay),1 ,false))   //lastDay넘어가면 1일부터 표시하기.
+                }
+
             } else if(i <= 0){  //0이하면 이전달 값 넣기
-                dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue-1,lastMonthDay + i) , 1))
-            } else{
-                dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue,i), 1))
+                if(LocalDate.of(selectedDate.year,selectedDate.monthValue-1,lastMonthDay + i).equals(MyApplicationClass.clickedDate)){
+                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue-1,lastMonthDay + i) , 1 , true))
+                }else{
+                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue-1,lastMonthDay + i) , 1,false))
+                }
+            } else{ //현재 값 표시하기.
+                if(LocalDate.of(selectedDate.year,selectedDate.monthValue,i).equals(MyApplicationClass.clickedDate)){
+                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue,i), 1 , true))
+                } else{
+                    dayList.add(Day(LocalDate.of(selectedDate.year,selectedDate.monthValue,i), 1 ,false))
+                }
             }
         }
 
