@@ -7,16 +7,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.pebbles.data.remote.dto.Todo
 import com.example.pebbles.data.remote.model.Habit
+import java.time.LocalDate
 
 class HomeViewModel : ViewModel() {
     //Viwjscp fewModel에서의
+    var allList = HashMap<String, ArrayList<Habit>>()
     var habitList = MutableLiveData<List<Habit>>()
-    var habit_data = ArrayList<Habit>()                    //이 데이터로 _habbitList에 추가하면서 갱신해주어야함
 
 
     init{
         //더미데이터 -> 추후에 비동기 통신으로 값을 가져와야하는 부분
-        val recyclerViewHabits : ArrayList<Habit> = ArrayList()
+        val all : ArrayList<ArrayList<Habit>> = ArrayList()
+        val habits1 : ArrayList<Habit> = ArrayList()
+        val habits2 : ArrayList<Habit> = ArrayList()
         val todos1 : ArrayList<Todo> = ArrayList()
         todos1.add(Todo(0,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"0"))
         todos1.add(Todo(1,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"1"))
@@ -29,11 +32,33 @@ class HomeViewModel : ViewModel() {
         todos3.add(Todo(1,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"0"))
         todos3.add(Todo(2,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"1"))
         todos3.add(Todo(3,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"0"))
-        recyclerViewHabits.add(Habit(0,"2022-11-11" ,1,"해빗 1에 대한 내용",0,"2022-10-11","0","10:22","2022-10-11","0",todos1,"0"))
-        recyclerViewHabits.add(Habit(0,"2022-11-11" ,2,"해빗 2에 대한 내용",0,"2022-10-11","0","10:22","2022-10-11","0",todos2,"0"))
-        recyclerViewHabits.add(Habit(0,"2022-11-11" ,3,"해빗 3에 대한 내용",0,"2022-10-11","0","10:22","2022-10-11","0",todos3,"0"))
-        habit_data = recyclerViewHabits
-        habitList.value = recyclerViewHabits
+        habits1.add(Habit(0,"2022-10-27" ,1,"해빗 1에 대한 내용",0,"2022-10-11","0","10:22","2022-10-27","0",todos1,"0"))
+        habits1.add(Habit(0,"2022-10-27" ,2,"해빗 2에 대한 내용",0,"2022-10-11","0","10:22","2022-10-27","0",todos2,"0"))
+        habits1.add(Habit(0,"2022-10-27" ,3,"해빗 3에 대한 내용",0,"2022-10-11","0","10:22","2022-10-27","0",todos3,"0"))
+        habits2.add(Habit(0,"2022-10-28" ,1,"해빗 4에 대한 내용",0,"2022-10-11","0","10:22","2022-10-28","0",todos1,"0"))
+        habits2.add(Habit(0,"2022-10-28" ,2,"해빗 5에 대한 내용",0,"2022-10-11","0","10:22","2022-10-28","0",todos2,"0"))
+        habits2.add(Habit(0,"2022-10-28" ,3,"해빗 6에 대한 내용",0,"2022-10-11","0","10:22","2022-10-28","0",todos3,"0"))
+
+        //온 Habit 리스트들로 셋팅하기.
+        all.add(habits1)
+        all.add(habits2)
+        for(cur in all){
+            //어짜피 날짜별로 오기 때문에 하나만 봐도 될듯
+            val today = cur[0].today
+            if(allList.containsKey(today)){
+                //포함하고 있으면 해당 날짜에 Habit들을 리스트에 추가하기 -> cur이 리스트
+                for(temp in cur){
+                    //temp가 Habit들
+                    allList.get(today)?.add(temp)
+                }
+            } else{
+                allList.put(today , cur)
+            }
+        }
+
+        //초기값 셋팅을 어떻게 할까?
+
+        habitList.value = habits1
     }
 
     fun setHabitList(recyclerViewHabits:ArrayList<Habit>){
@@ -69,5 +94,11 @@ class HomeViewModel : ViewModel() {
         }
 
         setHabitList(temp)
+    }
+
+    fun test(date: LocalDate){
+        Log.d("Test" , "HomeViewModel 데이터 출력 ${date}")
+        //리스트 날짜에 맞게 변경하기
+        habitList.value = allList.get(date.toString())
     }
 }

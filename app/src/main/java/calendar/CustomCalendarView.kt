@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewTreeViewModelStoreOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import calendar.adapter.CalendarAdapter
 import calendar.data.Day
@@ -15,6 +17,7 @@ import com.example.pebbles.MyApplicationClass
 import com.example.pebbles.R
 import com.example.pebbles.databinding.CustomViewCalendarBinding
 import com.example.pebbles.util.DateUtil
+import com.example.pebbles.view.home.HomeViewModel
 import java.io.ByteArrayInputStream
 import java.io.ObjectInputStream
 import java.time.LocalDate
@@ -31,21 +34,25 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
     private var selectedDate = LocalDate.now()
     private lateinit var listener: CalendarAdapter.OnCustomItemListener
 
-    private val callBackFunc: (LocalDate) -> Unit
+    //    private val callBackFunc: (LocalDate) -> Unit
+    //라이프 싸이클
+    private val viewModel by lazy {
+        ViewModelProvider(ViewTreeViewModelStoreOwner.get(this)!!).get(HomeViewModel::class.java)
+    }
 
 
     init {
-        val a = context.obtainStyledAttributes(attrs, R.styleable.CustomCalendarView)
-        val callBackStr = a.getString(R.styleable.CustomCalendarView_onClickListener) ?: ""
-
-        callBackFunc = createCallBackFunc(callBackStr)
+//        val a = context.obtainStyledAttributes(attrs, R.styleable.CustomCalendarView)
+//        val callBackStr = a.getString(R.styleable.CustomCalendarView_onClickListener) ?: ""
+//
+//        callBackFunc = createCallBackFunc(callBackStr)
 
         //화살표 눌렀을 때 이벤트
         initListener()
 
         //화면 설정
         setWeekView()
-        a.recycle()
+//        a.recycle()
     }
 
     //월간 화면 설정
@@ -74,7 +81,7 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
     }
 
     //주간 화면 설정
-    private fun setWeekView(){
+    private fun setWeekView() {
 
         //년월 텍스트 뷰 셋팅
         binding.customViewCalendarTitleTv.setText(DateUtil.monthYearFromDate(selectedDate))
@@ -115,11 +122,11 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
 
         binding.customViewCalendarNextIv.setOnClickListener {
             //월 달력일때
-            if(binding.customViewCalendarMonthIv.visibility == VISIBLE){
+            if (binding.customViewCalendarMonthIv.visibility == VISIBLE) {
                 //월 +1 하기기
                 selectedDate = selectedDate.plusMonths(1)
                 setMonthView()
-            } else{ //주 +1 하기
+            } else { //주 +1 하기
                 selectedDate = selectedDate.plusWeeks(1)
                 setWeekView()
             }
@@ -151,7 +158,8 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
 //                    val clickDay = DateUtil.yearMonthFromDate(selectedDate) + "-"+dayText
                     Toast.makeText(context, dayText.toString(), Toast.LENGTH_SHORT).show()
                     // 그 함수 호출!
-                    callBackFunc(dayText)
+//                    callBackFunc(dayText)
+                    viewModel.test(dayText)
                 }
 
             }
@@ -159,12 +167,12 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
 
     }
 
-    private fun createCallBackFunc(callBackStr: String): (LocalDate) -> Unit {
-        val decoded = Base64.decode(callBackStr, Base64.DEFAULT)
-
-        return ObjectInputStream(ByteArrayInputStream(decoded))
-            .readObject() as ((LocalDate) -> Unit)
-    }
+//    private fun createCallBackFunc(callBackStr: String): (LocalDate) -> Unit {
+//        val decoded = Base64.decode(callBackStr, Base64.DEFAULT)
+//
+//        return ObjectInputStream(ByteArrayInputStream(decoded))
+//            .readObject() as ((LocalDate) -> Unit)
+//    }
 
     //월간 달력 날짜 생성하기
     private fun daysInMonthArray(date: LocalDate): ArrayList<Day> {

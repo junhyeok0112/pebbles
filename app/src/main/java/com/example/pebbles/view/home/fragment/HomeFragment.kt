@@ -29,6 +29,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
         homeViewModel.habitList.observe(this,{
             adapter.notifyDataSetChanged()
+            Log.d("HABIT_LIST" , "${homeViewModel.habitList.value}")
         })
 
     }

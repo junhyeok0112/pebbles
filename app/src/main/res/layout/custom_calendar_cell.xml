@@ -5,6 +5,7 @@
         <variable
             name="day"
             type="calendar.data.Day" />
+
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="25dp"
