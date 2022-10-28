@@ -155,11 +155,11 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
                 if (dayText == null) {
                     Toast.makeText(context, "다른 날을 클릭해주세요", Toast.LENGTH_SHORT).show()
                 } else {
-//                    val clickDay = DateUtil.yearMonthFromDate(selectedDate) + "-"+dayText
-                    Toast.makeText(context, dayText.toString(), Toast.LENGTH_SHORT).show()
                     // 그 함수 호출!
 //                    callBackFunc(dayText)
                     viewModel.test(dayText)
+
+
                 }
 
             }

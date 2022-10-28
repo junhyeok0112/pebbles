@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.pebbles.MyApplicationClass
 import com.example.pebbles.data.remote.dto.Todo
 import com.example.pebbles.data.remote.model.Habit
 import java.time.LocalDate
@@ -21,7 +22,7 @@ class HomeViewModel : ViewModel() {
         val habits1 : ArrayList<Habit> = ArrayList()
         val habits2 : ArrayList<Habit> = ArrayList()
         val todos1 : ArrayList<Todo> = ArrayList()
-        todos1.add(Todo(0,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"0"))
+        todos1.add(Todo(0,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"1"))
         todos1.add(Todo(1,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"1"))
         val todos2 : ArrayList<Todo> = ArrayList()
         todos2.add(Todo(0,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"0"))
@@ -32,33 +33,55 @@ class HomeViewModel : ViewModel() {
         todos3.add(Todo(1,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"0"))
         todos3.add(Todo(2,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"1"))
         todos3.add(Todo(3,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"0"))
-        habits1.add(Habit(0,"2022-10-27" ,1,"해빗 1에 대한 내용",0,"2022-10-11","0","10:22","2022-10-27","0",todos1,"0"))
+        val todos4 : ArrayList<Todo> = ArrayList()
+        todos4.add(Todo(0,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"1"))
+        todos4.add(Todo(1,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"1"))
+        val todos5 : ArrayList<Todo> = ArrayList()
+        todos5.add(Todo(0,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"0"))
+        todos5.add(Todo(1,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"1"))
+        todos5.add(Todo(2,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"0"))
+        val todos6 : ArrayList<Todo> = ArrayList()
+        todos6.add(Todo(0,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"1"))
+        todos6.add(Todo(1,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"0"))
+        todos6.add(Todo(2,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"1"))
+        todos6.add(Todo(3,"투두 내용은 아마 내용이 길겠지요 ? " , 0,"0"))
+        habits1.add(Habit(0,"2022-10-27" ,1,"해빗 1에 대한 내용",0,"2022-10-11","1","10:22","2022-10-27","1",todos1,"0"))
         habits1.add(Habit(0,"2022-10-27" ,2,"해빗 2에 대한 내용",0,"2022-10-11","0","10:22","2022-10-27","0",todos2,"0"))
         habits1.add(Habit(0,"2022-10-27" ,3,"해빗 3에 대한 내용",0,"2022-10-11","0","10:22","2022-10-27","0",todos3,"0"))
-        habits2.add(Habit(0,"2022-10-28" ,1,"해빗 4에 대한 내용",0,"2022-10-11","0","10:22","2022-10-28","0",todos1,"0"))
-        habits2.add(Habit(0,"2022-10-28" ,2,"해빗 5에 대한 내용",0,"2022-10-11","0","10:22","2022-10-28","0",todos2,"0"))
-        habits2.add(Habit(0,"2022-10-28" ,3,"해빗 6에 대한 내용",0,"2022-10-11","0","10:22","2022-10-28","0",todos3,"0"))
+        habits2.add(Habit(0,"2022-10-28" ,1,"해빗 4에 대한 내용",0,"2022-10-11","1","10:22","2022-10-28","1",todos4,"0"))
+        habits2.add(Habit(0,"2022-10-28" ,2,"해빗 5에 대한 내용",0,"2022-10-11","0","10:22","2022-10-28","0",todos5,"0"))
+        habits2.add(Habit(0,"2022-10-28" ,3,"해빗 6에 대한 내용",0,"2022-10-11","0","10:22","2022-10-28","0",todos6,"0"))
 
         //온 Habit 리스트들로 셋팅하기.
         all.add(habits1)
         all.add(habits2)
-        for(cur in all){
+        for(cur in all){    //cur은 해당 날짜의 Habit List
             //어짜피 날짜별로 오기 때문에 하나만 봐도 될듯
             val today = cur[0].today
             if(allList.containsKey(today)){
                 //포함하고 있으면 해당 날짜에 Habit들을 리스트에 추가하기 -> cur이 리스트
                 for(temp in cur){
                     //temp가 Habit들
-                    allList.get(today)?.add(temp)
+                    if(today < LocalDate.now().toString()){ //과거의 것이면 todoList 필요없음
+                        temp.todos.clear()
+                        allList.get(today)?.add(temp)
+                    } else{                                 //오늘 ~ 미래거면 todo 필요 -> 미래는 Todo를 보여주나 ?
+                        allList.get(today)?.add(temp)
+                    }
                 }
             } else{
+                if(today<LocalDate.now().toString()){
+                    for(temp in cur){
+                        temp.todos.clear()
+                    }
+                }
                 allList.put(today , cur)
             }
         }
 
         //초기값 셋팅을 어떻게 할까?
 
-        habitList.value = habits1
+        habitList.value = allList.get(MyApplicationClass.clickedDate.toString())
     }
 
     fun setHabitList(recyclerViewHabits:ArrayList<Habit>){
@@ -92,13 +115,19 @@ class HomeViewModel : ViewModel() {
 
             temp.add(Habit(habit.cons_days , habit.end, habit.id , habit.name,habit.seq , habit.start , habit.status , habit.time , habit.today , habit.today_status , habit.todos ,habit.week))
         }
-
+        //바꾸고 Hash 값에도 갱신해줘야함 , 바꾸는건 일단 당일만 가능 -> 하지만 ? 지금은 테스트 중이니..
+        allList.put(MyApplicationClass.clickedDate.toString() , temp)
         setHabitList(temp)
     }
 
     fun test(date: LocalDate){
         Log.d("Test" , "HomeViewModel 데이터 출력 ${date}")
         //리스트 날짜에 맞게 변경하기
-        habitList.value = allList.get(date.toString())
+        if(allList.containsKey(date.toString())){
+            habitList.value = allList.get(date.toString())
+        } else{     //비어있는 리스트로 셋팅
+            habitList.value = ArrayList()
+        }
+
     }
 }

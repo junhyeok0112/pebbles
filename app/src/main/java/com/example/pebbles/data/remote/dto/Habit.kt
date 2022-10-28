@@ -14,6 +14,6 @@ data class Habit(
     val time: String,       //해빗 시간
     val today : String,             //해빗 실천하는 날짜
     var today_status : String,      //해빗 실천하는 날짜의 완료 여뷰
-    val todos : List<Todo>,         //해빗의 todos
+    val todos : ArrayList<Todo>,         //해빗의 todos
     val week: String                //해빗 요일
 )
