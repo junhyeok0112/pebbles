@@ -3,6 +3,7 @@ package com.example.pebbles.network.home
 import com.example.pebbles.data.remote.dto.HabitList
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.Path
 
 /**
@@ -16,6 +17,6 @@ Callback Hell을 방지하려면 Response를 이용해서 하는 것이 더 좋�
 interface HomeInterface {
 
     @GET("/auth/home/{userId}")
-    suspend fun getHabits(@Path("userId") userId:Int) : Response<HabitList>
+    suspend fun getHabits(@Path("userId") userId:Int , @Header("x-access-token") jwt: String?) : Response<HabitList>
 
 }
