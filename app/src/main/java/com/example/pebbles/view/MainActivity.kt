@@ -1,13 +1,19 @@
 package com.example.pebbles.view
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.liveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.bit.kodari.Config.BaseActivity
 import com.example.pebbles.R
+import com.example.pebbles.data.remote.dto.HabitList
 import com.example.pebbles.databinding.ActivityMainBinding
+import com.example.pebbles.network.RetrofitInstance
+import com.example.pebbles.network.home.HomeInterface
+import retrofit2.Response
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
@@ -20,6 +26,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 //네비게이션과 바텀네비 연결
         NavigationUI.setupWithNavController(binding.mainBottomNavigationView, navController)
         initListener(navController)
+
+        //Retrofit Test
+        val homeService = RetrofitInstance.getRetrofit.create(HomeInterface::class.java)
+
+        val responseLiveData : LiveData<Response<HabitList>> = liveData{
+            val response = homeService.getHabits(1)
+            emit(response)
+        }
+
+        responseLiveData.observe(this, Observer {
+            val list = it.body()?.toString()
+            Log.d("Retrofit_Test" , it.code().toString())
+            Log.d("Retrofit_Test" , list.toString())
+
+        })
+
     }
 
     private fun initListener(navController: NavController) {

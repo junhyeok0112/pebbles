@@ -31,7 +31,13 @@ class HabitRVAdapter(private var habbits : LiveData<List<Habit>>): RecyclerView.
 
     }
 
-    override fun getItemCount(): Int = habbits.value?.size!!
+    override fun getItemCount(): Int{
+        if(habbits.value != null){
+            return habbits.value?.size!!
+        } else{
+            return 0
+        }
+    }
 
     fun setListener(listener: TodoButtonListener){
         this.listener = listener

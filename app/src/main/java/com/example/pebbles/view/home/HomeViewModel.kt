@@ -1,14 +1,12 @@
 package com.example.pebbles.view.home
 
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.pebbles.MyApplicationClass
 import com.example.pebbles.data.remote.dto.Todo
 import com.example.pebbles.data.remote.model.Habit
-import com.example.pebbles.repository.HomeRepository
+import com.example.pebbles.repository.home.HomeRepository
 import java.time.LocalDate
 
 class HomeViewModel : ViewModel() {
