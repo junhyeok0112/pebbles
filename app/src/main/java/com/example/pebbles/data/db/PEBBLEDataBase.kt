@@ -1,13 +1,11 @@
 package com.example.pebbles.data.db
 
 import android.content.Context
-import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.pebbles.data.model.HabitDAO
 import com.example.pebbles.data.remote.model.Habit
-import kotlinx.coroutines.CoroutineScope
 
 @Database(entities = [Habit::class], version = 1, exportSchema = false)
 abstract class PEBBLEDataBase : RoomDatabase() {
@@ -20,7 +18,7 @@ abstract class PEBBLEDataBase : RoomDatabase() {
         @Volatile
         private var INSTANCE : PEBBLEDataBase? = null
 
-        fun getDB(context : Context) : PEBBLEDataBase{
+        fun getDB(context : Context) : PEBBLEDataBase {
             return INSTANCE ?: synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,

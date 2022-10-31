@@ -3,10 +3,16 @@ package com.example.pebbles
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.pebbles.data.db.PEBBLEDataBase
+import com.example.pebbles.di.Injector
+import com.example.pebbles.di.core.AppComponent
+import com.example.pebbles.di.home.HomeSubComponent
+import dagger.android.DaggerApplication
 import java.time.LocalDate
 
-class MyApplicationClass : Application(){
+class MyApplicationClass : Application() , Injector{
+
+    private lateinit var appComponent: AppComponent
+
     companion object{
         const val X_ACCESS_TOKEN: String = "X-ACCESS-TOKEN"         // JWT Token Key
         const val NICKNAME : String = "NICKNAME"
@@ -25,8 +31,16 @@ class MyApplicationClass : Application(){
 
     }
 
+
+    override fun createHomeSubComponent(): HomeSubComponent {
+        TODO("Not yet implemented")
+    }
+
     override fun onCreate() {
         super.onCreate()
         mSharedPreferences = applicationContext.getSharedPreferences(TAG, Context.MODE_PRIVATE)
+        appComponent =
+
+
     }
 }

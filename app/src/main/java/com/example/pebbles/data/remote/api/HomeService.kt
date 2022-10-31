@@ -1,4 +1,4 @@
-package com.example.pebbles.network.home
+package com.example.pebbles.data.remote.api
 
 import com.example.pebbles.data.remote.dto.HabitList
 import retrofit2.Response
@@ -14,7 +14,7 @@ Response 같은 경우는 서버에서 Status Code를 받아서 케이스를 나
 Callback Hell을 방지하려면 Response를 이용해서 하는 것이 더 좋다고 한다.
  **/
 
-interface HomeInterface {
+interface HomeService {
 
     @GET("/auth/home/{userId}")
     suspend fun getHabits(@Path("userId") userId:Int , @Header("x-access-token") jwt: String?) : Response<HabitList>
