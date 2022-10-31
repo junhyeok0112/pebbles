@@ -13,6 +13,7 @@ import com.example.pebbles.data.remote.dto.HabitList
 import com.example.pebbles.databinding.ActivityMainBinding
 import com.example.pebbles.network.RetrofitInstance
 import com.example.pebbles.network.home.HomeInterface
+import com.example.pebbles.util.saveLoginInfo
 import retrofit2.Response
 
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
@@ -41,6 +42,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             Log.d("Retrofit_Test" , list.toString())
 
         })
+
+        //SharePreferenc에 일단 값 저장
+        saveLoginInfo("eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjIsImlhdCI6MTY2NzEyMzU4MiwiZXhwIjoxNjY3OTg3NTgyfQ.vExDhlVDlP7mN-Ap8Nzp67FdYR1EpIY0JHAc_Cd3IWQ","yj","123",2)
 
     }
 

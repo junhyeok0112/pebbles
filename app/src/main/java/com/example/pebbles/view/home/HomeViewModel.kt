@@ -4,16 +4,18 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.pebbles.MyApplicationClass
+import com.example.pebbles.data.db.PEBBLEDataBase
 import com.example.pebbles.data.remote.dto.Todo
 import com.example.pebbles.data.remote.model.Habit
-import com.example.pebbles.repository.home.HomeRepository
+import com.example.pebbles.data.repository.home.HomeRepositoryImpl
 import java.time.LocalDate
 
+//Application을 할당하는게 좋은 방법일까 ?
 class HomeViewModel : ViewModel() {
     //Viwjscp fewModel에서의
 
     //테스트해서 받아보고 init에서 없애기 -> Room와 Retrofit 둘다 사용해야함함
-    val homeRepository = HomeRepository()
+//    val homeRepository = HomeRepositoryImpl(PEBBLEDataBase.getDB())
 
     var allList = HashMap<String, ArrayList<Habit>>()
     var habitList = MutableLiveData<List<Habit>>()
