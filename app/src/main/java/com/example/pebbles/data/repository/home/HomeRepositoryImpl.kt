@@ -74,8 +74,8 @@ class HomeRepositoryImpl @Inject constructor(
     }
     //TodoList 변경하기
 
+
     //오늘날짜 조회하기
-
-
+    override suspend fun getTodayFromDB(): String = habitLocalDataSource.getToday()
 
 }

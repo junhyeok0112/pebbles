@@ -39,7 +39,7 @@
                 android:id="@+id/item_habit_title_cl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@{habit.today_status == `1` ? @drawable/corner_main_10 : @drawable/corner_white}"
+                android:background="@{habit.today_status.equals(`True`) ? @drawable/corner_main_10 : @drawable/corner_white}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -51,7 +51,7 @@
                     android:layout_marginTop="15dp"
                     android:gravity="center"
                     android:text="@{habit.name}"
-                    android:textColor="@{habit.today_status == `1` ? @color/white :@color/black}"
+                    android:textColor="@{habit.today_status.equals(`True`) ? @color/white :@color/black}"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +63,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginEnd="10dp"
-                    android:src="@{habit.today_status == `1` ? @drawable/ic_three_dots_white : @drawable/ic_three_dots}"
+                    android:src="@{habit.today_status.equals(`True`) ? @drawable/ic_three_dots_white : @drawable/ic_three_dots}"
                     app:layout_constraintBottom_toBottomOf="@id/item_habbit_title_tv"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/item_habbit_title_tv" />

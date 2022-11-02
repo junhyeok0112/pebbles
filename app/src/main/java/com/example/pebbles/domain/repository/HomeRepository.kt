@@ -7,5 +7,6 @@ interface HomeRepository {
     suspend fun getHabitsFromAPI() : ArrayList<Habit>?
     suspend fun getHabitsFromDB() : List<Habit>?
     suspend fun updateHabitsToDB() : List<Habit>?
+    suspend fun getTodayFromDB() : String
 
 }

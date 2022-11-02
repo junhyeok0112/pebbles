@@ -21,7 +21,7 @@ interface HabitDAO {
     suspend fun getHabits() : List<Habit>
 
     //RoomDB의 날짜 조회 -> 오늘 데아터만 저장 될거임
-    @Query("SELECT today FROM Habit_List")
+    @Query("SELECT DISTINCT today FROM Habit_List")
     suspend fun getToday() : String
 
     //Todo 아이템 변경시키기 -> 쿼리 짜야함

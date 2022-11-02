@@ -32,7 +32,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/item_todo_title_tv"
             app:layout_constraintBottom_toBottomOf="@id/item_todo_title_tv"
-            android:src="@{todo.status == `0` ? @drawable/ic_todo_sand_not_achived : @drawable/ic_todo_sand_achive}"/>
+            android:src="@{todo.status.equals(`False`) ? @drawable/ic_todo_sand_not_achived : @drawable/ic_todo_sand_achive}"/>
 
         <View
             android:id="@+id/item_todo_line_view"

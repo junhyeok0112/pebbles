@@ -23,4 +23,6 @@ class HabitLocalDataSourceImpl @Inject constructor(private val habitDAO: HabitDA
             habitDAO.deleteAllHabit()
         }
     }
+
+    override suspend fun getToday(): String = habitDAO.getToday()
 }

@@ -9,7 +9,9 @@ import com.example.pebbles.data.remote.dto.Todo
 import com.example.pebbles.data.remote.model.Habit
 import com.example.pebbles.domain.usecase.GetHabitsFromAPIUseCase
 import com.example.pebbles.domain.usecase.GetHabitsFromDBUseCase
+import com.example.pebbles.domain.usecase.GetTodayFromDBUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
@@ -18,7 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getHabitsFromAPIUseCase: GetHabitsFromAPIUseCase,
-    private val getHabitsFromDBUseCase: GetHabitsFromDBUseCase
+    private val getHabitsFromDBUseCase: GetHabitsFromDBUseCase,
+    private val getTodayFromDBUseCase: GetTodayFromDBUseCase
 ) : ViewModel() {
     //Viwjscp fewModel에서의
 
@@ -30,191 +33,48 @@ class HomeViewModel @Inject constructor(
 
 
     init {
-        viewModelScope.launch {
-            getHabitsFromAPIUseCase()
-        }
+        var temp: ArrayList<Habit>? = ArrayList()
 
-        //더미데이터 -> 추후에 비동기 통신으로 값을 가져와야하는 부분
-        val all: ArrayList<ArrayList<Habit>> = ArrayList()
-        val habits1: ArrayList<Habit> = ArrayList()
-        val habits2: ArrayList<Habit> = ArrayList()
-        val habits3: ArrayList<Habit> = ArrayList()
-        val todos1: ArrayList<Todo> = ArrayList()
-        todos1.add(Todo(0, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "1"))
-        todos1.add(Todo(1, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "1"))
-        val todos2: ArrayList<Todo> = ArrayList()
-        todos2.add(Todo(0, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "0"))
-        todos2.add(Todo(1, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "1"))
-        todos2.add(Todo(2, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "0"))
-        val todos3: ArrayList<Todo> = ArrayList()
-        todos3.add(Todo(0, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "1"))
-        todos3.add(Todo(1, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "0"))
-        todos3.add(Todo(2, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "1"))
-        todos3.add(Todo(3, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "0"))
-        val todos4: ArrayList<Todo> = ArrayList()
-        todos4.add(Todo(0, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "1"))
-        todos4.add(Todo(1, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "1"))
-        val todos5: ArrayList<Todo> = ArrayList()
-        todos5.add(Todo(0, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "0"))
-        todos5.add(Todo(1, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "1"))
-        todos5.add(Todo(2, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "0"))
-        val todos6: ArrayList<Todo> = ArrayList()
-        todos6.add(Todo(0, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "1"))
-        todos6.add(Todo(1, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "0"))
-        todos6.add(Todo(2, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "1"))
-        todos6.add(Todo(3, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "0"))
-        val todos7: ArrayList<Todo> = ArrayList()
-        todos7.add(Todo(0, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "1"))
-        todos7.add(Todo(1, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "1"))
-        val todos8: ArrayList<Todo> = ArrayList()
-        todos8.add(Todo(0, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "0"))
-        todos8.add(Todo(1, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "1"))
-        todos8.add(Todo(2, "투두 내용은 아마 내용이 길겠지요 ? ", 0, "0"))
-        habits1.add(
-            Habit(
-                0,
-                "2022-10-27",
-                1,
-                "해빗 1에 대한 내용",
-                0,
-                "2022-10-11",
-                "1",
-                "10:22",
-                "2022-10-30",
-                "1",
-                todos1,
-                "0"
-            )
-        )
-        habits1.add(
-            Habit(
-                0,
-                "2022-10-27",
-                2,
-                "해빗 2에 대한 내용",
-                0,
-                "2022-10-11",
-                "0",
-                "10:22",
-                "2022-10-30",
-                "0",
-                todos2,
-                "0"
-            )
-        )
-        habits1.add(
-            Habit(
-                0,
-                "2022-10-27",
-                3,
-                "해빗 3에 대한 내용",
-                0,
-                "2022-10-11",
-                "0",
-                "10:22",
-                "2022-10-30",
-                "0",
-                todos3,
-                "0"
-            )
-        )
-        habits2.add(
-            Habit(
-                0,
-                "2022-10-28",
-                1,
-                "해빗 4에 대한 내용",
-                0,
-                "2022-10-11",
-                "1",
-                "10:22",
-                "2022-11-01",
-                "1",
-                todos4,
-                "0"
-            )
-        )
-        habits2.add(
-            Habit(
-                0,
-                "2022-10-28",
-                2,
-                "해빗 5에 대한 내용",
-                0,
-                "2022-10-11",
-                "0",
-                "10:22",
-                "2022-11-01",
-                "0",
-                todos5,
-                "0"
-            )
-        )
-        habits2.add(
-            Habit(
-                0,
-                "2022-10-28",
-                3,
-                "해빗 6에 대한 내용",
-                0,
-                "2022-10-11",
-                "0",
-                "10:22",
-                "2022-11-01",
-                "0",
-                todos6,
-                "0"
-            )
-        )
-        habits3.add(
-            Habit(
-                0,
-                "2022-10-28",
-                3,
-                "해빗 6에 대한 내용",
-                0,
-                "2022-10-11",
-                "0",
-                "10:22",
-                "2022-10-31",
-                "0",
-                todos7,
-                "0"
-            )
-        )
+        viewModelScope.async {
+            val list = async { getHabitsFromAPIUseCase() }
+            temp = list.await()
+            Log.d("ViewModel2", "${temp}")
 
-        //온 Habit 리스트들로 셋팅하기.
-        all.add(habits1)
-        all.add(habits2)
-        all.add(habits3)
-        for (cur in all) {    //cur은 해당 날짜의 Habit List
-            //어짜피 날짜별로 오기 때문에 하나만 봐도 될듯
-            val today = cur[0].today
-            Log.d("LocalDate_today", today)
-            if (allList.containsKey(today)) {
-                //포함하고 있으면 해당 날짜에 Habit들을 리스트에 추가하기 -> cur이 리스트
-                for (temp in cur) {
+            for (cur in temp!!) {    //cur은 해당 날짜의 Habit List
+                //어짜피 날짜별로 오기 때문에 하나만 봐도 될듯
+                val today = cur.today
+                Log.d("LocalDate_today", today)
+                if (allList.containsKey(today)) {
+                    //포함하고 있으면 해당 날짜에 Habit들을 리스트에 추가하기 -> cur이 Habit
                     //temp가 Habit들
                     if (today < LocalDate.now().toString()) { //과거의 것이면 todoList 필요없음
-                        temp.todos = listOf()
-                        allList.get(today)?.add(temp)
+                        cur.todos = listOf()
+                        allList.get(today)?.add(cur)
                     } else {                                 //오늘 ~ 미래거면 todo 필요 -> 미래는 Todo를 보여주나 ?
-                        allList.get(today)?.add(temp)
+                        allList.get(today)?.add(cur)
                     }
-                }
-            } else {
-                if (today < LocalDate.now().toString()) {
-                    for (temp in cur) {
-                        temp.todos = listOf()
+
+                } else {
+                    if (today < LocalDate.now().toString()) {
+                        cur.todos = listOf()
                     }
+                    val temp_list = ArrayList<Habit>()      //새로운 Habit 리스트 만들어서 할당
+                    temp_list.add(cur)
+                    allList.put(today,temp_list)
                 }
-                allList.put(today, cur)
+
             }
+            //오늘 날짜꺼는 RoomDB에 있는걸로 해야함
+//            Log.d("GetToday" , getTodayFromDBUseCase())
+            val today_temp = getTodayFromDBUseCase()
+            Log.d("GetToday" , today_temp)
+
+
+            //초기값 셋팅을 어떻게 할까?
+            Log.d("LocalDate", LocalDate.now().toString())
+            habitList.value = allList.get(MyApplicationClass.clickedDate.toString())
         }
 
-        //초기값 셋팅을 어떻게 할까?
-        Log.d("LocalDate", LocalDate.now().toString())
-        habitList.value = allList.get(MyApplicationClass.clickedDate.toString())
     }
 
     fun setHabitList(recyclerViewHabits: ArrayList<Habit>) {
@@ -232,17 +92,17 @@ class HomeViewModel @Inject constructor(
                 var cnt = 0
                 for (todo in habit.todos) {
                     if (todo.id == item.id) {
-                        if (todo.status == "0") todo.status = "1"
-                        else todo.status = "0"
+                        if (todo.status == "False") todo.status = "True"
+                        else todo.status = "False"
                         Log.d("HomeViewModel", todo.status)
                     }
-                    if (todo.status == "1") cnt++
+                    if (todo.status == "True") cnt++
                 }
                 //전부 1로 바뀌었으면
                 if (cnt == habit.todos.size) {
-                    habit.today_status = "1"
+                    habit.today_status = "True"
                 } else {
-                    habit.today_status = "0"
+                    habit.today_status = "False"
                 }
             }
 
@@ -255,11 +115,10 @@ class HomeViewModel @Inject constructor(
                     habit.seq,
                     habit.start,
                     habit.status,
-                    habit.time,
                     habit.today,
                     habit.today_status,
                     habit.todos,
-                    habit.week
+                    habit.weeks
                 )
             )
         }

@@ -96,7 +96,7 @@
             app:layout_constraintStart_toEndOf="@id/habit_info_day_title_tv"
             app:layout_constraintTop_toTopOf="@id/habit_info_day_title_tv"
             app:layout_constraintBottom_toBottomOf="@id/habit_info_day_title_tv"
-            android:text="@{habit.week}"
+            android:text="@{habit.weeks}"
             android:textSize="14sp"
             android:layout_marginStart="10dp"
             android:textColor="@color/main_40"/>

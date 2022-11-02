@@ -1,10 +1,7 @@
 package com.example.pebbles.di.core
 
 import com.example.pebbles.domain.repository.HomeRepository
-import com.example.pebbles.domain.usecase.GetHabitsFromAPIUseCase
-import com.example.pebbles.domain.usecase.GetHabitsFromAPIUseCaseImpl
-import com.example.pebbles.domain.usecase.GetHabitsFromDBUseCase
-import com.example.pebbles.domain.usecase.GetHabitsFromDBUseCaseImpl
+import com.example.pebbles.domain.usecase.*
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -27,6 +24,10 @@ abstract class UseCaseModule {
     //외부 Retrofit에서 사용하는 UseCase
     @Singleton
     @Binds
-    abstract fun provideGetHabitsFromAPIUseCase(gtHabitsFromAPIUseCaseImpl: GetHabitsFromAPIUseCaseImpl) : GetHabitsFromAPIUseCase
+    abstract fun provideGetHabitsFromAPIUseCase(getHabitsFromAPIUseCaseImpl: GetHabitsFromAPIUseCaseImpl) : GetHabitsFromAPIUseCase
+
+    @Singleton
+    @Binds
+    abstract fun provideGetTodayFromDBUseCase(getTodayFromDBUseCaseImpl: GetTodayFromDBUseCaseImpl) : GetTodayFromDBUseCase
 
 }

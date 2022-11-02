@@ -8,5 +8,6 @@ interface HabitLocalDataSource {
     suspend fun getHabits() : List<Habit>
     suspend fun saveHabitsToDB(habits : ArrayList<Habit>)       //당일 HabitList 저장
     suspend fun clearAll()
+    suspend fun getToday() : String
 
 }
