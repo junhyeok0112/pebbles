@@ -32,7 +32,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val homeService = RetrofitInstance.getRetrofit.create(HomeService::class.java)
 
         val responseLiveData : LiveData<Response<HabitList>> = liveData{
-            val response = homeService.getHabits(2 ,"eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjIsImlhdCI6MTY2NzEyMzU4MiwiZXhwIjoxNjY3OTg3NTgyfQ.vExDhlVDlP7mN-Ap8Nzp67FdYR1EpIY0JHAc_Cd3IWQ" )
+                    val response = homeService.getHabits(2 ,"eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjIsImlhdCI6MTY2NzEyMzU4MiwiZXhwIjoxNjY3OTg3NTgyfQ.vExDhlVDlP7mN-Ap8Nzp67FdYR1EpIY0JHAc_Cd3IWQ" )
             emit(response)
         }
 

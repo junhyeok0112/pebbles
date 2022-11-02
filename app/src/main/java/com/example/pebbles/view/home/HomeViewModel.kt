@@ -3,15 +3,20 @@ package com.example.pebbles.view.home
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.pebbles.MyApplicationClass
 import com.example.pebbles.data.remote.dto.Todo
 import com.example.pebbles.data.remote.model.Habit
 import com.example.pebbles.domain.usecase.GetHabitsFromAPIUseCase
 import com.example.pebbles.domain.usecase.GetHabitsFromDBUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.time.LocalDate
+import javax.inject.Inject
 
 //Application을 할당하는게 좋은 방법일까 ?
-class HomeViewModel(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     private val getHabitsFromAPIUseCase: GetHabitsFromAPIUseCase,
     private val getHabitsFromDBUseCase: GetHabitsFromDBUseCase
 ) : ViewModel() {
@@ -25,6 +30,10 @@ class HomeViewModel(
 
 
     init {
+        viewModelScope.launch {
+            getHabitsFromAPIUseCase()
+        }
+
         //더미데이터 -> 추후에 비동기 통신으로 값을 가져와야하는 부분
         val all: ArrayList<ArrayList<Habit>> = ArrayList()
         val habits1: ArrayList<Habit> = ArrayList()

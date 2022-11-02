@@ -8,8 +8,9 @@ import com.example.pebbles.data.remote.api.HomeService
 import com.example.pebbles.data.repository.home.datasource.HabitLocalDataSource
 import com.example.pebbles.data.repository.home.datasource.HabitRemoteDataSource
 import java.time.LocalDate
+import javax.inject.Inject
 
-class HomeRepositoryImpl(
+class HomeRepositoryImpl @Inject constructor(
     private val habitRemoteDataSource: HabitRemoteDataSource,
     private val habitLocalDataSource: HabitLocalDataSource
 ) : HomeRepository {

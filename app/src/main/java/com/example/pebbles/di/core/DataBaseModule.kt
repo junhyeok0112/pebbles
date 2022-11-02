@@ -6,18 +6,21 @@ import com.example.pebbles.data.db.PEBBLEDataBase
 import com.example.pebbles.data.model.HabitDAO
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-class DataBaseModule {
+@InstallIn(SingletonComponent::class)
+object DataBaseModule {
 
     @Singleton
     @Provides
-    fun provideHabitDataBase(context: Context) : PEBBLEDataBase{
-        return Room.databaseBuilder(context, PEBBLEDataBase::class.java, "pebbleclient").build()
+    fun provideHabitDataBase(@ApplicationContext context: Context) : PEBBLEDataBase{
+        return Room.databaseBuilder(context, PEBBLEDataBase::class.java, "pebble-database").build()
     }
 
-    @Singleton
     @Provides
     fun provideHabitDao(pebbleDataBase: PEBBLEDataBase) : HabitDAO{
         return pebbleDataBase.habitDao()

@@ -6,8 +6,9 @@ import com.example.pebbles.data.repository.home.datasource.HabitLocalDataSource
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HabitLocalDataSourceImpl(private val habitDAO: HabitDAO) : HabitLocalDataSource {
+class HabitLocalDataSourceImpl @Inject constructor(private val habitDAO: HabitDAO) : HabitLocalDataSource {
 
     override suspend fun getHabits(): ArrayList<Habit>  = habitDAO.getHabits()
 

@@ -3,12 +3,11 @@ package com.example.pebbles
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.pebbles.di.Injector
-import com.example.pebbles.di.core.AppComponent
 import com.example.pebbles.di.home.HomeSubComponent
-import dagger.android.DaggerApplication
+import dagger.hilt.android.HiltAndroidApp
 import java.time.LocalDate
 
+@HiltAndroidApp
 class MyApplicationClass : Application() , Injector{
 
     private lateinit var appComponent: AppComponent
@@ -39,7 +38,7 @@ class MyApplicationClass : Application() , Injector{
     override fun onCreate() {
         super.onCreate()
         mSharedPreferences = applicationContext.getSharedPreferences(TAG, Context.MODE_PRIVATE)
-        appComponent =
+
 
 
     }

@@ -3,8 +3,8 @@ package com.example.pebbles.domain.usecase
 import com.example.pebbles.data.remote.model.Habit
 import com.example.pebbles.domain.repository.HomeRepository
 
-class GetHabitsFromDBUseCase(private val homeRepository: HomeRepository) {
+interface GetHabitsFromDBUseCase {
 
-    suspend fun execute() : ArrayList<Habit>? = homeRepository.getHabitsFromDB()
+    suspend operator fun invoke() : ArrayList<Habit>?
 
 }

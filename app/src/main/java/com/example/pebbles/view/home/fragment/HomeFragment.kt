@@ -14,9 +14,12 @@ import com.example.pebbles.databinding.FragmentHomeBinding
 import com.example.pebbles.view.home.HomeViewModel
 import com.example.pebbles.view.home.adapter.HabitRVAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
+@AndroidEntryPoint
+class HomeFragment : BaseFragment<FragmentHomeBinding> (R.layout.fragment_home) {
 
     private val homeViewModel: HomeViewModel by viewModels()
     private lateinit var adapter : HabitRVAdapter

@@ -6,7 +6,8 @@ import com.example.pebbles.data.repository.home.datasource.HabitRemoteDataSource
 import com.example.pebbles.util.getJwt
 import com.example.pebbles.util.getUserIdx
 import retrofit2.Response
+import javax.inject.Inject
 
-class HabitRemoteDataSourceImpl(private val homeService: HomeService) : HabitRemoteDataSource {
+class HabitRemoteDataSourceImpl @Inject constructor(private val homeService: HomeService) : HabitRemoteDataSource {
     override suspend fun getHabits(): Response<HabitList>  = homeService.getHabits(getUserIdx() , getJwt())
 }
