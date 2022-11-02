@@ -17,8 +17,8 @@ object DataBaseModule {
 
     @Singleton
     @Provides
-    fun provideHabitDataBase(@ApplicationContext context: Context) : PEBBLEDataBase{
-        return Room.databaseBuilder(context, PEBBLEDataBase::class.java, "pebble-database").build()
+    fun provideHabitDataBase(@ApplicationContext context: Context) : PEBBLEDataBase {
+        return PEBBLEDataBase.getInstance(context)
     }
 
     @Provides

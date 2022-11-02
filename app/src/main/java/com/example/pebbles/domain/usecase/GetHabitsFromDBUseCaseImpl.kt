@@ -6,5 +6,5 @@ import javax.inject.Inject
 
 class GetHabitsFromDBUseCaseImpl @Inject constructor(private val homeRepository: HomeRepository) : GetHabitsFromDBUseCase{
 
-    override suspend operator fun invoke(): ArrayList<Habit>? = homeRepository.getHabitsFromDB()
+    override suspend operator fun invoke(): List<Habit>? = homeRepository.getHabitsFromDB()
 }

@@ -5,6 +5,6 @@ import com.example.pebbles.domain.repository.HomeRepository
 
 interface GetHabitsFromDBUseCase {
 
-    suspend operator fun invoke() : ArrayList<Habit>?
+    suspend operator fun invoke() : List<Habit>?
 
 }

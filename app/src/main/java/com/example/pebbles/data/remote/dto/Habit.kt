@@ -1,13 +1,16 @@
 package com.example.pebbles.data.remote.model
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.example.pebbles.data.remote.dto.Todo
+import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
 
 
 //오늘 날짜 Habit들을 RoomDB에 저장해야함 -> 흠 ..
 @Entity(tableName = "Habit_List")
 data class Habit(
+    @PrimaryKey(autoGenerate = true)
     @SerializedName("cons_days") val cons_days : Int,    //연속 일자
     @SerializedName("end") val end : String,       //종료일
     @SerializedName("id") val id: Int,            //해빗 ID
@@ -18,6 +21,6 @@ data class Habit(
     @SerializedName("time") val time: String,       //해빗 시간
     @SerializedName("today") val today : String,             //해빗 실천하는 날짜
     @SerializedName("today_status") var today_status : String,      //해빗 실천하는 날짜의 완료 여뷰
-    @SerializedName("todos") val todos : ArrayList<Todo>,         //해빗의 todos
+    @SerializedName("todos") var todos : List<Todo>,         //해빗의 todos
     @SerializedName("week") val week: String                //해빗 요일
 )

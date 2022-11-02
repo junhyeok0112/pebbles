@@ -18,7 +18,7 @@ object NetModule {
     @Provides
     fun provideRetrofit():Retrofit{
         return Retrofit.Builder()
-            .baseUrl("http://umc-kyj.shop/v2/api-docs/")
+            .baseUrl("http://umc-kyj.shop/")
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
             .build()
     }

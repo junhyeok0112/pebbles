@@ -14,8 +14,9 @@ import com.example.pebbles.databinding.ActivityMainBinding
 import com.example.pebbles.network.RetrofitInstance
 import com.example.pebbles.data.remote.api.HomeService
 import com.example.pebbles.util.saveLoginInfo
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Response
-
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun initAfterBinding() {
@@ -32,7 +33,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         val homeService = RetrofitInstance.getRetrofit.create(HomeService::class.java)
 
         val responseLiveData : LiveData<Response<HabitList>> = liveData{
-                    val response = homeService.getHabits(2 ,"eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjIsImlhdCI6MTY2NzEyMzU4MiwiZXhwIjoxNjY3OTg3NTgyfQ.vExDhlVDlP7mN-Ap8Nzp67FdYR1EpIY0JHAc_Cd3IWQ" )
+                    val response = homeService.getHabits(1 ,"eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjEsImlhdCI6MTY2NzM3NzYzOCwiZXhwIjoxNjY4MjQxNjM4fQ.ENx8Ts5JqT4mdz-5nA-wphWUh2Nv_p3oO0SFCLOay1Y" )
             emit(response)
         }
 
@@ -44,7 +45,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         })
 
         //SharePreferenc에 일단 값 저장
-        saveLoginInfo("eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjIsImlhdCI6MTY2NzEyMzU4MiwiZXhwIjoxNjY3OTg3NTgyfQ.vExDhlVDlP7mN-Ap8Nzp67FdYR1EpIY0JHAc_Cd3IWQ","yj","123",2)
+        saveLoginInfo("eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjEsImlhdCI6MTY2NzM3NzYzOCwiZXhwIjoxNjY4MjQxNjM4fQ.ENx8Ts5JqT4mdz-5nA-wphWUh2Nv_p3oO0SFCLOay1Y","yj","123",1)
 
     }
 

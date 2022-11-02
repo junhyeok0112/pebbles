@@ -25,6 +25,7 @@ class HomeRepositoryImpl @Inject constructor(
             //Service 통해서 가져오기 -> 추후에 userId, JWT 토큰 , Datasource단에서 매개변수 처리됨
             val response = habitRemoteDataSource.getHabits()
             val body = response.body()
+            Log.d("Repository" , "레포 실행 : ${response.code()} 코드 , ${response.body()} 바디")
             if(body != null){
                 //넘어온 List 셋팅
                 habitList = body.result.habits
@@ -39,8 +40,8 @@ class HomeRepositoryImpl @Inject constructor(
 
 
     //RoomDB에 저장되어 있는 데이터들 꺼내오기 -> POST 요청할 때 사용
-    override suspend fun getHabitsFromDB() : ArrayList<Habit>{
-        lateinit var habitList : ArrayList<Habit>
+    override suspend fun getHabitsFromDB() : List<Habit>{
+        lateinit var habitList : List<Habit>
         try{
             habitList = habitLocalDataSource.getHabits()
             Log.d("HomeRepositroy-Local_test" , "${habitList}")

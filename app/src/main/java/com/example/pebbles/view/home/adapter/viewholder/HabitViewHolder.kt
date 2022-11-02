@@ -14,7 +14,10 @@ class HabitViewHolder(private val binding : ItemHabitHomeBinding) : RecyclerView
    fun bind(item: Habit , listener: HabitRVAdapter.TodoButtonListener) = with(binding){
        this.habit = item
        //Adapter 만들어서 중복 리싸이클러뷰
-        val adapter =  TodoRVAdapter(item.todos as ArrayList<Todo> , item.id) //해당 해빗이 가져온 todo 리스트 추가 , 해당 Habit의 ID 넘겨줌
+        var adapter = TodoRVAdapter(ArrayList<Todo>(), item.id)
+        if(item.todos.size != 0){
+            adapter =  TodoRVAdapter(item.todos as ArrayList<Todo> , item.id) //해당 해빗이 가져온 todo 리스트 추가 , 해당 Habit의 ID 넘겨줌
+        }
         adapter.setListener(listener)
         binding.itemHomeRecyclerRv.adapter = adapter
    }

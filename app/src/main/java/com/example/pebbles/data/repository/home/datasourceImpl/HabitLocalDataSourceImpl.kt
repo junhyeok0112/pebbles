@@ -10,7 +10,7 @@ import javax.inject.Inject
 
 class HabitLocalDataSourceImpl @Inject constructor(private val habitDAO: HabitDAO) : HabitLocalDataSource {
 
-    override suspend fun getHabits(): ArrayList<Habit>  = habitDAO.getHabits()
+    override suspend fun getHabits(): List<Habit>  = habitDAO.getHabits()
 
     override suspend fun saveHabitsToDB(habits: ArrayList<Habit>) {
         CoroutineScope(Dispatchers.IO).launch {

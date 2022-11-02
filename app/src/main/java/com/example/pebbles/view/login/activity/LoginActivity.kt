@@ -6,7 +6,9 @@ import com.bit.kodari.Config.BaseActivity
 import com.example.pebbles.R
 import com.example.pebbles.databinding.ActivityLoginBinding
 import com.example.pebbles.view.login.LoginViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
     private val loginViewModel: LoginViewModel by viewModels()

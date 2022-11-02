@@ -196,7 +196,7 @@ class HomeViewModel @Inject constructor(
                 for (temp in cur) {
                     //temp가 Habit들
                     if (today < LocalDate.now().toString()) { //과거의 것이면 todoList 필요없음
-                        temp.todos.clear()
+                        temp.todos = listOf()
                         allList.get(today)?.add(temp)
                     } else {                                 //오늘 ~ 미래거면 todo 필요 -> 미래는 Todo를 보여주나 ?
                         allList.get(today)?.add(temp)
@@ -205,7 +205,7 @@ class HomeViewModel @Inject constructor(
             } else {
                 if (today < LocalDate.now().toString()) {
                     for (temp in cur) {
-                        temp.todos.clear()
+                        temp.todos = listOf()
                     }
                 }
                 allList.put(today, cur)

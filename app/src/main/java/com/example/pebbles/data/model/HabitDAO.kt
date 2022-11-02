@@ -18,7 +18,7 @@ interface HabitDAO {
     suspend fun deleteAllHabit()
     //전체 조회
     @Query("SELECT * FROM Habit_List")
-    suspend fun getHabits() : ArrayList<Habit>
+    suspend fun getHabits() : List<Habit>
 
     //RoomDB의 날짜 조회 -> 오늘 데아터만 저장 될거임
     @Query("SELECT today FROM Habit_List")

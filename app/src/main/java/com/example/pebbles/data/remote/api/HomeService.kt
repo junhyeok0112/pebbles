@@ -16,7 +16,7 @@ Callback Hell을 방지하려면 Response를 이용해서 하는 것이 더 좋�
 
 interface HomeService {
 
-    @GET("/auth/home/{userId}")
+    @GET("/api/home/{userId}")
     suspend fun getHabits(@Path("userId") userId:Int , @Header("x-access-token") jwt: String?) : Response<HabitList>
 
 }

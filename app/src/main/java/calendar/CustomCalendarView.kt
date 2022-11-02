@@ -159,7 +159,6 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
 //                    callBackFunc(dayText)
                     viewModel.test(dayText)
 
-
                 }
 
             }

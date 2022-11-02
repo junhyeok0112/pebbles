@@ -3,22 +3,19 @@ package com.example.pebbles
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.pebbles.di.home.HomeSubComponent
 import dagger.hilt.android.HiltAndroidApp
 import java.time.LocalDate
 
 @HiltAndroidApp
-class MyApplicationClass : Application() , Injector{
+class MyApplicationClass : Application() {
 
-    private lateinit var appComponent: AppComponent
-
-    companion object{
+    companion object {
         const val X_ACCESS_TOKEN: String = "X-ACCESS-TOKEN"         // JWT Token Key
-        const val NICKNAME : String = "NICKNAME"
+        const val NICKNAME: String = "NICKNAME"
         const val PASSWORD: String = "PASSWORD"
-        const val USER_IDX :String = "USER_IDX"                     //유저 번호
+        const val USER_IDX: String = "USER_IDX"                     //유저 번호
         const val TAG: String = "TEMPLATE-APP"                      // Log, SharedPreference
-        const val AUTO_LOGIN : String = "AUTO_LOGIN"
+        const val AUTO_LOGIN: String = "AUTO_LOGIN"
 
         lateinit var mSharedPreferences: SharedPreferences
 
@@ -30,16 +27,8 @@ class MyApplicationClass : Application() , Injector{
 
     }
 
-
-    override fun createHomeSubComponent(): HomeSubComponent {
-        TODO("Not yet implemented")
-    }
-
     override fun onCreate() {
         super.onCreate()
         mSharedPreferences = applicationContext.getSharedPreferences(TAG, Context.MODE_PRIVATE)
-
-
-
     }
 }
