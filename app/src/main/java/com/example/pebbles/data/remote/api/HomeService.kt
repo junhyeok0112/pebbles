@@ -1,10 +1,11 @@
 package com.example.pebbles.data.remote.api
 
 import com.example.pebbles.data.remote.dto.HabitList
+import com.example.pebbles.data.remote.dto.update.HomeUpdateRequest
+import com.example.pebbles.data.remote.dto.update.HomeUpdateRequestItem
+import com.example.pebbles.data.remote.dto.update.HomeUpdateResponse
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Path
+import retrofit2.http.*
 
 /**
 Rest API 서버와 통신하는 방법을 정의한 인터페이스
@@ -17,6 +18,9 @@ Callback Hell을 방지하려면 Response를 이용해서 하는 것이 더 좋�
 interface HomeService {
 
     @GET("/api/home/{userId}")
-    suspend fun getHabits(@Path("userId") userId:Int , @Header("x-access-token") jwt: String?) : Response<HabitList>
+    suspend fun getHabits( @Header("x-access-token") jwt: String? ,@Path("userId") userId:Int) : Response<HabitList>
 
+    //해빗의 today_status 갱신
+    @POST("/api/home/{userId}/update")
+    suspend fun updateHabits( @Header("x-access-token") jwt: String?, @Path("userId") userId:Int, @Body homeUpdateRequest: HomeUpdateRequest) : Response<HomeUpdateResponse>
 }

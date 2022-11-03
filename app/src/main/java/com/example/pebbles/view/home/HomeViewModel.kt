@@ -6,11 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pebbles.MyApplicationClass
 import com.example.pebbles.data.remote.dto.Todo
+import com.example.pebbles.data.remote.dto.update.HomeUpdateRequest
+import com.example.pebbles.data.remote.dto.update.HomeUpdateRequestItem
 import com.example.pebbles.data.remote.model.Habit
-import com.example.pebbles.domain.usecase.GetHabitsFromAPIUseCase
-import com.example.pebbles.domain.usecase.GetHabitsFromDBUseCase
-import com.example.pebbles.domain.usecase.GetTodayFromDBUseCase
+import com.example.pebbles.domain.usecase.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.time.LocalDate
@@ -21,7 +24,9 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getHabitsFromAPIUseCase: GetHabitsFromAPIUseCase,
     private val getHabitsFromDBUseCase: GetHabitsFromDBUseCase,
-    private val getTodayFromDBUseCase: GetTodayFromDBUseCase
+    private val getTodayFromDBUseCase: GetTodayFromDBUseCase,
+    private val updateTodoToDBUseCase: UpdateTodoToDBUseCase,
+    private val updateHabitToAPIUseCase: UpdateHabitsToAPIUseCase
 ) : ViewModel() {
     //Viwjscp fewModel에서의
 
@@ -69,7 +74,6 @@ class HomeViewModel @Inject constructor(
             //만약 날짜가 오늘꺼면 getHabitFromDB로 지금 데이터 가져옴.
             //getHabitFromDB로 오늘 날짜에 해당하는 값 다시 셋팅
             allList.put(LocalDate.now().toString() , getHabitsFromDBUseCase() as ArrayList<Habit>)
-            Log.d("GetHabits" , getTodayFromDBUseCase())
 
 
 
@@ -108,6 +112,11 @@ class HomeViewModel @Inject constructor(
                 } else {
                     habit.today_status = "False"
                 }
+                //habit.todos가 갱신되었을 꺼임 -> 그러면 이거를 바꾸면 되지 않을까 ?
+                //habit_id로 해당 habit찾고 , habit_todos를 갱신하기.->이때 저장은 json인데 그냥 그 json자체를 바꿔줌
+                CoroutineScope(Dispatchers.IO).launch {
+                    updateTodoToDBUseCase(habit)
+                }
             }
 
             temp.add(
@@ -130,15 +139,28 @@ class HomeViewModel @Inject constructor(
         allList.put(MyApplicationClass.clickedDate.toString(), temp)
         setHabitList(temp)
     }
+//날짜 변경하기
+    fun changeDay(date: LocalDate) {
 
-    fun test(date: LocalDate) {
-        Log.d("Test", "HomeViewModel 데이터 출력 ${date}")
         //리스트 날짜에 맞게 변경하기
         if (allList.containsKey(date.toString())) {
             habitList.value = allList.get(date.toString())
         } else {     //비어있는 리스트로 셋팅
             habitList.value = ArrayList()
         }
+    }
 
+    //오늘의 Habits 정보들 서버로 보내기
+    fun updateHabits(){
+        viewModelScope.launch {
+            val list = getHabitsFromDBUseCase() //호출해서 받아오고
+            val homeUpdateRequest = HomeUpdateRequest()
+            if (list != null) {
+                for(cur in list){
+                    homeUpdateRequest.add(HomeUpdateRequestItem(cur.id, cur.today_status,cur.today))    //Habit리스트 셋팅
+                }
+                Log.d("UpdateTest" , "${updateHabitToAPIUseCase(homeUpdateRequest).body()}")
+            }
+        }
     }
 }

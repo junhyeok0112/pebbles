@@ -1,10 +1,6 @@
 package com.example.pebbles.data.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.pebbles.data.remote.model.Habit
 
 //RoomDB에 해빗 리스트 관리하는 DAO
@@ -31,4 +27,7 @@ interface HabitDAO {
     )
 
     //Todo 아이템 변경시키기 -> 쿼리 짜야함
+    //해당 Habit을 전부 Update 시키기 -> PK로 알아서 구분해줌
+    @Update
+    fun updateTodo(habit : Habit)
 }

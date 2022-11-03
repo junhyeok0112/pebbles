@@ -35,6 +35,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding> (R.layout.fragment_home) 
             Log.d("HABIT_LIST" , "${homeViewModel.habitList.value}")
         })
 
+        binding.homeLogoLv.setOnClickListener {
+            homeViewModel.updateHabits()            //테스트를 위해 호출
+        }
     }
 
 

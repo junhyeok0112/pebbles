@@ -10,10 +10,10 @@ import com.google.gson.annotations.SerializedName
 //오늘 날짜 Habit들을 RoomDB에 저장해야함 -> 흠 ..
 @Entity(tableName = "Habit_List")
 data class Habit(
-    @PrimaryKey(autoGenerate = true)
+
     @SerializedName("cons_days") val cons_days : Int,    //연속 일자
     @SerializedName("end") val end : String,       //종료일
-    @SerializedName("id") val id: Int,            //해빗 ID
+    @PrimaryKey @SerializedName("id") val id: Int,            //해빗 ID
     @SerializedName("name") val name: String,       //해빗 이름
     @SerializedName("seq") val seq: Int,           //해빗 순서
     @SerializedName("start") val start : String,     //시작일

@@ -1,6 +1,10 @@
 package com.example.pebbles.domain.repository
 
+import com.example.pebbles.data.remote.dto.update.HomeUpdateRequest
+import com.example.pebbles.data.remote.dto.update.HomeUpdateRequestItem
+import com.example.pebbles.data.remote.dto.update.HomeUpdateResponse
 import com.example.pebbles.data.remote.model.Habit
+import retrofit2.Response
 
 interface HomeRepository {
 
@@ -8,5 +12,7 @@ interface HomeRepository {
     suspend fun getHabitsFromDB() : List<Habit>?
     suspend fun updateHabitsToDB() : List<Habit>?
     suspend fun getTodayFromDB() : String
+    suspend fun updateTodoToDB(habit : Habit)
+    suspend fun updateHabitToAPI(updateRequest: HomeUpdateRequest) : Response<HomeUpdateResponse>
 
 }

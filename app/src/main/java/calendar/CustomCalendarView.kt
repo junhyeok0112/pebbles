@@ -156,8 +156,7 @@ class CustomCalendarView(context: Context, attrs: AttributeSet) : ConstraintLayo
                     Toast.makeText(context, "다른 날을 클릭해주세요", Toast.LENGTH_SHORT).show()
                 } else {
                     // 그 함수 호출!
-//                    callBackFunc(dayText)
-                    viewModel.test(dayText)
+                    viewModel.changeDay(dayText)
 
                 }
 

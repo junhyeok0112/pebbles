@@ -1,6 +1,9 @@
 package com.example.pebbles.data.repository.home.datasource
 
 import com.example.pebbles.data.remote.dto.HabitList
+import com.example.pebbles.data.remote.dto.update.HomeUpdateRequest
+import com.example.pebbles.data.remote.dto.update.HomeUpdateRequestItem
+import com.example.pebbles.data.remote.dto.update.HomeUpdateResponse
 import com.example.pebbles.data.remote.model.Habit
 import retrofit2.Response
 
@@ -8,5 +11,6 @@ import retrofit2.Response
 interface HabitRemoteDataSource {
 
     suspend fun getHabits() : Response<HabitList>
+    suspend fun updateHabits(updateRequest: HomeUpdateRequest) : Response<HomeUpdateResponse>
 
 }

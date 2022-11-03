@@ -20,6 +20,13 @@ abstract class UseCaseModule {
     @Binds
     abstract fun provideGetHabitFromDBUseCase(getHabitsFromDBUseCaseImpl: GetHabitsFromDBUseCaseImpl) : GetHabitsFromDBUseCase
 
+    @Singleton
+    @Binds
+    abstract fun provideGetTodayFromDBUseCase(getTodayFromDBUseCaseImpl: GetTodayFromDBUseCaseImpl) : GetTodayFromDBUseCase
+
+    @Singleton
+    @Binds
+    abstract fun provideUpdateTodoToDBUseCase(updateTodoToDBUseCaseImpl: UpdateTodoToDBUseCaseImpl) : UpdateTodoToDBUseCase
 
     //외부 Retrofit에서 사용하는 UseCase
     @Singleton
@@ -28,6 +35,6 @@ abstract class UseCaseModule {
 
     @Singleton
     @Binds
-    abstract fun provideGetTodayFromDBUseCase(getTodayFromDBUseCaseImpl: GetTodayFromDBUseCaseImpl) : GetTodayFromDBUseCase
+    abstract fun provideUpdateHabitsToAPIUseCase(updateHabitsToAPIUseCaseImpl: UpdateHabitsToAPIUseCaseImpl) : UpdateHabitsToAPIUseCase
 
 }
