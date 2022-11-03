@@ -40,19 +40,34 @@ class HomeRepositoryImpl @Inject constructor(
 
 
     //RoomDB에 저장되어 있는 데이터들 꺼내오기 -> POST 요청할 때 사용
+    //getHabit으로 RoomDB에 알맞은 값 셋팅하고 가져옴
     override suspend fun getHabitsFromDB() : List<Habit>{
-        lateinit var habitList : List<Habit>
+        lateinit var habitList : ArrayList<Habit>
         try{
-            habitList = habitLocalDataSource.getHabits()
-            Log.d("HomeRepositroy-Local_test" , "${habitList}")
+            habitList = habitLocalDataSource.getHabits() as ArrayList<Habit>
+            Log.d("HomeRepositroy_Local_test" , "${habitList}")
         }catch(e: Exception){
             Log.d("HomeRepository_Exception_DB" , e.message.toString())
         }
-        if(habitList.size > 0){
-            return habitList
+
+        //이게 값이 있고 오늘 날짜면 바로 리스트 리턴
+        //값이 없거나 오늘날짜가 아니면 새로운 값 받아옴.
+        if(habitList.size > 0 && habitList[0].today == LocalDate.now().toString()){
+           return habitList
         } else{
             //만약 없으면 오늘자 데이터 가져와서 저장하고 그값 리턴 , 지금은 임시로 외부에서 가져옴
-            habitList = getHabitsFromAPI()!!
+            val temp_habitList = getHabitsFromAPI()!!
+            Log.d("Repository_save_habitList_1" , "${habitList.toString()}")
+            for(cur in temp_habitList){
+                if(cur.today == LocalDate.now().toString()){    //오늘 날짜 아닌 애들 제거
+                    habitList.add(cur)
+                }
+            }
+            Log.d("Repository_save_habitList_2" , "${habitList.toString()}")
+            //habitList를 RoomDB에 저장하기
+            Log.d("Repository_save_habitList_3" , "${habitList.toString()}")
+            habitLocalDataSource.clearAll()
+            habitLocalDataSource.saveHabitsToDB(habitList)
         }
         return habitList
     }

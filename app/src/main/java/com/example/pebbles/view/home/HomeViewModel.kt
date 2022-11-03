@@ -64,15 +64,19 @@ class HomeViewModel @Inject constructor(
                 }
 
             }
-            //오늘 날짜꺼는 RoomDB에 있는걸로 해야함
-//            Log.d("GetToday" , getTodayFromDBUseCase())
-            val today_temp = getTodayFromDBUseCase()
-            Log.d("GetToday" , today_temp)
+            //오늘 날짜꺼는 RoomDB에 있는걸로 해야함 -> 보면 어짜피 getHabitFromDB 실행해야함.
+            //날짜가 오늘꺼가 아니거나 비었으면 getHabitFromDB로 갱신 후 리스트 가져옴
+            //만약 날짜가 오늘꺼면 getHabitFromDB로 지금 데이터 가져옴.
+            //getHabitFromDB로 오늘 날짜에 해당하는 값 다시 셋팅
+            allList.put(LocalDate.now().toString() , getHabitsFromDBUseCase() as ArrayList<Habit>)
+            Log.d("GetHabits" , getTodayFromDBUseCase())
+
 
 
             //초기값 셋팅을 어떻게 할까?
             Log.d("LocalDate", LocalDate.now().toString())
             habitList.value = allList.get(MyApplicationClass.clickedDate.toString())
+            Log.d("ViewModel2", "셋팅 끝")
         }
 
     }
