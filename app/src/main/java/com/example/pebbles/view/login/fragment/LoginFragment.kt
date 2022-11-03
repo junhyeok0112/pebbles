@@ -21,12 +21,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     }
 
     private fun setListener() {
-        binding.loginKakaoBtn.setOnClickListener {
+        binding.loginStartBtn.setOnClickListener {
             it.findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
-        binding.loginNaverBtn.setOnClickListener {
-            showToast(LocalDate.now().toString()) //yyyy-MM-dd 형식으로 나옴
 
+        binding.loginLoginTv.setOnClickListener {
+            it.findNavController().navigate(R.id.action_loginFragment_to_loginSubFragment)
         }
     }
 }

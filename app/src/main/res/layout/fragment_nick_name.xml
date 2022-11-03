@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="27dp"
-            android:text="닉네임을 알려주세요"
+            android:text="오늘의 조약돌과 함께 \n목표를 위한 오늘 관리를 시작해요!"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -30,8 +30,8 @@
             android:id="@+id/nick_name_sub_title_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="설정 된 닉네임은 수정이 불가합니다."
+            android:layout_marginTop="25dp"
+            android:text="닉네임"
             android:textColor="@color/gray_50"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="@id/nick_name_title_tv"
@@ -42,10 +42,10 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/signup_basic"
-            android:hint="특수문자는 사용할 수 없습니다."
+            android:hint="설정된 닉네임은 수정이 불가해요"
             android:paddingStart="15dp"
             android:textSize="15sp"
             android:text="@={loginViewModel._nickname}"
@@ -67,40 +67,7 @@
             app:layout_constraintEnd_toEndOf="@id/nick_name_input_et"
             app:layout_constraintTop_toTopOf="@id/nick_name_input_et" />
 
-        <TextView
-            android:id="@+id/nick_name_result_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="6dp"
-            android:text="테스트"
-            android:textColor="@color/main_30"
-            android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nick_name_input_et" />
 
-        <TextView
-            android:id="@+id/nick_name_cur_len_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{Integer.toString(loginViewModel.nickname.length())}"
-            android:textColor="@color/gray_40"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="@id/nick_name_limit_tv"
-            app:layout_constraintEnd_toStartOf="@id/nick_name_limit_tv"
-            app:layout_constraintTop_toTopOf="@id/nick_name_limit_tv" />
-
-        <TextView
-            android:id="@+id/nick_name_limit_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="28dp"
-            android:text="/7"
-            android:textColor="@color/gray_40"
-            android:textSize="13sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nick_name_input_et" />
 
         <Button
             android:id="@+id/nick_name_next_btn"
