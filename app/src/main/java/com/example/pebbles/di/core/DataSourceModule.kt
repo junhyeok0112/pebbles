@@ -6,6 +6,8 @@ import com.example.pebbles.data.repository.home.datasource.HabitLocalDataSource
 import com.example.pebbles.data.repository.home.datasource.HabitRemoteDataSource
 import com.example.pebbles.data.repository.home.datasourceImpl.HabitLocalDataSourceImpl
 import com.example.pebbles.data.repository.home.datasourceImpl.HabitRemoteDataSourceImpl
+import com.example.pebbles.data.repository.login.datasource.LoginDataSource
+import com.example.pebbles.data.repository.login.datasourceImpl.LoginDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -27,4 +29,9 @@ abstract class DataSourceModule {
     @Singleton
     @Binds
     abstract fun provideHabitRemoteDataSource(remoteDataSourceImpl: HabitRemoteDataSourceImpl) : HabitRemoteDataSource
+
+    //로그인 DataSource
+    @Singleton
+    @Binds
+    abstract fun provideLoginDataSource(loginDataSourceImpl: LoginDataSourceImpl) : LoginDataSource
 }

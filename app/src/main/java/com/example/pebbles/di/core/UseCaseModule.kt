@@ -2,6 +2,10 @@ package com.example.pebbles.di.core
 
 import com.example.pebbles.domain.repository.HomeRepository
 import com.example.pebbles.domain.usecase.*
+import com.example.pebbles.domain.usecase.login.LoginUseCase
+import com.example.pebbles.domain.usecase.login.LoginUseCaseImpl
+import com.example.pebbles.domain.usecase.login.SignUpUseCase
+import com.example.pebbles.domain.usecase.login.SignUpUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -36,5 +40,15 @@ abstract class UseCaseModule {
     @Singleton
     @Binds
     abstract fun provideUpdateHabitsToAPIUseCase(updateHabitsToAPIUseCaseImpl: UpdateHabitsToAPIUseCaseImpl) : UpdateHabitsToAPIUseCase
+
+    //로그인 관련 UseCAse
+    @Singleton
+    @Binds
+    abstract fun provideSignUpUseCase(signUpUseCaseImpl: SignUpUseCaseImpl) : SignUpUseCase
+
+    @Singleton
+    @Binds
+    abstract fun provideLoginUseCase(loginUseCaseImpl: LoginUseCaseImpl) : LoginUseCase
+
 
 }

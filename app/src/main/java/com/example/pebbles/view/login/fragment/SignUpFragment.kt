@@ -17,21 +17,21 @@ import com.example.pebbles.view.login.adapter.SingUpVPAdapter
 
 class SignUpFragment : BaseFragment<FragmentSignUpBinding>(R.layout.fragment_sign_up) {
 
-    private lateinit var callback : OnBackPressedCallback
+//    private lateinit var callback : OnBackPressedCallback
 //시스템 뒤로가기 눌렀을시 보이는 뷰페이저에 따라 다르게 작동하게 예외처리
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        callback = object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                if(binding.signUpViewpager.currentItem == 1){
-                    binding.signUpViewpager.setCurrentItem(0)
-                } else{
-                    view?.findNavController()?.navigate(R.id.action_signUpFragment_to_loginFragment)
-                }
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(this ,callback)
-    }
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        callback = object : OnBackPressedCallback(true){
+//            override fun handleOnBackPressed() {
+//                if(binding.signUpViewpager.currentItem == 1){
+//                    binding.signUpViewpager.setCurrentItem(0)
+//                } else{
+//                    view?.findNavController()?.navigate(R.id.action_signUpFragment_to_loginFragment)
+//                }
+//            }
+//        }
+//        requireActivity().onBackPressedDispatcher.addCallback(this ,callback)
+//    }
 
 
     override fun initAfterBinding() {
@@ -42,15 +42,11 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(R.layout.fragment_sig
     private fun setViewPager(){
         binding.signUpViewpager.adapter = SingUpVPAdapter(this)
         binding.signUpViewpager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        binding.signUpViewpager.offscreenPageLimit = 2
+        binding.signUpViewpager.offscreenPageLimit = 1
         binding.signUpViewpager.isUserInputEnabled = false
         binding.signUpViewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                when(position){
-                  0 -> { binding.signUpProgressBar.setProgressCompat(50, true) }
-                  else -> { binding.signUpProgressBar.setProgressCompat(100,true) }
-                }
             }
         })
     }

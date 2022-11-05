@@ -3,7 +3,9 @@ package com.example.pebbles.di.core
 import com.example.pebbles.data.repository.home.HomeRepositoryImpl
 import com.example.pebbles.data.repository.home.datasource.HabitLocalDataSource
 import com.example.pebbles.data.repository.home.datasource.HabitRemoteDataSource
+import com.example.pebbles.data.repository.login.LoginRepositoryImpl
 import com.example.pebbles.domain.repository.HomeRepository
+import com.example.pebbles.domain.repository.LogInRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -25,4 +27,8 @@ abstract class RepositoryModule {
         homeRepositoryImpl: HomeRepositoryImpl
     ) : HomeRepository
 
+
+    @Singleton
+    @Binds
+    abstract fun provideLoginRepository(loginRepositoryImpl: LoginRepositoryImpl) : LogInRepository
 }

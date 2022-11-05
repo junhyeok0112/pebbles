@@ -65,4 +65,5 @@ abstract class BaseFragment<VB : ViewDataBinding>(
             mLoadingDialog.dismiss()
         }
     }
+
 }

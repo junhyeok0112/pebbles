@@ -7,10 +7,15 @@
         <entry key="..\:/And/pebbles/app/src/main/res/drawable/custom_day_cell.xml" value="0.156" />
         <entry key="..\:/And/pebbles/app/src/main/res/drawable/custom_day_cell_blank.xml" value="0.156" />
         <entry key="..\:/And/pebbles/app/src/main/res/drawable/custom_day_cell_unselected.xml" value="0.156" />
+        <entry key="..\:/And/pebbles/app/src/main/res/drawable/ic_login_alert.xml" value="0.1565" />
+        <entry key="..\:/And/pebbles/app/src/main/res/drawable/login_checked.xml" value="0.1565" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/custom_calendar_cell.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/custom_view_calendar.xml" value="0.4" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_login.xml" value="0.25364583333333335" />
+        <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_login_sub.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_nick_name.xml" value="0.2" />
+        <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_sign_up.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_target.xml" value="0.264" />
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/drawable/corner_bottom_sheet_dialog.xml" value="0.2665" />
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/drawable/corner_white.xml" value="0.2615" />
