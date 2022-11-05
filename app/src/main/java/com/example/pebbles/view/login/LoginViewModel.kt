@@ -13,6 +13,10 @@ class LoginViewModel @Inject constructor() : ViewModel(){
     var _nickname = MutableLiveData<String>().apply { value = "" }
     val nickname :LiveData<String>
         get() = _nickname
+    //패스워드
+    var password = MutableLiveData<String>().apply { value ="" }
+    //패스워드 체크
+    var passwrod_chk = MutableLiveData<String>().apply { value="" }
 
     var _content = MutableLiveData<String>().apply { value = "" }
     val content : LiveData<String>

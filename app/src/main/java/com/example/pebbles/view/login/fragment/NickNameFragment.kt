@@ -32,6 +32,7 @@ class NickNameFragment : BaseFragment<FragmentNickNameBinding>(R.layout.fragment
     }
 
     private fun setListener(){
+        //중복확인 체크
         binding.nickNameCheckTv.setOnClickListener {
 
         }
