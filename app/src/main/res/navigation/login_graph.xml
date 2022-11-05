@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_loginSubFragment"
+            app:destination="@id/loginSubFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -21,6 +24,14 @@
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginSubFragment"
+        android:name="com.example.pebbles.view.login.fragment.LoginSubFragment"
+        android:label="LoginSubFragment" >
+        <action
+            android:id="@+id/action_loginSubFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
 </navigation>

@@ -69,5 +69,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.d("Main Activity" , "onPause()")
+    }
+
 }
 
