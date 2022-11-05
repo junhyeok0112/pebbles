@@ -1,6 +1,7 @@
 package com.example.pebbles.data.repository.login
 
 import android.util.Log
+import com.example.pebbles.data.remote.dto.login.duplicate.DuplicateChkResponse
 import com.example.pebbles.data.remote.dto.login.login.LoginRequest
 import com.example.pebbles.data.remote.dto.login.login.LoginResponse
 import com.example.pebbles.data.remote.dto.login.signup.SignUpRequest
@@ -32,5 +33,15 @@ class LoginRepositoryImpl @Inject constructor(
             Log.d("LoginRepository_Exception" , e.message.toString())
         }
         return loginResponse
+    }
+
+    override suspend fun duplicateChk(username: String): Response<DuplicateChkResponse> {
+        lateinit var duplicateChkResponse: Response<DuplicateChkResponse>
+        try {
+            duplicateChkResponse = loginDataSource.duplicateChk(username)
+        }catch(e: Exception){
+            Log.d("LoginRepository_Exception" , e.message.toString())
+        }
+        return duplicateChkResponse
     }
 }

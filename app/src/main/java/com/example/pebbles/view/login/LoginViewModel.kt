@@ -1,5 +1,6 @@
 package com.example.pebbles.view.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.example.pebbles.data.remote.dto.login.login.LoginRequest
 import com.example.pebbles.data.remote.dto.login.login.LoginResponse
 import com.example.pebbles.data.remote.dto.login.signup.SignUpRequest
 import com.example.pebbles.data.remote.dto.login.signup.SignUpResponse
+import com.example.pebbles.domain.usecase.login.DuplicateChkUseCase
 import com.example.pebbles.domain.usecase.login.LoginUseCase
 import com.example.pebbles.domain.usecase.login.SignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
-    private val loginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase,
+    private val duplicateChkUseCase : DuplicateChkUseCase
 ) : ViewModel() {
 
     var nickname = MutableLiveData<String>().apply { value = "" }
@@ -36,6 +39,9 @@ class LoginViewModel @Inject constructor(
 
     //특수문자 사용불가  -> 3가지 상태
     var cannotSpecial = MutableLiveData<Boolean>().apply { value = false }
+
+    //중복체크 활성화
+    var isduplicateChk = MutableLiveData<Boolean>().apply { value = false }
 
     //사용 가능 닉네임 -> DataBinding 체크
     var canUseNick = MutableLiveData<Boolean>().apply { value = false }
@@ -86,6 +92,26 @@ class LoginViewModel @Inject constructor(
         return loginResponse
     }
 
+    //회원가입 데이터 초기화
+    fun initSignUpData(){
+        nickname.value = ""
+        password.value =""
+        password_chk.value =""
+    }
+
+    //로그인 데이터 초기화
+    fun initLoginData(){
+        login_id.value =""
+        login_pw.value= ""
+    }
+
+    //중복 검사하는 함수 호출 -> 중복인지 True면 중복 , False면 중복 아님
+    suspend fun duplicateChk() : Boolean? {
+        val duplicateChkResponse =  duplicateChkUseCase(nickname.value!!)
+        Log.d("Duplicate_Test" , "${duplicateChkResponse}")
+        Log.d("Duplicate_Test" , "${duplicateChkResponse.body()}")
+        return duplicateChkUseCase(nickname.value!!).body()?.result
+    }
 
 
 }

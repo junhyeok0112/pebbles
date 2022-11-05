@@ -6,7 +6,7 @@ object StringUtil {
 
     val idPattern = Pattern.compile("^[a-zA-Z0-9]*\$")
     val pwPattern =
-        Pattern.compile("^.*(?=^.{8,16}\$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#\$%^&+=]).*\$")
+        Pattern.compile("^.*(?=^.{0,16}\$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#\$%^&+=]).*\$")
 
 
     //아이디 특수문자 체크하는 함수
