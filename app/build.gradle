@@ -102,4 +102,7 @@ dependencies {
     //Viewpager2 indicator 추가
     implementation 'me.relex:circleindicator:2.1.6'
 
+    //Circle ImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 }

@@ -1,6 +1,7 @@
 package com.example.pebbles.view
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
@@ -29,23 +30,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         NavigationUI.setupWithNavController(binding.mainBottomNavigationView, navController)
         initListener(navController)
 
-        //Retrofit Test
-        val homeService = RetrofitInstance.getRetrofit.create(HomeService::class.java)
-
-        val responseLiveData : LiveData<Response<HabitList>> = liveData{
-                    val response = homeService.getHabits("eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjEsImlhdCI6MTY2NzM3NzYzOCwiZXhwIjoxNjY4MjQxNjM4fQ.ENx8Ts5JqT4mdz-5nA-wphWUh2Nv_p3oO0SFCLOay1Y" ,1)
-            emit(response)
-        }
-
-        responseLiveData.observe(this, Observer {
-            val list = it.body()?.toString()
-            Log.d("Retrofit_Test" , it.code().toString())
-            Log.d("Retrofit_Test" , list.toString())
-
-        })
+//        //Retrofit Test
+//        val homeService = RetrofitInstance.getRetrofit.create(HomeService::class.java)
+//
+//        val responseLiveData : LiveData<Response<HabitList>> = liveData{
+//                    val response = homeService.getHabits("eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjEsImlhdCI6MTY2NzM3NzYzOCwiZXhwIjoxNjY4MjQxNjM4fQ.ENx8Ts5JqT4mdz-5nA-wphWUh2Nv_p3oO0SFCLOay1Y" ,1)
+//            emit(response)
+//        }
+//
+//        responseLiveData.observe(this, Observer {
+//            val list = it.body()?.toString()
+//            Log.d("Retrofit_Test" , it.code().toString())
+//            Log.d("Retrofit_Test" , list.toString())
+//
+//        })
 
         //SharePreferenc에 일단 값 저장
-        saveLoginInfo("eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjEsImlhdCI6MTY2NzM3NzYzOCwiZXhwIjoxNjY4MjQxNjM4fQ.ENx8Ts5JqT4mdz-5nA-wphWUh2Nv_p3oO0SFCLOay1Y","yj","123",1)
+//        saveLoginInfo("eyJ0eXBlIjoiand0IiwiYWxnIjoiSFMyNTYifQ.eyJ1c2VySWQiOjEsImlhdCI6MTY2NzM3NzYzOCwiZXhwIjoxNjY4MjQxNjM4fQ.ENx8Ts5JqT4mdz-5nA-wphWUh2Nv_p3oO0SFCLOay1Y","yj","123",1)
 
     }
 
@@ -65,6 +66,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 binding.mainBottomNavigationView.menu.findItem(R.id.achiveFragment).setIcon(R.drawable.ic_achive_select)
                 binding.mainBottomNavigationView.menu.findItem(R.id.homeFragment).setIcon(R.drawable.ic_home_unselect)
                 binding.mainBottomNavigationView.menu.findItem(R.id.manageFragment).setIcon(R.drawable.ic_manage_unselect)
+            }
+
+            //셋팅 네비게이션 가면 바텀 네비게이션 뷰 숨기기
+            if(destination.id == R.id.settingFragment || destination.id == R.id.withdrawalFragment){
+                binding.mainBottomNavigationView.visibility = View.GONE
+            } else{
+                binding.mainBottomNavigationView.visibility = View.VISIBLE
             }
         }
     }

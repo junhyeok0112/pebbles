@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".view.setting.SettingFragment">
+
+        <ImageView
+            android:id="@+id/setting_back_btn"
+            android:layout_width="12dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="42dp"
+            android:src="@drawable/setting_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/setting_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:text="설정"
+            android:textColor="@color/gray_60"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/setting_back_btn"
+            app:layout_constraintStart_toEndOf="@id/setting_back_btn"
+            app:layout_constraintTop_toTopOf="@id/setting_back_btn" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/setting_image_iv"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="38dp"
+            android:src="@drawable/logo_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/setting_back_btn" />
+
+        <TextView
+            android:id="@+id/setting_nickname_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="아리아리아리아리"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/setting_image_iv"
+            app:layout_constraintStart_toEndOf="@id/setting_image_iv"
+            app:layout_constraintTop_toTopOf="@id/setting_image_iv" />
+
+        <LinearLayout
+            android:id="@+id/setting_view_temp"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/gray_10"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/setting_image_iv" />
+
+        <TextView
+            android:id="@+id/setting_terms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="22dp"
+            android:text="이용약관"
+            android:textColor="@color/gray_60"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/setting_view_temp" />
+
+        <TextView
+            android:id="@+id/setting_logout_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그아웃"
+            android:textColor="@color/alert"
+            android:textSize="12sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/setting_terms" />
+
+        <TextView
+            android:id="@+id/setting_withdrawal_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:text="회원 탈퇴"
+            android:textColor="@color/gray_40"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/setting_logout_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

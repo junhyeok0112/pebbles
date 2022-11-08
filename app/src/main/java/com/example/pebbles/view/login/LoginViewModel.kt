@@ -12,6 +12,8 @@ import com.example.pebbles.data.remote.dto.login.signup.SignUpResponse
 import com.example.pebbles.domain.usecase.login.DuplicateChkUseCase
 import com.example.pebbles.domain.usecase.login.LoginUseCase
 import com.example.pebbles.domain.usecase.login.SignUpUseCase
+import com.example.pebbles.util.saveAutoLogin
+import com.example.pebbles.util.saveLoginInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -89,6 +91,13 @@ class LoginViewModel @Inject constructor(
     suspend fun logIn() : Response<LoginResponse>{
         val logInRequest = LoginRequest(login_pw.value!! , login_id.value!!)
         val loginResponse = loginUseCase(logInRequest)
+        val body = loginResponse.body()
+        if(body != null){
+            if(loginResponse.body()!!.isSuccess){
+                saveLoginInfo(body.result.jwt , login_id.value , login_pw.value , body.result.userId)
+                saveAutoLogin(true)
+            }
+        }
         return loginResponse
     }
 

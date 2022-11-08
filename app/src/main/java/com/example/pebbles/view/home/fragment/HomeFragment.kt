@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.bit.kodari.Config.BaseFragment
 import com.example.pebbles.R
 import com.example.pebbles.data.remote.dto.Todo
@@ -29,6 +30,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding> (R.layout.fragment_home) 
         binding.lifecycleOwner = this
 
         setRecycelrView()
+        initListener()
 
         homeViewModel.habitList.observe(this,{
             adapter.notifyDataSetChanged()
@@ -61,6 +63,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding> (R.layout.fragment_home) 
     override fun onPause() {
         super.onPause()
         homeViewModel.updateHabits()
+    }
+
+    private fun initListener(){
+        binding.homeSettingIv.setOnClickListener {
+            it.findNavController().navigate(R.id.action_homeFragment_to_settingFragment)
+        }
     }
 
 }

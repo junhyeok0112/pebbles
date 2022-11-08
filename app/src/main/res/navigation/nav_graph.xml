@@ -8,7 +8,11 @@
         android:id="@+id/homeFragment"
         android:name="com.example.pebbles.view.home.fragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_settingFragment"
+            app:destination="@id/settingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/achiveFragment"
         android:name="com.example.pebbles.view.achive.fragment.AchiveFragment"
@@ -19,4 +23,16 @@
         android:name="com.example.pebbles.view.manage.fragment.ManageFragment"
         android:label="fragment_manage"
         tools:layout="@layout/fragment_manage" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.example.pebbles.view.setting.SettingFragment"
+        android:label="SettingFragment" >
+        <action
+            android:id="@+id/action_settingFragment_to_withdrawalFragment"
+            app:destination="@id/withdrawalFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/withdrawalFragment"
+        android:name="com.example.pebbles.view.setting.WithdrawalFragment"
+        android:label="WithdrawalFragment" />
 </navigation>

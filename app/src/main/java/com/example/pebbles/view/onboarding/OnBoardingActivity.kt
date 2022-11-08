@@ -6,6 +6,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bit.kodari.Config.BaseActivity
 import com.example.pebbles.R
 import com.example.pebbles.databinding.ActivityOnBoardingBinding
+import com.example.pebbles.util.getAutoLogin
+import com.example.pebbles.view.MainActivity
 import com.example.pebbles.view.login.activity.LoginActivity
 import com.example.pebbles.view.onboarding.adapter.OnBoardingVPAdapter
 
@@ -20,17 +22,18 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>(R.layout.acti
         initListener()
     }
 
-    private fun initViewPager(){
-       //어댑터 설정
+    private fun initViewPager() {
+        //어댑터 설정
         binding.onboardingVp.adapter = OnBoardingVPAdapter(this)
         //Viewpager2 객체의 방향 설정
         binding.onboardingVp.offscreenPageLimit = 3
 
         //indicator 생성
         binding.onboardingIndicator.setViewPager(binding.onboardingVp)
-        binding.onboardingIndicator.createIndicators(3,0)
+        binding.onboardingIndicator.createIndicators(3, 0)
 
-        binding.onboardingVp.registerOnPageChangeCallback(object  : ViewPager2.OnPageChangeCallback(){
+        binding.onboardingVp.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 curPosition = position
@@ -39,17 +42,23 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>(R.layout.acti
         })
     }
 
-    private fun initListener(){
+    private fun initListener() {
         binding.onboardingNextBtn.setOnClickListener {
             //클릭 했을 때 다음꺼 아니면 마지막
-            when(curPosition){
-              2 -> {    //마지막에서 다음 누르면 로그인 페이지 실행
-                  startActivityWithClear(LoginActivity::class.java)
-              }
-              else -> {
-                  curPosition++
-                  binding.onboardingVp.setCurrentItem(curPosition)
-              }
+            when (curPosition) {
+                2 -> {    //마지막에서 다음 누르면 로그인 페이지 실행
+                    if (getAutoLogin()) {
+                        startActivityWithClear(MainActivity::class.java)
+                    } else {
+
+                        startActivityWithClear(LoginActivity::class.java)
+                    }
+
+                }
+                else -> {
+                    curPosition++
+                    binding.onboardingVp.setCurrentItem(curPosition)
+                }
             }
         }
     }

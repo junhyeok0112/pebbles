@@ -46,7 +46,7 @@ class HomeRepositoryImpl @Inject constructor(
     //RoomDB에 저장되어 있는 데이터들 꺼내오기 -> POST 요청할 때 사용
     //getHabit으로 RoomDB에 알맞은 값 셋팅하고 가져옴
     override suspend fun getHabitsFromDB() : List<Habit>{
-        lateinit var habitList : ArrayList<Habit>
+        var habitList : ArrayList<Habit> = ArrayList()      //Local에 오늘 값 없을 수 도 있으므로
         try{
             habitList = habitLocalDataSource.getHabits() as ArrayList<Habit>
             Log.d("HomeRepositroy_Local_test" , "${habitList}")
