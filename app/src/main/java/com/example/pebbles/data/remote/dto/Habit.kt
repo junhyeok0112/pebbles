@@ -3,7 +3,7 @@ package com.example.pebbles.data.remote.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.pebbles.data.remote.dto.Todo
-import com.google.gson.annotations.JsonAdapter
+import com.example.pebbles.data.remote.dto.Week
 import com.google.gson.annotations.SerializedName
 
 
@@ -21,5 +21,5 @@ data class Habit(
     @SerializedName("today") val today : String,             //해빗 실천하는 날짜
     @SerializedName("today_status") var today_status : String,      //해빗 실천하는 날짜의 완료 여뷰
     @SerializedName("todos") var todos : List<Todo>,         //해빗의 todos
-    @SerializedName("weeks") val weeks: String                //해빗 요일
+    @SerializedName("weeks") var weeks: Week                //해빗 요일
 )

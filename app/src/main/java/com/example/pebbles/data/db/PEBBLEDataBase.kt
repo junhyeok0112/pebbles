@@ -13,7 +13,7 @@ import com.google.gson.Gson
 
 
 @Database(entities = [Habit::class], version = 2, exportSchema = false)
-@TypeConverters(value = [TodoListTypeConverter::class])
+@TypeConverters(value = [TodoListTypeConverter::class , WeeksTypeConverter::class])
 abstract class PEBBLEDataBase : RoomDatabase() {
 
     abstract fun habitDao(): HabitDAO
