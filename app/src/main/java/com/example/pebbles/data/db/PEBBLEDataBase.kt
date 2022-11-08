@@ -64,7 +64,7 @@ abstract class PEBBLEDataBase : RoomDatabase() {
             return Room.databaseBuilder(
                 context,
                 PEBBLEDataBase::class.java, "pebble_database"
-            ).addTypeConverter(TodoListTypeConverter(gson)).addMigrations(MIGRATION_1_2).build()
+            ).addTypeConverter(TodoListTypeConverter(gson)).addTypeConverter(WeeksTypeConverter(gson)).addMigrations(MIGRATION_1_2).build()
         }
 
     }

@@ -56,6 +56,7 @@
                 android:paddingStart="15dp"
                 android:text="@={loginViewModel.nickname}"
                 android:textSize="15sp"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -196,6 +197,7 @@
                 android:paddingStart="15dp"
                 android:text="@={loginViewModel.password}"
                 android:textSize="15sp"
+                android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/pk_title_tv" />
@@ -294,6 +296,7 @@
                 android:paddingStart="15dp"
                 android:text="@={loginViewModel.password_chk}"
                 android:textSize="15sp"
+                android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/pw_re_title_tv" />

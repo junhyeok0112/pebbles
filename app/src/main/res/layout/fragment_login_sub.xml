@@ -54,6 +54,7 @@
                 android:paddingStart="15dp"
                 android:text="@={vm.login_id}"
                 android:textSize="15sp"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/login_title_tv" />
@@ -68,8 +69,10 @@
                 android:background="@drawable/signup_basic"
                 android:hint="비밀번호"
                 android:paddingStart="15dp"
+                android:singleLine="true"
                 android:text="@={vm.login_pw}"
                 android:textSize="15sp"
+                android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/login_id_input_et" />

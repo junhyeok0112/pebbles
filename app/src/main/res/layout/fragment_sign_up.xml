@@ -32,7 +32,6 @@
             android:textColor="@color/black"/>
 
 
-
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/sign_up_viewpager"
             android:layout_width="match_parent"
