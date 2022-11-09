@@ -20,6 +20,7 @@ import com.example.pebbles.view.login.activity.LoginActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class WithdrawalFragment : BaseFragment<FragmentWithdrawalBinding>(R.layout.fragment_withdrawal) {
@@ -47,15 +48,18 @@ class WithdrawalFragment : BaseFragment<FragmentWithdrawalBinding>(R.layout.frag
                 val withdrawalResponse = homeViewModel.withdrawal(getUserIdx())
                 val body = withdrawalResponse.body()
                 //성공했을 때
-                if(body != null && body.isSuccess){
-                    //회원 탈퇴 성공 시
-                    saveLoginInfo(null, null, null, 0)     //0이면 유저 없는거
-                    saveAutoLogin(false)
-                    startActivity(Intent(requireContext(), LoginActivity::class.java))
-                    requireActivity().finish()
-                } else{
-                    showToast("회원 탈퇴 시 오류가 발생하였습니다")
+                withContext(Dispatchers.Main) {
+                    if (body != null && body.isSuccess) {
+                        //회원 탈퇴 성공 시
+                        saveLoginInfo(null, null, null, 0)     //0이면 유저 없는거
+                        saveAutoLogin(false)
+                        startActivity(Intent(requireContext(), LoginActivity::class.java))
+                        requireActivity().finish()
+                    } else {
+                        showToast("회원 탈퇴 시 오류가 발생하였습니다")
+                    }
                 }
+
             }
         }
     }
