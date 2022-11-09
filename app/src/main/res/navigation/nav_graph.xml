@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.pebbles.view.home.fragment.HomeFragment"
+        android:name="com.todaypebble.pebbles.view.home.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -15,17 +15,17 @@
     </fragment>
     <fragment
         android:id="@+id/achiveFragment"
-        android:name="com.example.pebbles.view.achive.fragment.AchiveFragment"
+        android:name="com.todaypebble.pebbles.view.achive.fragment.AchiveFragment"
         android:label="fragment_achive"
         tools:layout="@layout/fragment_achive" />
     <fragment
         android:id="@+id/manageFragment"
-        android:name="com.example.pebbles.view.manage.fragment.ManageFragment"
+        android:name="com.todaypebble.pebbles.view.manage.fragment.ManageFragment"
         android:label="fragment_manage"
         tools:layout="@layout/fragment_manage" />
     <fragment
         android:id="@+id/settingFragment"
-        android:name="com.example.pebbles.view.setting.SettingFragment"
+        android:name="com.todaypebble.pebbles.view.setting.SettingFragment"
         android:label="SettingFragment" >
         <action
             android:id="@+id/action_settingFragment_to_withdrawalFragment"
@@ -36,10 +36,10 @@
     </fragment>
     <fragment
         android:id="@+id/withdrawalFragment"
-        android:name="com.example.pebbles.view.setting.WithdrawalFragment"
+        android:name="com.todaypebble.pebbles.view.setting.WithdrawalFragment"
         android:label="WithdrawalFragment" />
     <fragment
         android:id="@+id/webTermFragment2"
-        android:name="com.example.pebbles.view.login.fragment.WebTermFragment"
+        android:name="com.todaypebble.pebbles.view.login.fragment.WebTermFragment"
         android:label="WebTermFragment" />
 </navigation>

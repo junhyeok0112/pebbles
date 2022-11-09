@@ -1,17 +1,13 @@
 package calendar.adapter
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import calendar.data.Day
-import com.example.pebbles.MyApplicationClass
-import com.example.pebbles.R
-import com.example.pebbles.databinding.CustomCalendarCellBinding
-import com.example.pebbles.view.home.HomeViewModel
+import com.todaypebble.pebbles.MyApplicationClass
+import com.todaypebble.pebbles.R
+import com.todaypebble.pebbles.databinding.CustomCalendarCellBinding
 import java.time.LocalDate
 
 class CalendarAdapter(var dayList :ArrayList<Day>) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>(){

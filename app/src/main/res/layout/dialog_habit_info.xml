@@ -4,7 +4,7 @@
     <data>
         <variable
             name="habit"
-            type="com.example.pebbles.data.remote.model.Habit" />
+            type="com.todaypebble.pebbles.data.remote.model.Habit" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

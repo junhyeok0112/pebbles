@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.pebbles.view.login.fragment.LoginFragment"
+        android:name="com.todaypebble.pebbles.view.login.fragment.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.pebbles.view.login.fragment.SignUpFragment"
+        android:name="com.todaypebble.pebbles.view.login.fragment.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginSubFragment"
-        android:name="com.example.pebbles.view.login.fragment.LoginSubFragment"
+        android:name="com.todaypebble.pebbles.view.login.fragment.LoginSubFragment"
         android:label="LoginSubFragment" >
         <action
             android:id="@+id/action_loginSubFragment_to_loginFragment"
@@ -39,6 +39,6 @@
     </fragment>
     <fragment
         android:id="@+id/webTermFragment"
-        android:name="com.example.pebbles.view.login.fragment.WebTermFragment"
+        android:name="com.todaypebble.pebbles.view.login.fragment.WebTermFragment"
         android:label="WebTermFragment" />
 </navigation>

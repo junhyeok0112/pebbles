@@ -2,7 +2,6 @@ package calendar
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
@@ -13,13 +12,11 @@ import androidx.lifecycle.ViewTreeViewModelStoreOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import calendar.adapter.CalendarAdapter
 import calendar.data.Day
-import com.example.pebbles.MyApplicationClass
-import com.example.pebbles.R
-import com.example.pebbles.databinding.CustomViewCalendarBinding
-import com.example.pebbles.util.DateUtil
-import com.example.pebbles.view.home.HomeViewModel
-import java.io.ByteArrayInputStream
-import java.io.ObjectInputStream
+import com.todaypebble.pebbles.MyApplicationClass
+import com.todaypebble.pebbles.R
+import com.todaypebble.pebbles.databinding.CustomViewCalendarBinding
+import com.todaypebble.pebbles.util.DateUtil
+import com.todaypebble.pebbles.view.home.HomeViewModel
 import java.time.LocalDate
 import java.time.YearMonth
 
