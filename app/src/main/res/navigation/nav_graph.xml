@@ -30,9 +30,16 @@
         <action
             android:id="@+id/action_settingFragment_to_withdrawalFragment"
             app:destination="@id/withdrawalFragment" />
+        <action
+            android:id="@+id/action_settingFragment_to_webTermFragment2"
+            app:destination="@id/webTermFragment2" />
     </fragment>
     <fragment
         android:id="@+id/withdrawalFragment"
         android:name="com.example.pebbles.view.setting.WithdrawalFragment"
         android:label="WithdrawalFragment" />
+    <fragment
+        android:id="@+id/webTermFragment2"
+        android:name="com.example.pebbles.view.login.fragment.WebTermFragment"
+        android:label="WebTermFragment" />
 </navigation>

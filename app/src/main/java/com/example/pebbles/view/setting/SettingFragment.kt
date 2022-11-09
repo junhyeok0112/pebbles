@@ -25,6 +25,10 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(R.layout.fragment_s
             logoutDialog.show(requireActivity().supportFragmentManager , "logoutDialog")
         }
 
+        binding.settingTerms.setOnClickListener {
+            it.findNavController().navigate(R.id.action_settingFragment_to_webTermFragment2)
+        }
+
     }
 
 
