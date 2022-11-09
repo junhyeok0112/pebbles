@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_webTermFragment"
+            app:destination="@id/webTermFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginSubFragment"
@@ -34,4 +37,8 @@
             android:id="@+id/action_loginSubFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/webTermFragment"
+        android:name="com.example.pebbles.view.login.fragment.WebTermFragment"
+        android:label="WebTermFragment" />
 </navigation>

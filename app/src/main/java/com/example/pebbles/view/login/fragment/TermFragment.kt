@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.bit.kodari.Config.BaseFragment
 import com.example.pebbles.R
@@ -11,7 +12,7 @@ import com.example.pebbles.databinding.FragmentTermBinding
 import com.example.pebbles.view.MainActivity
 import com.example.pebbles.view.login.LoginViewModel
 
-//목표 설정 프래그먼트
+//이용 약관 동의 프래그먼트
 class TermFragment : BaseFragment<FragmentTermBinding>(R.layout.fragment_term) {
 
     private val loginViewModel : LoginViewModel by activityViewModels()
@@ -52,6 +53,10 @@ class TermFragment : BaseFragment<FragmentTermBinding>(R.layout.fragment_term) {
                   flag = false
               }
             }
+        }
+
+        binding.termNextBtn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_signUpFragment_to_webTermFragment)
         }
     }
 
