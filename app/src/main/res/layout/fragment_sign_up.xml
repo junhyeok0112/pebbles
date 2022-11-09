@@ -31,6 +31,16 @@
             android:textSize="16sp"
             android:textColor="@color/black"/>
 
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/sign_up_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="20dp"
+            app:indicatorColor="@color/main_30"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sign_up_back_iv"/>
+
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/sign_up_viewpager"

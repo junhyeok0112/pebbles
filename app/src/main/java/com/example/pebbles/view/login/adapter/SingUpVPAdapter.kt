@@ -1,10 +1,9 @@
 package com.example.pebbles.view.login.adapter
 
-import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.pebbles.view.login.fragment.NickNameFragment
-import com.example.pebbles.view.login.fragment.TargetFragment
+import com.example.pebbles.view.login.fragment.TermFragment
 
 class SingUpVPAdapter(fragment:Fragment) : FragmentStateAdapter(fragment) {
 
@@ -12,7 +11,7 @@ class SingUpVPAdapter(fragment:Fragment) : FragmentStateAdapter(fragment) {
 
     override fun createFragment(position: Int): Fragment {
         return when(position){
-           0 -> {NickNameFragment()}
+           0 -> {TermFragment()}
             else->{NickNameFragment()}
          }
     }

@@ -6,16 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pebbles.MyApplicationClass
 import com.example.pebbles.data.remote.dto.Todo
+import com.example.pebbles.data.remote.dto.logout.WithdrawalResponse
 import com.example.pebbles.data.remote.dto.update.HomeUpdateRequest
 import com.example.pebbles.data.remote.dto.update.HomeUpdateRequestItem
 import com.example.pebbles.data.remote.model.Habit
 import com.example.pebbles.domain.usecase.*
+import com.example.pebbles.domain.usecase.logout.WithdrawalUseCase
+import com.example.pebbles.util.getUserIdx
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -26,7 +29,8 @@ class HomeViewModel @Inject constructor(
     private val getHabitsFromDBUseCase: GetHabitsFromDBUseCase,
     private val getTodayFromDBUseCase: GetTodayFromDBUseCase,
     private val updateTodoToDBUseCase: UpdateTodoToDBUseCase,
-    private val updateHabitToAPIUseCase: UpdateHabitsToAPIUseCase
+    private val updateHabitToAPIUseCase: UpdateHabitsToAPIUseCase,
+    private val withdrawalUseCase: WithdrawalUseCase
 ) : ViewModel() {
     //Viwjscp fewModel에서의
 
@@ -163,4 +167,8 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
+
+    //로그 아웃 하기
+    suspend fun withdrawal(userId:Int) : Response<WithdrawalResponse>  = withdrawalUseCase(userId)
+
 }

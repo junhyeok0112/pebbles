@@ -5,8 +5,8 @@ import com.example.pebbles.data.remote.model.Habit
 import com.example.pebbles.domain.repository.HomeRepository
 import com.example.pebbles.network.RetrofitInstance
 import com.example.pebbles.data.remote.api.HomeService
+import com.example.pebbles.data.remote.dto.logout.WithdrawalResponse
 import com.example.pebbles.data.remote.dto.update.HomeUpdateRequest
-import com.example.pebbles.data.remote.dto.update.HomeUpdateRequestItem
 import com.example.pebbles.data.remote.dto.update.HomeUpdateResponse
 import com.example.pebbles.data.repository.home.datasource.HabitLocalDataSource
 import com.example.pebbles.data.repository.home.datasource.HabitRemoteDataSource
@@ -103,4 +103,6 @@ class HomeRepositoryImpl @Inject constructor(
     //Habits들 API 로 갱신하기
     override suspend fun updateHabitToAPI(updateRequest: HomeUpdateRequest) : Response<HomeUpdateResponse> = habitRemoteDataSource.updateHabits(updateRequest)
 
+    //로그아웃 , dataSource를 만들어야하나..
+    override suspend fun withdrawal(userId: Int): Response<WithdrawalResponse> = habitRemoteDataSource.withdrawal(userId)
 }

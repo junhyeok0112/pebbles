@@ -1,11 +1,11 @@
 package com.example.pebbles.di.core
 
-import com.example.pebbles.domain.repository.HomeRepository
 import com.example.pebbles.domain.usecase.*
 import com.example.pebbles.domain.usecase.login.*
+import com.example.pebbles.domain.usecase.logout.WithdrawalUseCase
+import com.example.pebbles.domain.usecase.logout.WithdrawalUseCaseImpl
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -50,5 +50,10 @@ abstract class UseCaseModule {
     @Singleton
     @Binds
     abstract fun provideDuplicateChkUseCase(duplicateChkUseCaseImpl: DuplicateChkUseCaseImpl) : DuplicateChkUseCase
+
+    //로그아웃
+    @Singleton
+    @Binds
+    abstract fun provideLogoutUseCase(withdrawalUseCaseImpl: WithdrawalUseCaseImpl) : WithdrawalUseCase
 
 }

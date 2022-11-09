@@ -30,15 +30,7 @@ class NickNameFragment : BaseFragment<FragmentNickNameBinding>(R.layout.fragment
         setObserver()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//ViewPager안에 있는 Fragment의 버튼 눌렀을 때 다음 프래그먼트로 넘어가기
-//부모 액티비티 전체에서 ViewPager 찾아서 접근하면됨
-        val viewPager = activity?.findViewById<ViewPager2>(R.id.sign_up_viewpager)
-        binding.nickNameNextBtn.setOnClickListener {
-            viewPager?.currentItem = 1
-        }
-    }
+
 
     private fun setListener(){
         //중복확인 체크

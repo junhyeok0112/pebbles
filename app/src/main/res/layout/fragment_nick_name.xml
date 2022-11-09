@@ -351,7 +351,7 @@
                 android:layout_marginBottom="38dp"
                 android:background="@{loginViewModel.isClickBtn ? @color/main_30 : @color/gray_30}"
                 android:clickable="@{loginViewModel.isClickBtn ? true : false }"
-                android:text="다음"
+                android:text="완료"
                 android:textColor="@color/white"
                 android:textSize="17sp"
                 android:layout_marginTop="70dp"
