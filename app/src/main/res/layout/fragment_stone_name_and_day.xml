@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        tools:context=".view.manage.fragment.StoneNameAndDayFragment">
+
+        <TextView
+            android:id="@+id/stone_name_day_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="27dp"
+            android:text="목표를 정해 바윗돌 쌓기를 시작해요"
+            android:textColor="@color/gray_60"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/stone_name_day_goal_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="목표"
+            android:textColor="@color/gray_60"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stone_name_day_title_tv" />
+
+        <EditText
+            android:id="@+id/stone_name_day_name_input_et"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/corner_gray_30_10dp"
+            android:hint="예시) 한 달 동안 자기계발 책 5권 읽기"
+            android:paddingStart="15dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stone_name_day_goal_title_tv" />
+
+        <TextView
+            android:id="@+id/stone_name_day_startday_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:text="시작날짜"
+            android:textColor="@color/gray_40"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stone_name_day_name_input_et" />
+
+        <TextView
+            android:id="@+id/stone_name_day_endday_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="종료날짜"
+            android:textColor="@color/gray_40"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stone_name_day_startday_title_tv" />
+
+        <EditText
+            android:id="@+id/stone_name_day_startday_picker_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/stone_day_img"
+            android:drawablePadding="9dp"
+            android:hint="날짜를 선택해주세요"
+            android:textColor="@color/gray_60"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/stone_name_day_startday_title_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/stone_name_day_startday_title_tv" />
+
+        <EditText
+            android:id="@+id/stone_name_day_endday_picker_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:drawableStart="@drawable/stone_day_img"
+            android:drawablePadding="9dp"
+            android:hint="날짜를 선택해주세요"
+            android:textColor="@color/gray_60"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/stone_name_day_endday_title_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/stone_name_day_endday_title_tv" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

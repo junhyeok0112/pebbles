@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_sand_add_container"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/gray_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/item_sand_add_icon_iv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/sand_add_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_sand_add_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="홈 뷰 디자인하기가나다라마바사아자차카"
+                android:textColor="@color/gray_50"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="@id/item_sand_add_icon_iv"
+                app:layout_constraintStart_toEndOf="@id/item_sand_add_icon_iv"
+                app:layout_constraintTop_toTopOf="@id/item_sand_add_icon_iv" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/item_sand_add_todo_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_sand_add_container"
+            android:text="세부 할 일"
+            android:textSize="15sp"
+            android:textColor="@color/gray_60"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"/>
+        
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/item_sand_add_todo_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_sand_add_todo_title_tv"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="12dp"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_sand_todo"/>
+
+        <Button
+            android:id="@+id/item_sand_add_todo_btn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_sand_add_todo_rv"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/add_habit"
+            android:text="+ 세부 할 일 추가하기"
+            android:textColor="@color/main_10"
+            android:textSize="14sp"/>
+        
+        <FrameLayout
+            android:id="@+id/item_sand_add_view"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="@color/gray_10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_sand_add_todo_btn"
+            android:layout_marginTop="20dp"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

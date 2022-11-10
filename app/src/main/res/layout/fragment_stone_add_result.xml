@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            tools:context=".view.manage.fragment.StoneAddResultFragment">
+
+            <ImageView
+                android:id="@+id/stone_add_result_close_iv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="25dp"
+                android:src="@drawable/ic_baseline_close_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/stone_add_result_image_iv"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/stone_add_result_close_iv" />
+
+            <TextView
+                android:id="@+id/stone_add_result_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="목표"
+                android:textColor="@color/gray_60"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/stone_add_result_image_iv" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/stone_add_result_container"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/divide_container"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/stone_add_result_title_tv">
+
+                <ImageView
+                    android:id="@+id/stone_add_result_icon_iv"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_manage_select"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/stone_add_result_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="오늘의 조약돌 디자인 완성"
+                    android:textColor="@color/main_50"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/stone_add_result_icon_iv"
+                    app:layout_constraintStart_toEndOf="@id/stone_add_result_icon_iv"
+                    app:layout_constraintTop_toTopOf="@id/stone_add_result_icon_iv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <FrameLayout
+                android:id="@+id/stone_add_result_view"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/gray_10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/stone_add_result_container" />
+
+            <TextView
+                android:id="@+id/stone_add_text_rv_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="하루 할 일"
+                android:textSize="15sp"
+                android:textColor="@color/gray_60"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/stone_add_result_view"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/stone_add_result_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/stone_add_text_rv_tv"
+                tools:listitem="@layout/item_result"
+                tools:itemCount="2"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</layout>

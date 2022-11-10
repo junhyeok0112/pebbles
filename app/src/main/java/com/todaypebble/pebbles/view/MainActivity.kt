@@ -62,7 +62,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
 
             //셋팅 네비게이션 가면 바텀 네비게이션 뷰 숨기기
-            if(destination.id == R.id.settingFragment || destination.id == R.id.withdrawalFragment){
+            if(destination.id == R.id.settingFragment || destination.id == R.id.withdrawalFragment || destination.id == R.id.stoneAddFragment || destination.id == R.id.stoneAddResultFragment){
                 binding.mainBottomNavigationView.visibility = View.GONE
             } else{
                 binding.mainBottomNavigationView.visibility = View.VISIBLE

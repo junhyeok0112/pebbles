@@ -22,7 +22,11 @@
         android:id="@+id/manageFragment"
         android:name="com.todaypebble.pebbles.view.manage.fragment.ManageFragment"
         android:label="fragment_manage"
-        tools:layout="@layout/fragment_manage" />
+        tools:layout="@layout/fragment_manage" >
+        <action
+            android:id="@+id/action_manageFragment_to_stoneAddFragment"
+            app:destination="@id/stoneAddFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingFragment"
         android:name="com.todaypebble.pebbles.view.setting.SettingFragment"
@@ -42,4 +46,17 @@
         android:id="@+id/webTermFragment2"
         android:name="com.todaypebble.pebbles.view.login.fragment.WebTermFragment"
         android:label="WebTermFragment" />
+    <fragment
+        android:id="@+id/stoneAddFragment"
+        android:name="com.todaypebble.pebbles.view.manage.fragment.StoneAddFragment"
+        android:label="fragment_stone_add"
+        tools:layout="@layout/fragment_stone_add" >
+        <action
+            android:id="@+id/action_stoneAddFragment_to_stoneAddResultFragment"
+            app:destination="@id/stoneAddResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stoneAddResultFragment"
+        android:name="com.todaypebble.pebbles.view.manage.fragment.StoneAddResultFragment"
+        android:label="StoneAddResultFragment" />
 </navigation>

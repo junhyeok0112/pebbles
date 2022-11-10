@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            tools:context=".view.manage.fragment.HabitAddFragment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/habit_add_container"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/divide_container"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/habit_add_icon_iv"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_manage_select"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/habit_add_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="오늘의 조약돌 디자인 완성"
+                    android:textColor="@color/main_50"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/habit_add_icon_iv"
+                    app:layout_constraintStart_toEndOf="@id/habit_add_icon_iv"
+                    app:layout_constraintTop_toTopOf="@id/habit_add_icon_iv" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/habit_add_ask_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:text="목표를 이루기 위해 해야하는 일을\n하루 단위로 정리해볼까요?"
+                android:textColor="@color/gray_60"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/habit_add_container" />
+
+            <FrameLayout
+                android:id="@+id/habit_add_blank_view"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:background="@color/gray_10"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/habit_add_ask_tv"
+                android:layout_marginTop="20dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/habit_add_habit_list_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/habit_add_blank_view"
+                tools:listitem="@layout/item_habit_add"
+                tools:itemCount="2"/>
+
+            <Button
+                android:id="@+id/habit_add_add_habit_btn"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/add_habit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/habit_add_habit_list_rv"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="+ 하루 할 일 추가하기"
+                android:textColor="@color/main_30"
+                android:textSize="14sp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
