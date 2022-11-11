@@ -3,6 +3,7 @@ package com.todaypebble.pebbles.di.core
 import com.todaypebble.pebbles.data.remote.api.HomeService
 import com.todaypebble.pebbles.data.remote.api.LoginService
 import com.google.gson.GsonBuilder
+import com.todaypebble.pebbles.data.remote.api.ManageService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,5 +36,12 @@ object NetModule {
     @Provides
     fun provideLoginService(retrofit : Retrofit) : LoginService{
         return retrofit.create(LoginService::class.java)
+    }
+
+    //바윗돌 관련 Service
+    @Singleton
+    @Provides
+    fun provideManageService(retrofit: Retrofit) : ManageService{
+        return retrofit.create(ManageService::class.java)
     }
 }

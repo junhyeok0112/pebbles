@@ -4,6 +4,8 @@ import com.todaypebble.pebbles.domain.usecase.*
 import com.todaypebble.pebbles.domain.usecase.login.*
 import com.todaypebble.pebbles.domain.usecase.logout.WithdrawalUseCase
 import com.todaypebble.pebbles.domain.usecase.logout.WithdrawalUseCaseImpl
+import com.todaypebble.pebbles.domain.usecase.manage.GetMyStonesUseCase
+import com.todaypebble.pebbles.domain.usecase.manage.GetMyStonesUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -55,5 +57,10 @@ abstract class UseCaseModule {
     @Singleton
     @Binds
     abstract fun provideLogoutUseCase(withdrawalUseCaseImpl: WithdrawalUseCaseImpl) : WithdrawalUseCase
+
+    //내 하이라이트 조회
+    @Singleton
+    @Binds
+    abstract fun provideGetMyStonesUseCase(getMyStonesUseCaseImpl: GetMyStonesUseCaseImpl) : GetMyStonesUseCase
 
 }

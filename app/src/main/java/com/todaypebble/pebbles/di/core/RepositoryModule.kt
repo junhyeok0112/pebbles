@@ -2,8 +2,10 @@ package com.todaypebble.pebbles.di.core
 
 import com.todaypebble.pebbles.data.repository.home.HomeRepositoryImpl
 import com.todaypebble.pebbles.data.repository.login.LoginRepositoryImpl
+import com.todaypebble.pebbles.data.repository.manage.ManageRepositoryImpl
 import com.todaypebble.pebbles.domain.repository.HomeRepository
 import com.todaypebble.pebbles.domain.repository.LogInRepository
+import com.todaypebble.pebbles.domain.repository.ManageRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -28,4 +30,9 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun provideLoginRepository(loginRepositoryImpl: LoginRepositoryImpl) : LogInRepository
+
+    //바윗돌 관리 Repository
+    @Singleton
+    @Binds
+    abstract fun provideManageRepository(manageRepositoryImpl: ManageRepositoryImpl) : ManageRepository
 }

@@ -6,11 +6,14 @@ import com.todaypebble.pebbles.data.repository.home.datasourceImpl.HabitLocalDat
 import com.todaypebble.pebbles.data.repository.home.datasourceImpl.HabitRemoteDataSourceImpl
 import com.todaypebble.pebbles.data.repository.login.datasource.LoginDataSource
 import com.todaypebble.pebbles.data.repository.login.datasourceImpl.LoginDataSourceImpl
+import com.todaypebble.pebbles.data.repository.manage.datasource.ManageDatasource
+import com.todaypebble.pebbles.data.repository.manage.datasourceImpl.ManageDatasourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+import javax.sql.DataSource
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -31,4 +34,9 @@ abstract class DataSourceModule {
     @Singleton
     @Binds
     abstract fun provideLoginDataSource(loginDataSourceImpl: LoginDataSourceImpl) : LoginDataSource
+
+    //바윗돌 관리 DataSource
+    @Singleton
+    @Binds
+    abstract fun provideManageDataSource(manageDatasourceImpl: ManageDatasourceImpl) : ManageDatasource
 }
