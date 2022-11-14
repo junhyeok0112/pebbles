@@ -105,4 +105,7 @@ dependencies {
     //Circle ImageView
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
+    //안드로이드 Toggle Group
+    implementation 'com.nex3z:toggle-button-group:1.2.3'
+
 }

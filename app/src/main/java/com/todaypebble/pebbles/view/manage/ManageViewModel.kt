@@ -5,30 +5,92 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import com.todaypebble.pebbles.data.remote.dto.manage.Habit
 import com.todaypebble.pebbles.data.remote.dto.manage.MyStone
+import com.todaypebble.pebbles.data.remote.dto.manage.Todo
+import com.todaypebble.pebbles.data.remote.dto.manage.Weeks
 import com.todaypebble.pebbles.domain.usecase.manage.GetMyStonesUseCase
 import com.todaypebble.pebbles.util.getUserIdx
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @HiltViewModel
 class ManageViewModel @Inject constructor(
     private val getMyStonesUseCase: GetMyStonesUseCase
-) : ViewModel(){
+) : ViewModel() {
 
     var stoneList = MutableLiveData<List<MyStone>?>()
+//하이라이트 정보
+    var stoneName = MutableLiveData<String>().apply { value = "" }
+    var stoneStartDay = MutableLiveData<String>().apply {
+        Log.d("ManageViewModel" , "스타트 apply")
+        value = LocalDate.now().toString() }
+    var stoneEndDay = MutableLiveData<String>().apply { value = "" }
 
+    //Habit 리스트
+    var HabitList = MutableLiveData<ArrayList<Habit>>().apply { value = ArrayList() }
     init {
-        Log.d("ManageViewModel" , "실행2")
-        viewModelScope.async{
-            Log.d("ManageViewModel" , "실행3")
+        viewModelScope.async {
             stoneList.value = getMyStonesUseCase(getUserIdx())
-            Log.d("ManageViewModel" , "실행11")
         }
     }
 
+    fun addHabit(){
+        var temp_todo = ArrayList<Todo>()
+        temp_todo.add(Todo("",0))
+        temp_todo.add(Todo("",1))
+        temp_todo.add(Todo("",2))
+        HabitList.value?.add(Habit(ArrayList() , stoneEndDay.value!!,"",HabitList.value!!.size+1,stoneStartDay.value!!,temp_todo,Weeks(false,false,false,false,false,false,false)))
+        Log.d("ManageViewModel" , "addHabit() 실행 , ${HabitList.value?.size}")
+    }
+
+
+    fun initStoneInfo(){
+        stoneName.value = ""
+        stoneStartDay.value = ""
+        stoneEndDay.value = ""
+        HabitList.value = ArrayList()
+    }
+//days 계산하면서 새로운 하이라이트 만들기.
+    fun makeNewStone() {
+        //Habit의 days 값까지 가공해야함 -> 요일까지
+        for(cur in HabitList.value!!){
+            //cur.days에 start  ~ end 까지 해당하는 날짜들 넣기
+            //무슨 요일들이 필요한지 넣어두자 , 월 : 1 일 : 7
+            var hs = HashSet<Int>()
+            if(cur.weeks.mon) hs.add(1)
+            if(cur.weeks.tue) hs.add(2)
+            if(cur.weeks.wed) hs.add(3)
+            if(cur.weeks.thu) hs.add(4)
+            if(cur.weeks.fri) hs.add(5)
+            if(cur.weeks.sat) hs.add(6)
+            if(cur.weeks.sun) hs.add(7)
+            var start_date  = LocalDate.parse(cur.start , DateTimeFormatter.ISO_DATE)
+            var end_date = LocalDate.parse(cur.end , DateTimeFormatter.ISO_DATE)
+            while(start_date <= end_date){
+                Log.d("테스트" , "while 시작")
+                var temp = start_date.dayOfWeek.value
+                if(hs.contains(temp)) cur.days.add(start_date.toString())
+                start_date = start_date.plusDays(1)
+            }
+        }
+
+        Log.d("테스트" , "${HabitList.value}")
+
+    }
+
+    //현재 manageViewModel의 값들 출력
+    fun showInfo(){
+        Log.d("ManageViewModel" , "이름 : ${stoneName.value}")
+        Log.d("ManageViewModel" , "시작 날짜 : ${stoneStartDay.value}")
+        Log.d("ManageViewModel" , "종료 날짜 : ${stoneEndDay.value}")
+        Log.d("ManageViewModel" , "리스트 : ${HabitList.value}")
+
+    }
 
 }

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+        
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".view.manage.fragment.TempFragment"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/temp_back"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/result_logo"/>
+            
+            <ImageView
+                android:id="@+id/temp_icon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/result_icon"
+                app:layout_constraintStart_toStartOf="@id/temp_back"
+                app:layout_constraintEnd_toEndOf="@id/temp_back"
+                app:layout_constraintTop_toTopOf="@id/temp_back"
+                android:layout_marginTop="130dp"/>
+
+            <TextView
+                android:id="@+id/temp_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="목표 설정을 완료했어요!"
+                android:textSize="18sp"
+                android:textColor="@color/gray_60"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_icon"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                android:id="@+id/temp_target_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="목표"
+                android:textSize="15sp"
+                android:textColor="@color/gray_60"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_back"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/sand_add_container"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="17dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/divide_container"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_target_title">
+
+                <ImageView
+                    android:id="@+id/sand_add_icon_iv"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/ic_manage_select"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/sand_add_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="책 10권 읽기"
+                    android:textColor="@color/main_50"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/sand_add_icon_iv"
+                    app:layout_constraintStart_toEndOf="@id/sand_add_icon_iv"
+                    app:layout_constraintTop_toTopOf="@id/sand_add_icon_iv" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <FrameLayout
+                android:id="@+id/temp_view"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sand_add_container"
+                android:background="@color/gray_10"
+                android:layout_marginTop="20dp"/>
+
+
+            <TextView
+                android:id="@+id/temp_todo_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="하루 할 일"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_view"
+                android:layout_marginTop="20dp"
+                android:textSize="15sp"
+                android:textColor="@color/gray_60"
+                android:layout_marginStart="20dp"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_sand_add_container"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/gray_10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_todo_1">
+
+                <ImageView
+                    android:id="@+id/item_sand_add_icon_iv"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/sand_add_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/item_sand_add_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="책 1시간 읽기"
+                    android:textColor="@color/gray_50"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/item_sand_add_icon_iv"
+                    app:layout_constraintStart_toEndOf="@id/item_sand_add_icon_iv"
+                    app:layout_constraintTop_toTopOf="@id/item_sand_add_icon_iv" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/temp_todo_1_1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_sand_add_container"
+                android:background="@drawable/corner_gray_30_10dp"
+                android:text="출근 길에 30분 읽기"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/temp_todo_1_2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_todo_1_1"
+                android:background="@drawable/corner_gray_30_10dp"
+                android:text="자기 전에 30분 읽기"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"/>
+
+            <FrameLayout
+                android:id="@+id/temp_view_2"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_todo_1_2"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_10"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_sand_add_container_2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/gray_10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_view_2">
+
+                <ImageView
+                    android:id="@+id/item_sand_add_icon_iv_2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/sand_add_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/item_sand_add_title_tv_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="책 2시간 읽기"
+                    android:textColor="@color/gray_50"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/item_sand_add_icon_iv_2"
+                    app:layout_constraintStart_toEndOf="@id/item_sand_add_icon_iv_2"
+                    app:layout_constraintTop_toTopOf="@id/item_sand_add_icon_iv_2" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/temp_todo_2_1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_sand_add_container_2"
+                android:background="@drawable/corner_gray_30_10dp"
+                android:text="출근 길에 1시간 읽기"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"/>
+
+            <TextView
+                android:id="@+id/temp_todo_2_2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_todo_2_1"
+                android:background="@drawable/corner_gray_30_10dp"
+                android:text="자기 전에 1시간 읽기"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"/>
+
+            <FrameLayout
+                android:id="@+id/temp_view_3"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_todo_2_2"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_10"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/item_sand_add_container_3"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/gray_10"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_view_3">
+
+                <ImageView
+                    android:id="@+id/item_sand_add_icon_iv_3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/sand_add_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/item_sand_add_title_tv_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="독후감 1개 쓰기"
+                    android:textColor="@color/gray_50"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="@id/item_sand_add_icon_iv_3"
+                    app:layout_constraintStart_toEndOf="@id/item_sand_add_icon_iv_3"
+                    app:layout_constraintTop_toTopOf="@id/item_sand_add_icon_iv_3" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/temp_todo_3_1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/item_sand_add_container_3"
+                android:background="@drawable/corner_gray_30_10dp"
+                android:text="독후감 1개 쓰기"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"/>
+
+
+            <FrameLayout
+                android:id="@+id/temp_view_4"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_todo_3_1"
+                android:layout_marginTop="10dp"
+                android:background="@color/gray_10"/>
+
+            <Button
+                android:id="@+id/btn"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_view_4"
+                android:text="홈으로 이동"
+                android:textSize="17sp"
+                android:textColor="@color/white"
+                android:background="@color/main_30"
+                android:layout_marginTop="30dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        
+    </androidx.core.widget.NestedScrollView>
+    
+</layout>

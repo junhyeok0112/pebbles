@@ -11,6 +11,7 @@ import com.todaypebble.pebbles.databinding.FragmentHomeBinding
 import com.todaypebble.pebbles.view.home.HomeViewModel
 import com.todaypebble.pebbles.view.home.adapter.HabitRVAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
 import java.util.*
 
 @AndroidEntryPoint
@@ -38,8 +39,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding> (R.layout.fragment_home) 
 
         val listener = object : HabitRVAdapter.TodoButtonListener{
             override fun onSandClick(item: Todo , habit_id :Int) {
-                //뷰모델에서 데이터 바꾸는 코드 호출하기
-                homeViewModel.changeTodo(item , habit_id)
+                if(LocalDate.now().toString() < homeViewModel.habitList.value?.get(0)?.today!!){
+                    showToast("미래 일은 아직 할 수 없습니다")
+                }else{
+                    //뷰모델에서 데이터 바꾸는 코드 호출하기
+                    homeViewModel.changeTodo(item , habit_id)
+                }
             }
 
             override fun onDetailClick(item: Habit) {

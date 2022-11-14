@@ -40,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="오늘의 조약돌 디자인 완성"
+                    android:text="책 10권 읽기"
                     android:textColor="@color/main_50"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -82,6 +82,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/sand_add_view"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="2"
                 tools:listitem="@layout/item_sand_add"/>
 

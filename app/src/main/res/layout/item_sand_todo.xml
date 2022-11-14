@@ -14,6 +14,7 @@
             android:hint="예시) 도서관 가기"
             android:paddingStart="15dp"
             android:textSize="15sp"
+            android:inputType="text"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

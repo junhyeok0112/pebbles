@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="habit"
+            type="com.todaypebble.pebbles.data.remote.dto.manage.Habit" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +35,9 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/corner_gray_30_10dp"
             android:hint="예시) 출근 전에 책 30분 읽기"
+            android:inputType="text"
             android:paddingStart="15dp"
+            android:text="@={habit.name}"
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,35 +70,55 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_habit_startday_title_tv" />
 
-        <EditText
+        <TextView
             android:id="@+id/item_habit_startday_picker_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:drawableStart="@drawable/stone_day_img"
             android:drawablePadding="9dp"
             android:hint="날짜를 선택해주세요"
+            android:text="@={habit.start}"
             android:textColor="@color/gray_60"
             android:textSize="15sp"
+            app:drawableStartCompat="@drawable/stone_day_img"
             app:layout_constraintBottom_toBottomOf="@id/item_habit_startday_title_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/item_habit_startday_title_tv" />
 
-        <EditText
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/gray_20"
+            app:layout_constraintEnd_toEndOf="@id/item_habit_startday_picker_et"
+            app:layout_constraintStart_toStartOf="@id/item_habit_startday_picker_et"
+            app:layout_constraintTop_toBottomOf="@id/item_habit_startday_picker_et" />
+
+        <TextView
             android:id="@+id/item_habit_endday_picker_et"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:drawableStart="@drawable/stone_day_img"
             android:drawablePadding="9dp"
             android:hint="날짜를 선택해주세요"
+            android:text="@={habit.end}"
             android:textColor="@color/gray_60"
             android:textSize="15sp"
+            app:drawableStartCompat="@drawable/stone_day_img"
             app:layout_constraintBottom_toBottomOf="@id/item_habit_endday_title_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/item_habit_endday_title_tv" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/gray_20"
+            app:layout_constraintEnd_toEndOf="@id/item_habit_endday_picker_et"
+            app:layout_constraintStart_toStartOf="@id/item_habit_endday_picker_et"
+            app:layout_constraintTop_toBottomOf="@id/item_habit_endday_picker_et" />
 
         <TextView
             android:id="@+id/item_habit_day_title_tv"
@@ -104,123 +133,196 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_habit_endday_title_tv" />
 
-        <RadioGroup
-            android:id="@+id/item_habit_radio_group"
+
+        <LinearLayout
+            android:id="@+id/item_habit_group"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_habit_day_title_tv">
 
-            <RadioButton
-                android:id="@+id/item_habit_radio_mon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/item_habit_mon_unselected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
                 android:layout_marginEnd="13dp"
                 android:layout_weight="1"
-                android:background="@drawable/selector_radio_button"
-                android:button="@null"
+                android:background="@drawable/day_unselected"
                 android:gravity="center"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
                 android:text="월"
-                android:textColor="@drawable/selector_radio_text"
+                android:textColor="@color/gray_30"
                 android:textSize="16sp" />
 
-            <RadioButton
-                android:id="@+id/item_habit_radio_tue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/item_habit_mon_selected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
                 android:layout_marginEnd="13dp"
                 android:layout_weight="1"
-                android:background="@drawable/selector_radio_button"
-                android:button="@null"
+                android:background="@drawable/day_selected"
                 android:gravity="center"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
+                android:text="월"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/item_habit_tue_unselected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="13dp"
+                android:layout_weight="1"
+                android:background="@drawable/day_unselected"
+                android:gravity="center"
                 android:text="화"
-                android:textColor="@drawable/selector_radio_text"
+                android:textColor="@color/gray_30"
                 android:textSize="16sp" />
 
-            <RadioButton
-                android:id="@+id/item_habit_radio_wed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/item_habit_tue_selected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
                 android:layout_marginEnd="13dp"
                 android:layout_weight="1"
-                android:background="@drawable/selector_radio_button"
-                android:button="@null"
+                android:background="@drawable/day_selected"
                 android:gravity="center"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
+                android:text="화"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/item_habit_wed_unselected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="13dp"
+                android:layout_weight="1"
+                android:background="@drawable/day_unselected"
+                android:gravity="center"
                 android:text="수"
-                android:textColor="@drawable/selector_radio_text"
+                android:textColor="@color/gray_30"
                 android:textSize="16sp" />
 
-            <RadioButton
-                android:id="@+id/item_habit_radio_thu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/item_habit_wed_selected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
                 android:layout_marginEnd="13dp"
                 android:layout_weight="1"
-                android:background="@drawable/selector_radio_button"
-                android:button="@null"
+                android:background="@drawable/day_selected"
                 android:gravity="center"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
+                android:text="수"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/item_habit_thu_unselected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="13dp"
+                android:layout_weight="1"
+                android:background="@drawable/day_unselected"
+                android:gravity="center"
                 android:text="목"
-                android:textColor="@drawable/selector_radio_text"
+                android:textColor="@color/gray_30"
                 android:textSize="16sp" />
 
-            <RadioButton
-                android:id="@+id/item_habit_radio_fri"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/item_habit_thu_selected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
                 android:layout_marginEnd="13dp"
                 android:layout_weight="1"
-                android:background="@drawable/selector_radio_button"
-                android:button="@null"
+                android:background="@drawable/day_selected"
                 android:gravity="center"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
+                android:text="목"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/item_habit_fri_unselected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="13dp"
+                android:layout_weight="1"
+                android:background="@drawable/day_unselected"
+                android:gravity="center"
                 android:text="금"
-                android:textColor="@drawable/selector_radio_text"
+                android:textColor="@color/gray_30"
                 android:textSize="16sp" />
 
-            <RadioButton
-                android:id="@+id/item_habit_radio_sat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/item_habit_fri_selected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
                 android:layout_marginEnd="13dp"
                 android:layout_weight="1"
-                android:background="@drawable/selector_radio_button"
-                android:button="@null"
+                android:background="@drawable/day_selected"
                 android:gravity="center"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
+                android:text="금"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/item_habit_sat_unselected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="13dp"
+                android:layout_weight="1"
+                android:background="@drawable/day_unselected"
+                android:gravity="center"
                 android:text="토"
-                android:textColor="@drawable/selector_radio_text"
+                android:textColor="@color/gray_30"
                 android:textSize="16sp" />
 
-            <RadioButton
-                android:id="@+id/item_habit_radio_sun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/item_habit_sat_selected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
                 android:layout_marginEnd="13dp"
                 android:layout_weight="1"
-                android:background="@drawable/selector_radio_button"
-                android:button="@null"
+                android:background="@drawable/day_selected"
                 android:gravity="center"
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
+                android:text="토"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/item_habit_sun_unselected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="13dp"
+                android:layout_weight="1"
+                android:background="@drawable/day_unselected"
+                android:gravity="center"
                 android:text="일"
-                android:textColor="@drawable/selector_radio_text"
+                android:textColor="@color/gray_30"
                 android:textSize="16sp" />
 
-        </RadioGroup>
+            <TextView
+                android:id="@+id/item_habit_sun_selected"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_marginEnd="13dp"
+                android:layout_weight="1"
+                android:background="@drawable/day_selected"
+                android:gravity="center"
+                android:text="일"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/item_habit_delete_btn"
@@ -232,7 +334,7 @@
             android:textSize="11sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_habit_radio_group" />
+            app:layout_constraintTop_toBottomOf="@id/item_habit_group" />
 
         <FrameLayout
             android:id="@+id/item_habit_bar"

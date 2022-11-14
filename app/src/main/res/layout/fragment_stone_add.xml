@@ -57,20 +57,29 @@
             app:layout_constraintTop_toBottomOf="@id/stone_add_back_iv" />
 
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/stone_add_viewpager"
+        <FrameLayout
+            android:id="@+id/stone_add_container_cl"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@id/stone_add_next_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/stone_add_progress_bar" />
+            app:layout_constraintTop_toBottomOf="@id/stone_add_progress_bar"/>
+
+<!--        <androidx.viewpager2.widget.ViewPager2-->
+<!--            android:id="@+id/stone_add_viewpager"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/stone_add_next_btn"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/stone_add_progress_bar" />-->
 
         <Button
             android:id="@+id/stone_add_next_btn"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/gray_30"
+            android:background="@color/main_30"
             android:text="다음"
             android:textColor="@color/white"
             android:textSize="17sp"
