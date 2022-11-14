@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/dialog_corner_white">
 
         <ImageView
-            android:id="@+id/logout_icon"
+            android:id="@+id/delete_habit_icon"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginTop="30dp"
@@ -17,7 +18,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/logout_message_tv"
+            android:id="@+id/delete_habit_message_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
@@ -26,20 +27,20 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logout_icon" />
+            app:layout_constraintTop_toBottomOf="@+id/delete_habit_icon" />
 
         <View
-            android:id="@+id/logout_line_iv"
+            android:id="@+id/delete_habit_line_iv"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="23dp"
             android:background="@color/gray_30"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logout_message_tv" />
+            app:layout_constraintTop_toBottomOf="@id/delete_habit_message_tv" />
 
         <TextView
-            android:id="@+id/logout_dialog_cancel_btn"
+            android:id="@+id/delete_habit_dialog_cancel_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
@@ -49,10 +50,10 @@
             android:textColor="@color/gray_40"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logout_line_iv" />
+            app:layout_constraintTop_toBottomOf="@id/delete_habit_line_iv" />
 
         <TextView
-            android:id="@+id/logout_dialog_logout_btn"
+            android:id="@+id/delete_habit_dialog_delete_habit_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -63,7 +64,7 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logout_line_iv" />
+            app:layout_constraintTop_toBottomOf="@id/delete_habit_line_iv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

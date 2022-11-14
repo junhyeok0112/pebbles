@@ -1,9 +1,13 @@
 package com.todaypebble.pebbles.data.repository.manage
 
 import android.util.Log
+import com.todaypebble.pebbles.MyApplicationClass.Companion.userId
+import com.todaypebble.pebbles.data.remote.dto.manage.MakeStoneRequest
+import com.todaypebble.pebbles.data.remote.dto.manage.MakeStoneResponse
 import com.todaypebble.pebbles.data.remote.dto.manage.MyStone
 import com.todaypebble.pebbles.data.repository.manage.datasource.ManageDatasource
 import com.todaypebble.pebbles.domain.repository.ManageRepository
+import retrofit2.Response
 import javax.inject.Inject
 
 class ManageRepositoryImpl @Inject constructor(
@@ -32,4 +36,23 @@ class ManageRepositoryImpl @Inject constructor(
         return stoneList
     }
 
+    //바윗돌 생성하기
+    override suspend fun postMakeStone(
+        userId: Int,
+        makeStoneRequest: MakeStoneRequest
+    ): MakeStoneResponse {
+        Log.d("postMakeStone" , "실행")
+        lateinit var body : MakeStoneResponse
+        try{
+            val response = manageDatasource.postMakeStone(userId, makeStoneRequest)
+            if(response.body() != null){
+                body = response.body()!!
+            }
+
+        } catch(e: Exception){
+           Log.d("ManageRepository_Exception " ,e.message.toString())
+         }
+
+        return body
+    }
 }

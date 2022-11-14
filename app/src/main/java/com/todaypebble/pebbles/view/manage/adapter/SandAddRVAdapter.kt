@@ -43,5 +43,6 @@ class SandAddRVAdapter(private var habits: MutableLiveData<ArrayList<Habit>>) : 
     interface clickListener {
         fun addClickTodo(position: Int)
         fun writeTodo(position :Int , habitPosition: Int , name : String)
+        fun deleteTodo(position: Int , habitPosition: Int)
     }
 }

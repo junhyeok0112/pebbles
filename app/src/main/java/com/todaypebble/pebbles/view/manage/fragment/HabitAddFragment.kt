@@ -7,6 +7,7 @@ import com.bit.kodari.Config.BaseFragment
 import com.todaypebble.pebbles.R
 import com.todaypebble.pebbles.data.remote.dto.manage.Weeks
 import com.todaypebble.pebbles.databinding.FragmentHabitAddBinding
+import com.todaypebble.pebbles.view.manage.DeleteHabitDialog
 import com.todaypebble.pebbles.view.manage.ManageViewModel
 import com.todaypebble.pebbles.view.manage.adapter.HabitAddRVAdapter
 import java.text.SimpleDateFormat
@@ -24,12 +25,25 @@ class HabitAddFragment : BaseFragment<FragmentHabitAddBinding>(R.layout.fragment
         binding.vm = manageViewModel
         binding.lifecycleOwner = this
 
+        setResult()
         initListener()
         initRecyclerView()
 
-        Log.d("관리", "${manageViewModel.stoneName.value}와 시작 날짜 ${manageViewModel.stoneStartDay.value}")
 
 
+
+    }
+
+    //삭제 다이얼로그에서 넘어온 값을 확인하고 실행
+    fun setResult(){
+        requireActivity().supportFragmentManager.setFragmentResultListener("request",this
+        ) { key, bundle ->
+            if (key == "request") {
+                if (bundle.containsKey("delete")) {       //삭제되었다고 하고 넘어오면
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        }
     }
 
     fun initListener() {
@@ -118,8 +132,8 @@ class HabitAddFragment : BaseFragment<FragmentHabitAddBinding>(R.layout.fragment
             }
 
             override fun deleteHabit(position: Int) {
-                manageViewModel.HabitList.value!!.removeAt(position)
-                adapter.notifyDataSetChanged()
+                val deleteHabitDialog = DeleteHabitDialog(position)
+                deleteHabitDialog.show(requireActivity().supportFragmentManager , "DeleteDialog")
             }
         }
         adapter = HabitAddRVAdapter(manageViewModel.HabitList)

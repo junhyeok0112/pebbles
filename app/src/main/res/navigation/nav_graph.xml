@@ -52,18 +52,7 @@
         android:label="fragment_stone_add"
         tools:layout="@layout/fragment_stone_add" >
         <action
-            android:id="@+id/action_stoneAddFragment_to_stoneAddResultFragment"
-            app:destination="@id/stoneAddResultFragment" />
-        <action
-            android:id="@+id/action_stoneAddFragment_to_tempFragment"
-            app:destination="@id/tempFragment" />
+            android:id="@+id/action_stoneAddFragment_to_manageFragment"
+            app:destination="@id/manageFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/stoneAddResultFragment"
-        android:name="com.todaypebble.pebbles.view.manage.fragment.StoneAddResultFragment"
-        android:label="StoneAddResultFragment" />
-    <fragment
-        android:id="@+id/tempFragment"
-        android:name="com.todaypebble.pebbles.view.manage.fragment.TempFragment"
-        android:label="TempFragment" />
 </navigation>

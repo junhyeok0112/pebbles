@@ -2,6 +2,7 @@ package com.todaypebble.pebbles.view.manage.fragment
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,10 @@ import com.todaypebble.pebbles.databinding.FragmentStoneAddBinding
 import com.todaypebble.pebbles.view.login.adapter.SingUpVPAdapter
 import com.todaypebble.pebbles.view.manage.ManageViewModel
 import com.todaypebble.pebbles.view.manage.adapter.StoneAddVPAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 //뷰페이저 있는 곳 ->여기서 StoneNick -> HabitAdd -> sandAdd -> Result 순으로
 class StoneAddFragment : BaseFragment<FragmentStoneAddBinding>(R.layout.fragment_stone_add) {
@@ -36,6 +41,7 @@ class StoneAddFragment : BaseFragment<FragmentStoneAddBinding>(R.layout.fragment
 
                         }).commit()
                     binding.stoneAddProgressBar.setProgressCompat(33, true)
+                    binding.stoneAddNextBtn.text = "다음"
                     index = 0
                 } else if (index == 2) {
 //                    binding.stoneAddViewpager.setCurrentItem(1)
@@ -44,6 +50,7 @@ class StoneAddFragment : BaseFragment<FragmentStoneAddBinding>(R.layout.fragment
 
                         }).commit()
                     binding.stoneAddProgressBar.setProgressCompat(66, true)
+                    binding.stoneAddNextBtn.text = "다음"
                     index = 1
                 } else {
                     view?.findNavController()?.popBackStack()
@@ -107,6 +114,8 @@ class StoneAddFragment : BaseFragment<FragmentStoneAddBinding>(R.layout.fragment
                         }).commit()
                     index = 0
                     binding.stoneAddProgressBar.setProgressCompat(33, true)
+                    binding.stoneAddNextBtn.text = "다음"
+                    binding.stoneAddSkipTv.visibility = View.GONE
                 }
                 else -> {
                     index = 1
@@ -115,6 +124,8 @@ class StoneAddFragment : BaseFragment<FragmentStoneAddBinding>(R.layout.fragment
 
                         }).commit()
                     binding.stoneAddProgressBar.setProgressCompat(66, true)
+                    binding.stoneAddNextBtn.text = "다음"
+                    binding.stoneAddSkipTv.visibility = View.GONE
 //                    binding.stoneAddViewpager.setCurrentItem(1)
                 }
             }
@@ -142,18 +153,65 @@ class StoneAddFragment : BaseFragment<FragmentStoneAddBinding>(R.layout.fragment
                         }).commit()
                     binding.stoneAddProgressBar.setProgressCompat(100, true)
                     binding.stoneAddNextBtn.text = "완료"
+                    binding.stoneAddSkipTv.visibility = View.VISIBLE
                 }
-                else -> {   //완료 눌렀을 때 Viewmodel에서 가공 후 데이터 보내야함 -> 성공시 넘어가게
-                    manageViewModel.makeNewStone()      //데이터 가공
+                2 -> {   //완료 눌렀을 때 Viewmodel에서 가공 후 데이터 보내야함 -> 성공시 넘어가게
                     //여기서 API 호출
-                    manageViewModel.initStoneInfo()     //입력한 정보 초기화 시키기
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val response = manageViewModel.makeNewStone()
+                        Log.d("MakeStone" , "${response}")
+                        withContext(Dispatchers.Main){
+                            if(response.code == 1000){
+                                //성공했을 때
+                                index = 3
+                                binding.stoneAddNextBtn.text = "홈으로 가기"
+                                binding.stoneAddBackIv.visibility = View.GONE
+                                binding.stoneAddSkipTv.visibility = View.GONE
+                                binding.stoneAddProgressBar.visibility = View.GONE
+                                binding.stoneAddTitleTv.visibility = View.GONE
+                                requireActivity().supportFragmentManager.beginTransaction()
+                                    .replace(R.id.stone_add_container_cl, StoneAddResultFragment().apply {
 
-                    it.findNavController()
-                        .navigate(R.id.action_stoneAddFragment_to_tempFragment)
+                                    }).commit()
+                                manageViewModel.updateStoneList()   //새로운 돌 리스트로 가져옴
+                            } else{
+                                Log.d("MakeStone" , "${response}")
+                                showToast("하이라이트 생성 실패")
+                            }
+                        }
+                    }
+
+                }
+                else->{ //홈 화면으로 돌아가게 하기 -> 바윗돌 관리 화면으로.
+                    view?.findNavController()?.popBackStack()
                 }
             }
         }
 
+        //완료 눌렀을 때와 동일하게.
+        binding.stoneAddSkipTv.setOnClickListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                val response = manageViewModel.makeNewStone()
+                withContext(Dispatchers.Main){
+                    if(response.code == 1000){
+                        //성공했을 때
+                        index = 3
+                        binding.stoneAddNextBtn.text = "홈으로 가기"
+                        binding.stoneAddBackIv.visibility = View.GONE
+                        binding.stoneAddSkipTv.visibility = View.GONE
+                        binding.stoneAddProgressBar.visibility = View.GONE
+                        binding.stoneAddTitleTv.visibility = View.GONE
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.stone_add_container_cl, StoneAddResultFragment().apply {
+
+                            }).commit()
+                    } else{
+                        Log.d("MakeStone" , "${response}")
+                        showToast("하이라이트 생성 실패")
+                    }
+                }
+            }
+        }
 
     }
 }

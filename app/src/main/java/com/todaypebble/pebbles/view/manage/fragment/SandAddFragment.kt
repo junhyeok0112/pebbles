@@ -11,6 +11,7 @@ import com.bit.kodari.Config.BaseFragment
 import com.todaypebble.pebbles.R
 import com.todaypebble.pebbles.data.remote.dto.manage.Todo
 import com.todaypebble.pebbles.databinding.FragmentSandAddBinding
+import com.todaypebble.pebbles.view.manage.DeleteTodoDialog
 import com.todaypebble.pebbles.view.manage.ManageViewModel
 import com.todaypebble.pebbles.view.manage.adapter.HabitAddRVAdapter
 import com.todaypebble.pebbles.view.manage.adapter.SandAddRVAdapter
@@ -22,7 +23,9 @@ class SandAddFragment : BaseFragment<FragmentSandAddBinding>(R.layout.fragment_s
     private lateinit var adapter : SandAddRVAdapter
     override fun initAfterBinding() {
 
+        setResult()
         setRecyclerView()
+        initListener()
 
     }
 
@@ -30,12 +33,20 @@ class SandAddFragment : BaseFragment<FragmentSandAddBinding>(R.layout.fragment_s
 
         val listener = object : SandAddRVAdapter.clickListener{
             override fun addClickTodo(position:Int) {
-                manageViewModel.HabitList.value?.get(position)?.todos?.add(Todo("",manageViewModel.HabitList.value?.get(position)?.todos?.size!!))
-//                adapter.notifyItemInserted()
+                manageViewModel.addTodo(position)
+//                manageViewModel.HabitList.value?.get(position)?.todos?.add(Todo("",manageViewModel.HabitList.value?.get(position)?.todos?.size!!))
             }
 
             override fun writeTodo(position: Int, habitPosition: Int, name :String) {
-                manageViewModel.HabitList.value?.get(habitPosition)?.todos?.get(position)?.name = name
+                manageViewModel.writeTodo(position,habitPosition,name)
+//                manageViewModel.HabitList.value?.get(habitPosition)?.todos?.get(position)?.name = name
+            }
+
+            override fun deleteTodo(position: Int, habitPosition: Int) {
+                //다이얼로그 띄워야함 ..
+                val deleteTodoDialog = DeleteTodoDialog(position, habitPosition)
+                deleteTodoDialog.show(requireActivity().supportFragmentManager , "DeleteTodoDialog")
+
             }
         }
 
@@ -47,4 +58,21 @@ class SandAddFragment : BaseFragment<FragmentSandAddBinding>(R.layout.fragment_s
         binding.sandAddRv.adapter = adapter
     }
 
+
+    private fun initListener(){
+
+    }
+
+
+    //삭제 다이얼로그에서 넘어온 값을 확인하고 실행
+    fun setResult(){
+        requireActivity().supportFragmentManager.setFragmentResultListener("request",this
+        ) { key, bundle ->
+            if (key == "request") {
+                if (bundle.containsKey("delete")) {       //삭제되었다고 하고 넘어오면
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        }
+    }
 }

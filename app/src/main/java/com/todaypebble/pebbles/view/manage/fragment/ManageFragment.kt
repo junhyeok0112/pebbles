@@ -32,6 +32,7 @@ class ManageFragment : BaseFragment<FragmentManageBinding>(R.layout.fragment_man
         setRecyclerView()
     }
 
+
     private fun initListener(){
         binding.manageFlaBtn.setOnClickListener {
 //            manageViewModel.initStoneInfo()

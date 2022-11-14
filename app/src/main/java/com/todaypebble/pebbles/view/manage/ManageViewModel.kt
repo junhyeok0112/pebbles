@@ -5,11 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.todaypebble.pebbles.data.remote.dto.manage.Habit
-import com.todaypebble.pebbles.data.remote.dto.manage.MyStone
-import com.todaypebble.pebbles.data.remote.dto.manage.Todo
-import com.todaypebble.pebbles.data.remote.dto.manage.Weeks
+import com.todaypebble.pebbles.data.remote.dto.manage.*
 import com.todaypebble.pebbles.domain.usecase.manage.GetMyStonesUseCase
+import com.todaypebble.pebbles.domain.usecase.manage.PostMakeStoneUseCase
 import com.todaypebble.pebbles.util.getUserIdx
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ManageViewModel @Inject constructor(
-    private val getMyStonesUseCase: GetMyStonesUseCase
+    private val getMyStonesUseCase: GetMyStonesUseCase,
+    private val postMakeStoneUseCase : PostMakeStoneUseCase
 ) : ViewModel() {
 
     var stoneList = MutableLiveData<List<MyStone>?>()
@@ -36,7 +35,7 @@ class ManageViewModel @Inject constructor(
     var HabitList = MutableLiveData<ArrayList<Habit>>().apply { value = ArrayList() }
     init {
         viewModelScope.async {
-            stoneList.value = getMyStonesUseCase(getUserIdx())
+            updateStoneList()
         }
     }
 
@@ -56,8 +55,8 @@ class ManageViewModel @Inject constructor(
         stoneEndDay.value = ""
         HabitList.value = ArrayList()
     }
-//days 계산하면서 새로운 하이라이트 만들기.
-    fun makeNewStone() {
+//days 계산하면서 새로운 하이라이트 만들기. Todo 리스트들 계산해서 공백인거 제거하고, 전부 공백이면 Habit 이름이랑 동일하게 만들기
+    suspend fun makeNewStone() : MakeStoneResponse{
         //Habit의 days 값까지 가공해야함 -> 요일까지
         for(cur in HabitList.value!!){
             //cur.days에 start  ~ end 까지 해당하는 날짜들 넣기
@@ -78,10 +77,33 @@ class ManageViewModel @Inject constructor(
                 if(hs.contains(temp)) cur.days.add(start_date.toString())
                 start_date = start_date.plusDays(1)
             }
+
+
+            //Todo 계산.
+            //Todo 계산하려면 -> Habit애들 중 todo가 비어있는 것들은 삭제 , 단 다 삭제 후 todo size 가 0이면 Habit이름의 todo 추가
+            val remove_todo = ArrayList<Todo>()
+            for(todo in cur.todos){
+                if(todo.name == ""){    //값 없으면 해당꺼 삭제
+                    remove_todo.add(todo)
+                }
+            }
+
+            for(remove in remove_todo){
+                cur.todos.remove(remove)
+            }
+            //만약 todo가 전부 삭제됐으면 Habit 이름의 todo 추가
+            if(cur.todos.size == 0){
+                cur.todos.add(Todo(cur.name , 0))   //0번으로
+            }
         }
 
         Log.d("테스트" , "${HabitList.value}")
 
+        //보내기전 마지막 점검
+        showInfo()
+
+        //완료한뒤 통신하기 -> 통신 성공하면 viewModel 리셋, 결과 화면으로 넘어가기.
+        return postMakeStoneUseCase(getUserIdx() , MakeStoneRequest(stoneEndDay.value!! , HabitList.value!! , stoneName.value!! , stoneStartDay.value!! ))
     }
 
     //현재 manageViewModel의 값들 출력
@@ -93,4 +115,26 @@ class ManageViewModel @Inject constructor(
 
     }
 
+    //Habit 삭제 버튼 눌렀을 시
+    fun deleteHabit(position : Int){
+        HabitList.value!!.removeAt(position)
+    }
+
+    //Todo 추가 눌렀을 시
+    fun addTodo(position : Int){
+        HabitList.value?.get(position)?.todos?.add(Todo("",HabitList.value?.get(position)?.todos?.size!!))
+    }
+
+    //Todo 이름 변경
+    fun writeTodo(position: Int , habitPosition : Int , name :String){
+        HabitList.value?.get(habitPosition)?.todos?.get(position)?.name = name
+    }
+
+    fun deleteTodo(position: Int , habitPosition : Int){
+        HabitList.value?.get(habitPosition)?.todos?.removeAt(position)
+    }
+
+    suspend fun updateStoneList(){
+        stoneList.value = getMyStonesUseCase(getUserIdx())
+    }
 }

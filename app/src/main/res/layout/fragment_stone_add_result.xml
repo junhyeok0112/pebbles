@@ -14,6 +14,39 @@
             android:background="@color/white"
             tools:context=".view.manage.fragment.StoneAddResultFragment">
 
+
+            <ImageView
+                android:id="@+id/temp_back"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/result_logo"/>
+
+            <ImageView
+                android:id="@+id/temp_icon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/result_icon"
+                app:layout_constraintStart_toStartOf="@id/temp_back"
+                app:layout_constraintEnd_toEndOf="@id/temp_back"
+                app:layout_constraintTop_toTopOf="@id/temp_back"
+                android:layout_marginTop="130dp"/>
+
+            <TextView
+                android:id="@+id/temp_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="목표 설정을 완료했어요!"
+                android:textSize="18sp"
+                android:textColor="@color/gray_60"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/temp_icon"
+                android:layout_marginTop="20dp"/>
+
             <ImageView
                 android:id="@+id/stone_add_result_close_iv"
                 android:layout_width="20dp"
@@ -114,6 +147,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/stone_add_text_rv_tv"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_result"
                 tools:itemCount="2"/>
 

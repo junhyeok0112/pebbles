@@ -21,7 +21,7 @@ class SandTodoRVAdapter(private var todos: ArrayList<Todo> , private val listene
     }
 
     override fun onBindViewHolder(holder: SandTodoViewHolder, position: Int) {
-        todos.get(position)?.let {      //해당값이 null이 아니면
+        todos.get(position).let {      //해당값이 null이 아니면
             //Bind 하면서 해당 listener도 넘겨줌
             holder.bind(it , listener , habitPosition)
         }
