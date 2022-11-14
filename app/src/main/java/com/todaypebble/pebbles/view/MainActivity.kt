@@ -18,6 +18,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private val manageViewModel : ManageViewModel by viewModels()
 
+
     override fun initAfterBinding() {
 //리스너 초기화
         binding.mainBottomNavigationView.itemIconTintList = null

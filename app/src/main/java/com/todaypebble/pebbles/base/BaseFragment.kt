@@ -11,6 +11,8 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.ktx.Firebase
 import com.todaypebble.pebbles.base.LoadingDialog
 
 
@@ -22,12 +24,14 @@ abstract class BaseFragment<VB : ViewDataBinding>(
     //protected lateinit var binding:VB
     private lateinit var mLoadingDialog: LoadingDialog
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, layoutRes, container, false)
+        // Obtain the FirebaseAnalytics instance.
 
         return binding.root
     }

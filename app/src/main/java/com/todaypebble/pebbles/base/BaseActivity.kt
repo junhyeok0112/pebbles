@@ -10,6 +10,9 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import com.todaypebble.pebbles.base.LoadingDialog
 
 abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes val layoutRes: Int): AppCompatActivity(){
@@ -18,13 +21,15 @@ abstract class BaseActivity<T: ViewDataBinding>(@LayoutRes val layoutRes: Int): 
 
     private var imm : InputMethodManager? = null
     private lateinit var mLoadingDialog: LoadingDialog
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutRes)
 
         imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
-
+        // Obtain the FirebaseAnalytics instance.
+        firebaseAnalytics = Firebase.analytics
         initAfterBinding()
     }
 

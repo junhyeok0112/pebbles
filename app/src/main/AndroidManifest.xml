@@ -9,9 +9,9 @@
     <application
         android:name="com.todaypebble.pebbles.MyApplicationClass"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/pebble"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/pebble_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Pebbles"
         android:usesCleartextTraffic="true">
