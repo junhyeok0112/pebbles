@@ -4,6 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="detailMyStone"
+            type="com.todaypebble.pebbles.data.remote.dto.manage.DetailMyStoneResult" />
+    </data>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            tools:context=".view.manage.ManageDetailFragment">
+            tools:context=".view.manage.fragment.ManageDetailFragment">
 
             <ImageView
                 android:id="@+id/manage_detail_back_btn"
@@ -41,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="32dp"
-                android:text="바윗돌 이름이 여기에 들어갑니다"
+                android:text="@{detailMyStone.name}"
                 android:textColor="@color/black"
                 android:textSize="19sp"
                 android:textStyle="bold"
@@ -65,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="2022-10-01"
+                android:text="@{detailMyStone.start}"
                 android:textColor="@color/gray_60"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/manage_detail_stone_start_title_tv"
@@ -89,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="2022-10-01"
+                android:text="@{detailMyStone.end}"
                 android:textColor="@color/gray_60"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="@id/manage_detail_stone_end_title_tv"

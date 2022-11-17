@@ -60,6 +60,6 @@
     </fragment>
     <fragment
         android:id="@+id/manageDetailFragment"
-        android:name="com.todaypebble.pebbles.view.manage.ManageDetailFragment"
+        android:name="com.todaypebble.pebbles.view.manage.fragment.ManageDetailFragment"
         android:label="ManageDetailFragment" />
 </navigation>

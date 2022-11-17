@@ -25,6 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class ManageFragment : BaseFragment<FragmentManageBinding>(R.layout.fragment_manage) {
@@ -50,11 +51,15 @@ class ManageFragment : BaseFragment<FragmentManageBinding>(R.layout.fragment_man
 
         val listener = object : MyStoneRVAdapter.StoneClickListener {
             override fun onStoneClickListener(highlightId: Int) {
+                showLoadingDialog(context!!)
                 CoroutineScope(Dispatchers.IO).launch {
                     manageViewModel.getDetailMyStone(getUserIdx() , highlightId)
-                    Log.d("DetailMyStone" , "${manageViewModel.detailStone}")
+                    //가져온 정보를 토대로 Fragment 이동해야함
+                    withContext(Dispatchers.Main){
+                        dismissLoadingDialog()
+                        view?.findNavController()?.navigate(R.id.action_manageFragment_to_manageDetailFragment)
+                    }
                 }
-
             }
         }
 
