@@ -26,6 +26,7 @@ class SandAddFragment : BaseFragment<FragmentSandAddBinding>(R.layout.fragment_s
         setResult()
         setRecyclerView()
         initListener()
+        binding.sandAddNameTv.text = manageViewModel.stoneName.value
 
     }
 
