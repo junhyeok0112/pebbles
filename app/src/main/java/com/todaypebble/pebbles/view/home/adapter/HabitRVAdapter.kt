@@ -42,6 +42,9 @@ class HabitRVAdapter(private var habbits : LiveData<List<Habit>>): RecyclerView.
         this.listener = listener
     }
 
+    override fun getItemId(position: Int): Long {
+        return habbits.value!!.get(position).id.toLong()
+    }
 
     interface TodoButtonListener {
         fun onSandClick(item : Todo , habit_id : Int)

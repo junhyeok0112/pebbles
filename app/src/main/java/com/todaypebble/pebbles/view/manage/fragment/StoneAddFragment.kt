@@ -1,6 +1,7 @@
 package com.todaypebble.pebbles.view.manage.fragment
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -58,6 +59,10 @@ class StoneAddFragment : BaseFragment<FragmentStoneAddBinding>(R.layout.fragment
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+
+        //상태바 색상 변경
+        activity?.window?.decorView?.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        activity?.window?.statusBarColor = Color.parseColor("#FFFFFF")
     }
 
     override fun initAfterBinding() {

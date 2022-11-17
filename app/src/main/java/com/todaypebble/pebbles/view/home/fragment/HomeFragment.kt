@@ -55,6 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding> (R.layout.fragment_home) 
         }
 
         adapter = HabitRVAdapter(homeViewModel.habitList)
+        adapter.setHasStableIds(true)
         adapter.setListener(listener)
         binding.homeRecyclerRv.adapter = adapter
     }
