@@ -97,6 +97,13 @@ class HabitAddFragment : BaseFragment<FragmentHabitAddBinding>(R.layout.fragment
                 )
 //           최소 날짜를 현재 시각 이후로
                 dpd.datePicker.minDate = System.currentTimeMillis() - 1000;
+                //String -> Date -> Calendar 형식으로 변경
+                val maxDate = Calendar.getInstance()
+                val yearMax = manageViewModel.stoneEndDay.value?.substring(0,4)
+                val monthMax = manageViewModel.stoneEndDay.value?.substring(5,7)
+                val dayMax = manageViewModel.stoneEndDay.value?.substring(8,10)
+                maxDate.set(yearMax!!.toInt(), monthMax!!.toInt()-1, dayMax!!.toInt())      //-1 해야지 원하는 ㄴ달 나옴
+                dpd.datePicker.maxDate = maxDate.timeInMillis
                 dpd.show()
             }
 
@@ -128,6 +135,12 @@ class HabitAddFragment : BaseFragment<FragmentHabitAddBinding>(R.layout.fragment
                 )
 //           최소 날짜를 현재 시각 이후로
                 dpd.datePicker.minDate = System.currentTimeMillis() - 1000;
+                val maxDate = Calendar.getInstance()
+                val yearMax = manageViewModel.stoneEndDay.value?.substring(0,4)
+                val monthMax = manageViewModel.stoneEndDay.value?.substring(5,7)
+                val dayMax = manageViewModel.stoneEndDay.value?.substring(8,10)
+                maxDate.set(yearMax!!.toInt(), monthMax!!.toInt()-1, dayMax!!.toInt())
+                dpd.datePicker.maxDate = maxDate.timeInMillis
                 dpd.show()
             }
 

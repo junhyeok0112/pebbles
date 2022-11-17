@@ -1,19 +1,11 @@
 package com.todaypebble.pebbles.view.manage.fragment
 
 import android.app.DatePickerDialog
-import android.icu.util.LocaleData
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import com.bit.kodari.Config.BaseFragment
-import com.google.android.material.textfield.TextInputEditText
 import com.todaypebble.pebbles.R
 import com.todaypebble.pebbles.databinding.FragmentStoneNameAndDayBinding
 import com.todaypebble.pebbles.view.manage.ManageViewModel
