@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.todaypebble.pebbles.data.remote.dto.manage.*
+import com.todaypebble.pebbles.domain.usecase.manage.GetDetailMyStoneUseCase
 import com.todaypebble.pebbles.domain.usecase.manage.GetMyStonesUseCase
 import com.todaypebble.pebbles.domain.usecase.manage.PostMakeStoneUseCase
 import com.todaypebble.pebbles.util.getUserIdx
@@ -20,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ManageViewModel @Inject constructor(
     private val getMyStonesUseCase: GetMyStonesUseCase,
-    private val postMakeStoneUseCase : PostMakeStoneUseCase
+    private val postMakeStoneUseCase : PostMakeStoneUseCase,
+    private val getDetailMyStoneUseCase: GetDetailMyStoneUseCase
 ) : ViewModel() {
 
     var stoneList = MutableLiveData<List<MyStone>?>()
@@ -30,7 +32,8 @@ class ManageViewModel @Inject constructor(
         Log.d("ManageViewModel" , "스타트 apply")
         value = LocalDate.now().toString() }
     var stoneEndDay = MutableLiveData<String>().apply { value = "" }
-
+    //내 돌탑 상세 정보
+    var detailStone = DetailMyStoneResult()
     //Habit 리스트
     var HabitList = MutableLiveData<ArrayList<Habit>>().apply { value = ArrayList() }
     init {
@@ -54,6 +57,7 @@ class ManageViewModel @Inject constructor(
         stoneStartDay.value = ""
         stoneEndDay.value = ""
         HabitList.value = ArrayList()
+        detailStone = DetailMyStoneResult()
     }
 //days 계산하면서 새로운 하이라이트 만들기. Todo 리스트들 계산해서 공백인거 제거하고, 전부 공백이면 Habit 이름이랑 동일하게 만들기
     suspend fun makeNewStone() : MakeStoneResponse{
@@ -136,5 +140,10 @@ class ManageViewModel @Inject constructor(
 
     suspend fun updateStoneList(){
         stoneList.value = getMyStonesUseCase(getUserIdx())
+    }
+
+    //내가 클릭한 바윗돌 세부정보 가져오기 -> 셋팅하기
+    suspend fun getDetailMyStone(userId: Int, highlightId: Int){
+        detailStone = getDetailMyStoneUseCase(userId, highlightId)
     }
 }

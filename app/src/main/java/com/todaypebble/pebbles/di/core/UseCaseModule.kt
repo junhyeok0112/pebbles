@@ -4,10 +4,7 @@ import com.todaypebble.pebbles.domain.usecase.*
 import com.todaypebble.pebbles.domain.usecase.login.*
 import com.todaypebble.pebbles.domain.usecase.logout.WithdrawalUseCase
 import com.todaypebble.pebbles.domain.usecase.logout.WithdrawalUseCaseImpl
-import com.todaypebble.pebbles.domain.usecase.manage.GetMyStonesUseCase
-import com.todaypebble.pebbles.domain.usecase.manage.GetMyStonesUseCaseImpl
-import com.todaypebble.pebbles.domain.usecase.manage.PostMakeStoneUseCase
-import com.todaypebble.pebbles.domain.usecase.manage.PostMakeStoneUseCaseImpl
+import com.todaypebble.pebbles.domain.usecase.manage.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -65,8 +62,15 @@ abstract class UseCaseModule {
     @Binds
     abstract fun provideGetMyStonesUseCase(getMyStonesUseCaseImpl: GetMyStonesUseCaseImpl) : GetMyStonesUseCase
 
+    //내 하이라이트 상세 정보 조회
+    @Singleton
+    @Binds
+    abstract fun provideGetDetailMyStoneUseCase(getDetailMyStoneUseCaseImpl: GetDetailMyStoneUseCaseImpl) : GetDetailMyStoneUseCase
+
+
     //하이라이트 생성
     @Singleton
     @Binds
     abstract fun providePostMakeStoneUseCase(postMakeStoneUseCaseImpl: PostMakeStoneUseCaseImpl) : PostMakeStoneUseCase
+
 }

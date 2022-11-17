@@ -15,12 +15,16 @@ import com.todaypebble.pebbles.data.remote.dto.Todo
 import com.todaypebble.pebbles.data.remote.dto.manage.MyStone
 import com.todaypebble.pebbles.data.remote.model.Habit
 import com.todaypebble.pebbles.databinding.FragmentManageBinding
+import com.todaypebble.pebbles.util.getUserIdx
 import com.todaypebble.pebbles.view.home.adapter.HabitRVAdapter
 import com.todaypebble.pebbles.view.home.fragment.HabitInfoDialog
 import com.todaypebble.pebbles.view.manage.ManageViewModel
 import com.todaypebble.pebbles.view.manage.adapter.HabitAddRVAdapter
 import com.todaypebble.pebbles.view.manage.adapter.MyStoneRVAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ManageFragment : BaseFragment<FragmentManageBinding>(R.layout.fragment_manage) {
@@ -44,10 +48,20 @@ class ManageFragment : BaseFragment<FragmentManageBinding>(R.layout.fragment_man
 
     private fun setRecyclerView(){
 
+        val listener = object : MyStoneRVAdapter.StoneClickListener {
+            override fun onStoneClickListener(highlightId: Int) {
+                CoroutineScope(Dispatchers.IO).launch {
+                    manageViewModel.getDetailMyStone(getUserIdx() , highlightId)
+                    Log.d("DetailMyStone" , "${manageViewModel.detailStone}")
+                }
+
+            }
+        }
 
         val stoneList = manageViewModel.stoneList.value as ArrayList<MyStone>?
         Log.d("테스트" , "${stoneList}")
         val adapter = MyStoneRVAdapter(stoneList!!)
+        adapter.setListener(listener)
         binding.manageListRv.adapter = adapter
     }
 }

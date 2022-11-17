@@ -2,6 +2,7 @@ package com.todaypebble.pebbles.data.repository.manage
 
 import android.util.Log
 import com.todaypebble.pebbles.MyApplicationClass.Companion.userId
+import com.todaypebble.pebbles.data.remote.dto.manage.DetailMyStoneResult
 import com.todaypebble.pebbles.data.remote.dto.manage.MakeStoneRequest
 import com.todaypebble.pebbles.data.remote.dto.manage.MakeStoneResponse
 import com.todaypebble.pebbles.data.remote.dto.manage.MyStone
@@ -52,6 +53,25 @@ class ManageRepositoryImpl @Inject constructor(
         } catch(e: Exception){
            Log.d("ManageRepository_Exception " ,e.message.toString())
          }
+
+        return body
+    }
+
+    //바잇돌 세부 정보 가져오기
+    override suspend fun getDetailMyStone(userId: Int, highligh_id: Int): DetailMyStoneResult {
+        Log.d("getDetailMyStone" , "실행")
+        lateinit var body : DetailMyStoneResult
+        try{
+            Log.d("getDetailMyStone" , "${userId} , ${highligh_id}")
+            val response = manageDatasource.getDetailMyStone(userId, highligh_id)
+            Log.d("getDetailMyStone" , "${response}")
+            if(response.body() != null){
+                body = response.body()!!.result
+            }
+            //원래라면 잘 못 가져왔을 때 처리해야함
+        } catch(e: Exception){
+            Log.d("ManageRepository_Exception " ,e.message.toString())
+        }
 
         return body
     }

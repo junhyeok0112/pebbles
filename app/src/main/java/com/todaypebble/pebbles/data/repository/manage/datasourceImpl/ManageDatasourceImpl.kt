@@ -2,6 +2,7 @@ package com.todaypebble.pebbles.data.repository.manage.datasourceImpl
 
 import android.util.Log
 import com.todaypebble.pebbles.data.remote.api.ManageService
+import com.todaypebble.pebbles.data.remote.dto.manage.DetailMyStoneResponse
 import com.todaypebble.pebbles.data.remote.dto.manage.MakeStoneRequest
 import com.todaypebble.pebbles.data.remote.dto.manage.MakeStoneResponse
 import com.todaypebble.pebbles.data.remote.dto.manage.MyStoneResponse
@@ -25,4 +26,9 @@ class ManageDatasourceImpl @Inject constructor(private val manageService: Manage
         userId: Int,
         makeStoneRequest: MakeStoneRequest
     ): Response<MakeStoneResponse> = manageService.postMakeStone(getJwt() , userId, makeStoneRequest)
+
+    override suspend fun getDetailMyStone(
+        userId: Int,
+        highlighId: Int
+    ): Response<DetailMyStoneResponse> = manageService.getDetailMyStone(getJwt(), userId , highlighId)
 }

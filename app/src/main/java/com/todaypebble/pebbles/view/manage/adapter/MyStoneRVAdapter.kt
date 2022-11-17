@@ -13,6 +13,12 @@ import com.todaypebble.pebbles.view.manage.adapter.viewholder.MyStoneViewHolder
 
 class MyStoneRVAdapter (private var stones : ArrayList<MyStone>): RecyclerView.Adapter<MyStoneViewHolder>() {
 
+    private lateinit var listener : StoneClickListener
+
+    fun setListener(listener: StoneClickListener){
+        this.listener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyStoneViewHolder {
         val binding = ItemStoneManageBinding.inflate(LayoutInflater.from(parent.context) , parent, false)
         return MyStoneViewHolder(binding)
@@ -21,11 +27,15 @@ class MyStoneRVAdapter (private var stones : ArrayList<MyStone>): RecyclerView.A
     override fun onBindViewHolder(holder: MyStoneViewHolder, position: Int) {
         //let 함수를 쓰면 객체의 상태를 변경할 수 있다.
         //또한 non-null이므로 null체크에도 용이
-        stones.get(position)?.let {      //해당값이 null이 아니면
+        stones.get(position).let {      //해당값이 null이 아니면
             //Bind 하면서 해당 listener도 넘겨줌
-            holder.bind(it)
+            holder.bind(it , listener)
         }
     }
 
     override fun getItemCount(): Int = stones.size
+
+    interface StoneClickListener{
+        fun onStoneClickListener(highlightId : Int)
+    }
 }
