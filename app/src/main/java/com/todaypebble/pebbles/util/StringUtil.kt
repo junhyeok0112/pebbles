@@ -4,7 +4,7 @@ import java.util.regex.Pattern
 
 object StringUtil {
 
-    val idPattern = Pattern.compile("^[a-zA-Z0-9]*\$")
+    val idPattern = Pattern.compile("^[a-zA-Z0-9ㄱ-ㅎ가-힣]*\$")
     val pwPattern =
         Pattern.compile("^.*(?=^.{0,16}\$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#\$%^&+=]).*\$")
 

@@ -1,6 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_manage_detail_container"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/corner_solid_gray_10_10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/item_manage_detail_icon_iv"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/sand_add_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_manage_detail_title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="홈 뷰 디자인하기가나다라마바사아자차카"
+            android:textColor="@color/gray_50"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/item_manage_detail_icon_iv"
+            app:layout_constraintStart_toEndOf="@id/item_manage_detail_icon_iv"
+            app:layout_constraintTop_toTopOf="@id/item_manage_detail_icon_iv" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/item_manage_detail_start_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="시작날짜"
+        android:textSize="14sp"
+        android:textColor="@color/gray_40"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_manage_detail_container"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="22dp"/>
+
+    <TextView
+        android:id="@+id/item_manage_detail_start_day_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2022-11-17"
+        android:textColor="@color/gray_60"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_manage_detail_start_tv"
+        app:layout_constraintBottom_toBottomOf="@id/item_manage_detail_start_tv"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/item_manage_detail_end_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_manage_detail_start_tv"
+        android:text="종료날짜"
+        android:textSize="14sp"
+        android:textColor="@color/gray_40"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"/>
+
+    <TextView
+        android:id="@+id/item_manage_detail_end_day_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2022-11-17"
+        android:textColor="@color/gray_60"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_manage_detail_end_tv"
+        app:layout_constraintBottom_toBottomOf="@id/item_manage_detail_end_tv"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/item_manage_detail_week_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="실천요일"
+        android:textSize="14sp"
+        android:textColor="@color/gray_40"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_manage_detail_end_tv"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/item_manage_detail_week_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="월,수,금"
+        android:textColor="@color/gray_60"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/item_manage_detail_week_title_tv"
+        app:layout_constraintBottom_toBottomOf="@id/item_manage_detail_week_title_tv"
+        android:layout_marginEnd="20dp"/>
+
+    <TextView
+        android:id="@+id/item_manage_detail_sand_list_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="모래알 목록"
+        android:textSize="14sp"
+        android:textColor="@color/gray_40"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_manage_detail_week_title_tv"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/item_manage_detail_sand_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_manage_detail_sand_list_title_tv"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="12dp"
+        tools:listitem="@layout/item_manage_detail_sand"
+        tools:itemCount="3"/>
+
+    <View
+        android:id="@+id/item_manage_detail_bar"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="@color/gray_10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/item_manage_detail_sand_rv"
+        android:layout_marginTop="10dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

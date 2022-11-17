@@ -1,5 +1,7 @@
 package com.todaypebble.pebbles.view.onboarding
 
+import android.graphics.Color
+import android.view.View
 import androidx.viewpager2.widget.ViewPager2
 import com.bit.kodari.Config.BaseActivity
 import com.todaypebble.pebbles.R
@@ -18,6 +20,9 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>(R.layout.acti
     override fun initAfterBinding() {
         initViewPager()
         initListener()
+        //상태바 색상 설정
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        window.statusBarColor = Color.parseColor("#FFFFFF")
     }
 
     private fun initViewPager() {

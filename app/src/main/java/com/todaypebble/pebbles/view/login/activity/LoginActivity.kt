@@ -1,5 +1,7 @@
 package com.todaypebble.pebbles.view.login.activity
 
+import android.graphics.Color
+import android.view.View
 import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.bit.kodari.Config.BaseActivity
@@ -21,6 +23,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         //액티비티와 프래그먼트가 공유할 ViewModel 선언
         binding.loginViewModel = loginViewModel
         binding.lifecycleOwner = this
+
+        //상태바 색상 변경
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        window.statusBarColor = Color.parseColor("#FFFFFF")
     }
 
 }

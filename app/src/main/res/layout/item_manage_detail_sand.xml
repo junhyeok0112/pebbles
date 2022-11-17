@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_marginBottom="10dp">
+
+    <ImageView
+        android:id="@+id/item_manage_detail_sand_icon"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:src="@drawable/ic_todo_sand_achive"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/item_manage_detail_sand_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/item_manage_detail_sand_icon"
+        app:layout_constraintTop_toTopOf="@id/item_manage_detail_sand_icon"
+        app:layout_constraintBottom_toBottomOf="@id/item_manage_detail_sand_icon"
+        android:text="모래알 내용이 여기에 들어갈거야야야야야야야"
+        android:textSize="14sp"
+        android:textColor="@color/gray_60"
+        android:layout_marginStart="8dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

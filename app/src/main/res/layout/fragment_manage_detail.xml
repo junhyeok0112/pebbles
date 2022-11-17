@@ -122,7 +122,9 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/manage_detail_bar_view"/>
+                app:layout_constraintTop_toBottomOf="@id/manage_detail_bar_view"
+                tools:listitem="@layout/item_manage_detail"
+                tools:itemCount="2"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

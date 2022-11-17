@@ -3,13 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/And/pebbles/app/src/main/res/drawable/add_habit.xml" value="0.1565" />
         <entry key="..\:/And/pebbles/app/src/main/res/drawable/corner_bottom_sheet_dialog.xml" value="0.1" />
+        <entry key="..\:/And/pebbles/app/src/main/res/drawable/corner_solid_gray_10_10dp.xml" value="0.1565" />
+        <entry key="..\:/And/pebbles/app/src/main/res/drawable/corner_solid_gray_30_8dp.xml" value="0.1565" />
         <entry key="..\:/And/pebbles/app/src/main/res/drawable/custom_day_cell.xml" value="0.156" />
         <entry key="..\:/And/pebbles/app/src/main/res/drawable/custom_day_cell_blank.xml" value="0.156" />
         <entry key="..\:/And/pebbles/app/src/main/res/drawable/custom_day_cell_unselected.xml" value="0.156" />
         <entry key="..\:/And/pebbles/app/src/main/res/drawable/ic_login_alert.xml" value="0.1565" />
         <entry key="..\:/And/pebbles/app/src/main/res/drawable/login_checked.xml" value="0.1565" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/And/pebbles/app/src/main/res/layout/activity_on_boarding.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/custom_calendar_cell.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/custom_view_calendar.xml" value="0.4" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/dialog_habit_delete.xml" value="0.25364583333333335" />
@@ -18,16 +22,25 @@
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_home.xml" value="0.264" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_login.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_login_sub.xml" value="0.25364583333333335" />
+        <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_manage_detail.xml" value="0.17129792472740063" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_nick_name.xml" value="0.2" />
+        <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_on_boarding_first.xml" value="0.25364583333333335" />
+        <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_on_boarding_second.xml" value="0.25364583333333335" />
+        <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_on_boarding_third.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_sign_up.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_stone_add.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_stone_add_result.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_target.xml" value="0.264" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_temp.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/fragment_web_term.xml" value="0.25364583333333335" />
+        <entry key="..\:/And/pebbles/app/src/main/res/layout/item_habit_home.xml" value="0.25364583333333335" />
+        <entry key="..\:/And/pebbles/app/src/main/res/layout/item_manage_detail.xml" value="0.25364583333333335" />
+        <entry key="..\:/And/pebbles/app/src/main/res/layout/item_manage_detail_sand.xml" value="0.264" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/item_result.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/item_result_todo.xml" value="0.25364583333333335" />
+        <entry key="..\:/And/pebbles/app/src/main/res/layout/item_sand_add.xml" value="0.25364583333333335" />
         <entry key="..\:/And/pebbles/app/src/main/res/layout/item_sand_todo.xml" value="0.25364583333333335" />
+        <entry key="..\:/And/pebbles/app/src/main/res/layout/item_todo_home.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/drawable/corner_bottom_sheet_dialog.xml" value="0.2665" />
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/drawable/corner_white.xml" value="0.2615" />
         <entry key="..\:/Users/qs78q/AndroidStudioProjects/Pebbles/app/src/main/res/drawable/corner_white_main_10.xml" value="0.1375" />
