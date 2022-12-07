@@ -2,6 +2,7 @@ package com.todaypebble.pebbles.view.manage.fragment
 
 import android.app.DatePickerDialog
 import android.util.Log
+import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import com.bit.kodari.Config.BaseFragment
 import com.todaypebble.pebbles.R
@@ -22,6 +23,9 @@ class HabitAddFragment : BaseFragment<FragmentHabitAddBinding>(R.layout.fragment
     //하루 할일 추가 누르면 -> Todos가 비어있는 Habit이 추가되어야함
     //그 추가된 Habit들과 연결해야함 .. 흠 ..
     override fun initAfterBinding() {
+        //버튼 끄기
+        offButton()
+
         binding.vm = manageViewModel
         binding.lifecycleOwner = this
 
@@ -152,6 +156,19 @@ class HabitAddFragment : BaseFragment<FragmentHabitAddBinding>(R.layout.fragment
         adapter = HabitAddRVAdapter(manageViewModel.HabitList)
         adapter.setListener(listener)
         binding.habitAddHabitListRv.adapter = adapter
+    }
+
+    private fun offButton(){
+        //부모 액티비티에 접근하여서 버튼 off모드 시키기
+        val nextBtn = activity?.findViewById<Button>(R.id.stone_add_next_btn)
+        nextBtn?.setBackgroundColor(resources.getColor(R.color.gray_30))
+        nextBtn?.isClickable = false
+    }
+
+    private fun onButton(){
+        val nextBtn = activity?.findViewById<Button>(R.id.stone_add_next_btn)
+        nextBtn?.setBackgroundColor(resources.getColor(R.color.main_30))
+        nextBtn?.isClickable = true
     }
 
 }

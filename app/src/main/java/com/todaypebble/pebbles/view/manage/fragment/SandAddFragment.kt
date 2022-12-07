@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import com.bit.kodari.Config.BaseFragment
 import com.todaypebble.pebbles.R
@@ -22,6 +23,8 @@ class SandAddFragment : BaseFragment<FragmentSandAddBinding>(R.layout.fragment_s
     private val manageViewModel : ManageViewModel by activityViewModels()
     private lateinit var adapter : SandAddRVAdapter
     override fun initAfterBinding() {
+        //버튼 끄기
+        offButton()
 
         setResult()
         setRecyclerView()
@@ -75,5 +78,18 @@ class SandAddFragment : BaseFragment<FragmentSandAddBinding>(R.layout.fragment_s
                 }
             }
         }
+    }
+
+    private fun offButton(){
+        //부모 액티비티에 접근하여서 버튼 off모드 시키기
+        val nextBtn = activity?.findViewById<Button>(R.id.stone_add_next_btn)
+        nextBtn?.setBackgroundColor(resources.getColor(R.color.gray_30))
+        nextBtn?.isClickable = false
+    }
+
+    private fun onButton(){
+        val nextBtn = activity?.findViewById<Button>(R.id.stone_add_next_btn)
+        nextBtn?.setBackgroundColor(resources.getColor(R.color.main_30))
+        nextBtn?.isClickable = true
     }
 }
