@@ -24,7 +24,7 @@ class HabitAddViewHolder(private val binding : ItemHabitAddBinding) : RecyclerVi
     var isStartDayFill = true
     var isEndDayFill = true
     var isWeekFill = false
-
+//isFill 에 따라 item 바꿔야함
     fun bind(item: Habit ,listener: HabitAddRVAdapter.clickListener) = with(binding){
         this.habit = item
         initListener(listener , item)
