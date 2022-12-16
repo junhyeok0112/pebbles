@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.util.Log
 import android.view.View
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.todaypebble.pebbles.R
 import com.todaypebble.pebbles.data.remote.dto.manage.Habit
@@ -19,10 +20,14 @@ import java.util.*
 class HabitAddViewHolder(private val binding : ItemHabitAddBinding) : RecyclerView.ViewHolder(binding.root) {
 
     val tempWeek = Weeks(false,false,false,false,false,false,false)
+    var isTitleFill = false
+    var isStartDayFill = true
+    var isEndDayFill = true
+    var isWeekFill = false
 
     fun bind(item: Habit ,listener: HabitAddRVAdapter.clickListener) = with(binding){
         this.habit = item
-        initListener(listener)
+        initListener(listener , item)
         if(item.weeks.mon){
             binding.itemHabitMonSelected.visibility = View.VISIBLE
             binding.itemHabitMonUnselected.visibility = View.GONE
@@ -80,7 +85,7 @@ class HabitAddViewHolder(private val binding : ItemHabitAddBinding) : RecyclerVi
         }
     }
 
-    fun initListener(listener: HabitAddRVAdapter.clickListener){
+    fun initListener(listener: HabitAddRVAdapter.clickListener , item :Habit){
         binding.itemHabitMonUnselected.setOnClickListener {
             binding.itemHabitMonUnselected.visibility = View.GONE
             binding.itemHabitMonSelected.visibility = View.VISIBLE
@@ -192,6 +197,13 @@ class HabitAddViewHolder(private val binding : ItemHabitAddBinding) : RecyclerVi
             listener.deleteHabit(adapterPosition)
         }
 
+        //입력 했을 때 변수 바꿔야함 -> 그리고 그 변수들이 모두 True일 때 해당 Item의 isFill이 바뀌어야함함
+        binding.itemHabitAddInputEt.addTextChangedListener{
+
+        }
     }
 
+    fun changeIsFill(item: Habit){
+        item.isFill = isTitleFill && isStartDayFill && isEndDayFill && isWeekFill
+    }
 }

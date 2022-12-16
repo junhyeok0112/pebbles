@@ -24,7 +24,7 @@ class HabitAddFragment : BaseFragment<FragmentHabitAddBinding>(R.layout.fragment
     //그 추가된 Habit들과 연결해야함 .. 흠 ..
     override fun initAfterBinding() {
         //버튼 끄기
-        offButton()
+        chkFill()
 
         binding.vm = manageViewModel
         binding.lifecycleOwner = this
@@ -32,9 +32,6 @@ class HabitAddFragment : BaseFragment<FragmentHabitAddBinding>(R.layout.fragment
         setResult()
         initListener()
         initRecyclerView()
-
-
-
 
     }
 
@@ -57,6 +54,7 @@ class HabitAddFragment : BaseFragment<FragmentHabitAddBinding>(R.layout.fragment
             } else{
                 manageViewModel.addHabit()
                 adapter.notifyDataSetChanged()
+                offButton()         //버튼 끄기
             }
         }
 
@@ -158,6 +156,14 @@ class HabitAddFragment : BaseFragment<FragmentHabitAddBinding>(R.layout.fragment
         binding.habitAddHabitListRv.adapter = adapter
     }
 
+    //채워야하는 값들이 채워졌는지 확인한 후 버튼 활성화 시킴
+    private fun chkFill(){
+        when(manageViewModel.isAddHabitFill){
+          true -> {onButton()}
+          else -> {offButton()}
+        }
+    }
+
     private fun offButton(){
         //부모 액티비티에 접근하여서 버튼 off모드 시키기
         val nextBtn = activity?.findViewById<Button>(R.id.stone_add_next_btn)
@@ -165,6 +171,7 @@ class HabitAddFragment : BaseFragment<FragmentHabitAddBinding>(R.layout.fragment
         nextBtn?.isClickable = false
     }
 
+    //버튼 활성화 시키기
     private fun onButton(){
         val nextBtn = activity?.findViewById<Button>(R.id.stone_add_next_btn)
         nextBtn?.setBackgroundColor(resources.getColor(R.color.main_30))

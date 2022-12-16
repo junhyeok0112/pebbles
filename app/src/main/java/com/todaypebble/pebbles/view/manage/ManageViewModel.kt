@@ -36,7 +36,11 @@ class ManageViewModel @Inject constructor(
     var detailStone = DetailMyStoneResult()
     //Habit 리스트
     var HabitList = MutableLiveData<ArrayList<Habit>>().apply { value = ArrayList() }
-    init {
+
+    //Habit들에 내용이 전부 채워졌는지 확인하는 변수 -> HabitAddFragment에서 사용
+    var isAddHabitFill = false
+
+   init {
         viewModelScope.async {
             updateStoneList()
         }
@@ -49,6 +53,8 @@ class ManageViewModel @Inject constructor(
         temp_todo.add(Todo("",2))
         HabitList.value?.add(Habit(ArrayList() , stoneEndDay.value!!,"",HabitList.value!!.size+1,stoneStartDay.value!!,temp_todo,Weeks(false,false,false,false,false,false,false)))
         Log.d("ManageViewModel" , "addHabit() 실행 , ${HabitList.value?.size}")
+        //해빗 추가하면 기본값 false로 변경하기
+        changeIsAddFill()
     }
 
 
@@ -146,4 +152,24 @@ class ManageViewModel @Inject constructor(
     suspend fun getDetailMyStone(userId: Int, highlightId: Int){
         detailStone = getDetailMyStoneUseCase(userId, highlightId)
     }
+
+    //isAddFill 바꾸는 함수
+    fun changeIsAddFill(){
+        //리스트 없으면 false로 고정
+        if(HabitList.value?.size == 0){
+            isAddHabitFill = false
+            return
+        }
+
+        //모든 List에 isFill 이 True면 isAddFill이 True 아니면 False
+        for(cur in HabitList.value!!){
+            if(!cur.isFill){
+                isAddHabitFill = false
+                return
+            }
+        }
+        isAddHabitFill = true
+    }
+
+
 }
